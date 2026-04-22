@@ -70,3 +70,15 @@ export interface GuestLookupResponse {
 export interface CommentCreateResponse {
   comment: Comment;
 }
+
+export interface ImportMarkdownResponse {
+  versionID: number;
+  versionCode: string;
+  importedItems: number;
+}
+
+export interface CodexExportResponse {
+  versionID: number;
+  versionCode: string;
+  markdown: string;
+}

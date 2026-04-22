@@ -9,3 +9,7 @@ export function buildVersionPath(versionId: number | string, guestToken?: string
 export function buildItemPath(itemId: number | string, guestToken?: string): string {
   return guestToken ? `/guest/${guestToken}/items/${itemId}` : `/items/${itemId}`;
 }
+
+export function buildToolsPath(): string {
+  return "/tools";
+}

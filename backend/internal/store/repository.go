@@ -8,7 +8,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sort"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/user/familytriphelper/backend/internal/domain"
 	"github.com/user/familytriphelper/backend/internal/plan"
@@ -45,6 +48,12 @@ type ImportResult struct {
 
 type GuestLookup struct {
 	Participant domain.Participant `json:"participant"`
+}
+
+type CodexExport struct {
+	VersionID   int64  `json:"versionID"`
+	VersionCode string `json:"versionCode"`
+	Markdown    string `json:"markdown"`
 }
 
 func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
@@ -420,6 +429,85 @@ func (r *Repository) CreateCommentByGuestToken(ctx context.Context, guestToken s
 	return created, nil
 }
 
+func (r *Repository) ExportCodex(ctx context.Context, versionRef string) (CodexExport, error) {
+	versionRef = strings.TrimSpace(versionRef)
+	if versionRef == "" {
+		return CodexExport{}, fmt.Errorf("version reference is required")
+	}
+
+	versionID, versionCode, err := r.resolveVersionRef(ctx, versionRef)
+	if err != nil {
+		return CodexExport{}, err
+	}
+
+	versionDetails, err := r.GetVersion(ctx, versionID)
+	if err != nil {
+		return CodexExport{}, err
+	}
+
+	itemComments, err := r.listExportItemComments(ctx, versionID)
+	if err != nil {
+		return CodexExport{}, err
+	}
+
+	itemByID := make(map[int64]domain.PlanItem, len(versionDetails.Items))
+	for _, item := range versionDetails.Items {
+		itemByID[item.ID] = item
+	}
+
+	var builder strings.Builder
+	builder.WriteString("Trip: ")
+	builder.WriteString(versionDetails.Version.Title)
+	builder.WriteString("\n")
+	builder.WriteString("Version: ")
+	builder.WriteString(versionCode)
+	builder.WriteString("\n")
+
+	builder.WriteString("\n## Version comments\n")
+	if len(versionDetails.Comments) == 0 {
+		builder.WriteString("No comments.\n")
+	} else {
+		for index, comment := range versionDetails.Comments {
+			writeExportComment(&builder, index+1, comment)
+		}
+	}
+
+	builder.WriteString("\n## Item comments\n")
+	if len(itemComments) == 0 {
+		builder.WriteString("No comments.\n")
+	} else {
+		itemIDs := make([]int64, 0, len(itemComments))
+		for itemID := range itemComments {
+			itemIDs = append(itemIDs, itemID)
+		}
+		sort.Slice(itemIDs, func(i, j int) bool { return itemIDs[i] < itemIDs[j] })
+
+		for _, itemID := range itemIDs {
+			item, ok := itemByID[itemID]
+			if !ok {
+				continue
+			}
+
+			builder.WriteString("\n### stable_key=")
+			builder.WriteString(item.StableKey)
+			builder.WriteString("\n")
+			builder.WriteString("title=")
+			builder.WriteString(item.Title)
+			builder.WriteString("\n\n")
+
+			for index, comment := range itemComments[itemID] {
+				writeExportComment(&builder, index+1, comment)
+			}
+		}
+	}
+
+	return CodexExport{
+		VersionID:   versionID,
+		VersionCode: versionCode,
+		Markdown:    builder.String(),
+	}, nil
+}
+
 func (r *Repository) ImportPlan(ctx context.Context, doc plan.Document) (ImportResult, error) {
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
@@ -517,4 +605,86 @@ func nullableInt64(value int64) any {
 	}
 
 	return value
+}
+
+func (r *Repository) resolveVersionRef(ctx context.Context, versionRef string) (int64, string, error) {
+	if parsedID, err := strconv.ParseInt(versionRef, 10, 64); err == nil {
+		var versionCode string
+		err = r.db.QueryRowContext(ctx, `
+			SELECT version_code
+			FROM plan_versions
+			WHERE id = $1
+		`, parsedID).Scan(&versionCode)
+		if err != nil {
+			if errors.Is(err, sql.ErrNoRows) {
+				return 0, "", ErrNotFound
+			}
+			return 0, "", fmt.Errorf("select version by id: %w", err)
+		}
+
+		return parsedID, versionCode, nil
+	}
+
+	var (
+		versionID   int64
+		versionCode string
+	)
+	err := r.db.QueryRowContext(ctx, `
+		SELECT id, version_code
+		FROM plan_versions
+		WHERE version_code = $1
+	`, versionRef).Scan(&versionID, &versionCode)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, "", ErrNotFound
+		}
+		return 0, "", fmt.Errorf("select version by code: %w", err)
+	}
+
+	return versionID, versionCode, nil
+}
+
+func (r *Repository) listExportItemComments(ctx context.Context, versionID int64) (map[int64][]domain.Comment, error) {
+	rows, err := r.db.QueryContext(ctx, `
+		SELECT c.plan_item_id, c.id, p.display_name, c.body, c.created_at
+		FROM comments c
+		JOIN participants p ON p.id = c.participant_id
+		WHERE c.plan_version_id = $1 AND c.plan_item_id IS NOT NULL
+		ORDER BY c.plan_item_id ASC, c.created_at ASC, c.id ASC
+	`, versionID)
+	if err != nil {
+		return nil, fmt.Errorf("select item comments for export: %w", err)
+	}
+	defer rows.Close()
+
+	result := map[int64][]domain.Comment{}
+	for rows.Next() {
+		var (
+			itemID  int64
+			comment domain.Comment
+		)
+		if err := rows.Scan(&itemID, &comment.ID, &comment.Author, &comment.Body, &comment.CreatedAt); err != nil {
+			return nil, fmt.Errorf("scan item comment for export: %w", err)
+		}
+		result[itemID] = append(result[itemID], comment)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("iterate item comments for export: %w", err)
+	}
+
+	return result, nil
+}
+
+func writeExportComment(builder *strings.Builder, index int, comment domain.Comment) {
+	builder.WriteString(strconv.Itoa(index))
+	builder.WriteString(". author=")
+	builder.WriteString(comment.Author)
+	builder.WriteString("\n")
+	builder.WriteString("   created_at=")
+	builder.WriteString(comment.CreatedAt.In(time.UTC).Format(time.RFC3339))
+	builder.WriteString("\n")
+	builder.WriteString("   text=")
+	builder.WriteString(comment.Body)
+	builder.WriteString("\n\n")
 }

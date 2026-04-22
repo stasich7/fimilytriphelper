@@ -1,6 +1,8 @@
 import type {
+  CodexExportResponse,
   CommentCreateResponse,
   GuestLookupResponse,
+  ImportMarkdownResponse,
   ItemDetailsResponse,
   OverviewResponse,
   VersionDetailsResponse,
@@ -77,4 +79,34 @@ export async function createComment(input: {
   }
 
   return (await response.json()) as CommentCreateResponse;
+}
+
+export async function importMarkdown(source: string): Promise<ImportMarkdownResponse> {
+  const response = await fetch(`${API_BASE}/imports/markdown`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ source }),
+  });
+
+  if (!response.ok) {
+    let message = `Request failed with status ${response.status}`;
+    try {
+      const payload = (await response.json()) as { message?: string };
+      if (payload.message) {
+        message = payload.message;
+      }
+    } catch {
+      // Ignore JSON parsing errors for non-JSON responses.
+    }
+
+    throw new Error(message);
+  }
+
+  return (await response.json()) as ImportMarkdownResponse;
+}
+
+export function getCodexExport(versionId: string): Promise<CodexExportResponse> {
+  return requestJSON<CodexExportResponse>(`/exports/codex?versionId=${encodeURIComponent(versionId)}`);
 }

@@ -16,11 +16,25 @@ Create a personal guest link from the running app container:
 docker exec family-trip-helper-app family-trip-helper create-guest --name "Anna" --base-url https://familytrip.stasich7.ru
 ```
 
+Production examples:
+
+```bash
+docker exec family-trip-helper-app family-trip-helper create-guest --name "Anna" --base-url https://familytrip.stasich7.ru
+docker exec family-trip-helper-app family-trip-helper create-guest --name "Ivan" --base-url https://familytrip.stasich7.ru
+docker exec family-trip-helper-app family-trip-helper create-guest --name "Olga" --base-url https://familytrip.stasich7.ru
+```
+
 Arguments:
 - `--name` sets the display name that will be shown in the UI and in comments.
 - `--base-url` defines the public base address that will be used in the generated link.
 
 The command prints a ready-to-share personal guest URL.
+
+Local development example:
+
+```bash
+docker exec family-trip-helper-backend family-trip-helper create-guest --name "Smoke Test Guest" --base-url http://127.0.0.1
+```
 
 Current scope:
 - one trip only;

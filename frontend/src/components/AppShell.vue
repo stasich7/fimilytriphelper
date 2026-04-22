@@ -10,6 +10,7 @@
 
       <nav class="shell__nav">
         <RouterLink :to="overviewPath">В начало</RouterLink>
+        <RouterLink v-if="!guestToken" :to="toolsPath">Инструменты</RouterLink>
       </nav>
     </header>
 
@@ -24,12 +25,13 @@ import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import { getGuest } from "../api";
-import { buildOverviewPath } from "../paths";
+import { buildOverviewPath, buildToolsPath } from "../paths";
 
 const route = useRoute();
 
 const guestToken = computed(() => String(route.params.guestToken || ""));
 const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefined));
+const toolsPath = buildToolsPath();
 const guestName = ref("");
 
 const showHeaderImage = computed(() => {

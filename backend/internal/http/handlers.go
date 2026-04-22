@@ -189,15 +189,26 @@ func (r *Router) handleExportCodex(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	versionCode := req.URL.Query().Get("version")
-	if versionCode == "" {
-		versionCode = "v1"
+	versionRef := strings.TrimSpace(req.URL.Query().Get("versionId"))
+	if versionRef == "" {
+		versionRef = strings.TrimSpace(req.URL.Query().Get("version"))
+	}
+	if versionRef == "" {
+		writeBadRequest(w, "versionId or version is required")
+		return
 	}
 
-	writeJSON(w, http.StatusOK, map[string]any{
-		"versionCode": versionCode,
-		"markdown":    "Trip export is not implemented yet.\nNo comments have been collected yet.\n",
-	})
+	exportResult, err := r.repo.ExportCodex(req.Context(), versionRef)
+	if err != nil {
+		if errors.Is(err, store.ErrNotFound) {
+			writeNotFound(w)
+			return
+		}
+		writeBadRequest(w, err.Error())
+		return
+	}
+
+	writeJSON(w, http.StatusOK, exportResult)
 }
 
 func writeMethodNotAllowed(w http.ResponseWriter, allowed string) {

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import OverviewPage from "../pages/OverviewPage.vue";
 import PlanItemPage from "../pages/PlanItemPage.vue";
 import PlanVersionPage from "../pages/PlanVersionPage.vue";
+import ToolsPage from "../pages/ToolsPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: "/items/:itemId",
       name: "item",
       component: PlanItemPage,
+    },
+    {
+      path: "/tools",
+      name: "tools",
+      component: ToolsPage,
     },
     {
       path: "/guest/:guestToken",
