@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: family-trip-helper-postgres
+    environment:
+      POSTGRES_DB: family_trip_helper
+      POSTGRES_USER: family_trip_helper
+      POSTGRES_PASSWORD: family_trip_helper
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: /Users/user/repos/my/FamilyTripHelper
+      dockerfile: backend/Dockerfile
+    container_name: family-trip-helper-backend
+    depends_on:
+      - postgres
+    environment:
+      APP_ADDR: :80
+      APP_STATIC_DIR: /app/web
+      DB_DSN: postgres://family_trip_helper:family_trip_helper@postgres:5432/family_trip_helper?sslmode=disable
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:

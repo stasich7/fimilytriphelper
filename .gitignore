@@ -1,0 +1,16 @@
+# Backend
+/backend/bin/
+/backend/.cache/
+
+# Frontend
+/frontend/node_modules/
+/frontend/dist/
+
+# Local env
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo

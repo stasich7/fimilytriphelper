@@ -1,0 +1,72 @@
+export interface Trip {
+  id: number;
+  slug: string;
+  title: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PlanVersion {
+  id: number;
+  versionCode: string;
+  title: string;
+  createdAt: string;
+}
+
+export interface PlanItem {
+  id: number;
+  stableKey: string;
+  type: string;
+  title: string;
+  bodyMarkdown: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Comment {
+  id: number;
+  author: string;
+  body: string;
+  createdAt: string;
+}
+
+export interface Participant {
+  id: number;
+  displayName: string;
+  createdAt: string;
+  lastSeenAt: string;
+}
+
+export interface OverviewResponse {
+  trip?: Trip;
+  currentVersion?: PlanVersion;
+  stats: {
+    items: number;
+    comments: number;
+    openComments: number;
+  };
+}
+
+export interface VersionsResponse {
+  versions: PlanVersion[];
+}
+
+export interface VersionDetailsResponse {
+  version: PlanVersion;
+  items: PlanItem[];
+  comments: Comment[];
+}
+
+export interface ItemDetailsResponse {
+  item: PlanItem;
+  comments: Comment[];
+}
+
+export interface GuestLookupResponse {
+  participant: Participant;
+}
+
+export interface CommentCreateResponse {
+  comment: Comment;
+}
