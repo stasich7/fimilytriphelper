@@ -8,6 +8,20 @@ The service is designed for a manual Codex workflow:
 - Family members open personal guest links and leave comments.
 - The service exports structured feedback back to Codex without losing context.
 
+## Creating guest links
+
+Create a personal guest link from the running app container:
+
+```bash
+docker exec family-trip-helper-app family-trip-helper create-guest --name "Anna" --base-url https://familytrip.stasich7.ru
+```
+
+Arguments:
+- `--name` sets the display name that will be shown in the UI and in comments.
+- `--base-url` defines the public base address that will be used in the generated link.
+
+The command prints a ready-to-share personal guest URL.
+
 Current scope:
 - one trip only;
 - guest links without registration;

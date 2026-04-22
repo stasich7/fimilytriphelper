@@ -85,9 +85,9 @@ watch(
 .shell__header--with-image {
   background-color: rgba(255, 255, 255, 0.9);
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.94) 46%, rgba(255, 255, 255, 0.78) 64%, rgba(255, 255, 255, 0.2) 100%), url("/family-trip-v4.png");
-  background-position: left top, right center;
+  background-position: left top, right bottom;
   background-repeat: no-repeat, no-repeat;
-  background-size: auto, auto 100%;
+  background-size: auto, 39%;
 }
 
 .shell__eyebrow {
@@ -141,7 +141,7 @@ watch(
 
 @media (max-width: 900px) {
   .shell__header--with-image {
-    background-position: left top, right top;
+    background-position: left top, right bottom;
     background-size: auto, 48% auto;
   }
 }
@@ -149,7 +149,7 @@ watch(
 @media (max-width: 640px) {
   .shell__header--with-image {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 52%, rgba(255, 255, 255, 0.88) 100%), url("/family-trip-v4.png");
-    background-position: left top, right -10px top 10px;
+    background-position: left top, right bottom;
     background-size: auto, 240px auto;
   }
 }

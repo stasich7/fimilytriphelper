@@ -12,7 +12,7 @@
       <template v-else-if="overview?.trip">
         <h2>{{ overview.trip.title }}</h2>
         <p v-if="guestName" class="guest-summary">Комментарии от имени {{ guestName }}</p>
-        <img class="hero-image" src="/family-trip-v3.png" alt="Family Trip Helper" />
+        <img class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
       </template>
       <template v-else>
         <h2>План поездки еще не загружен</h2>
