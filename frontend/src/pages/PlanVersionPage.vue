@@ -16,9 +16,19 @@
         <p class="card__label">Версия плана</p>
         <h2>{{ version.versionCode }} - {{ version.title }}</h2>
         <p>Здесь собраны все варианты и общие комментарии к этой версии поездки.</p>
+        <a class="anchor-link" href="#version-comments">Общие комментарии к версии</a>
       </article>
 
-      <article class="card">
+      <article v-for="section in sections" :key="section.type" class="card">
+        <p class="card__label">{{ section.label }}</p>
+        <div v-for="item in section.items" :key="item.id" class="item">
+          <h3>{{ item.title }}</h3>
+          <p class="preview">{{ preview(item.bodyMarkdown) }}</p>
+          <button type="button" class="link-button" @click="openItem(item.id)">Открыть карточку</button>
+        </div>
+      </article>
+
+      <article id="version-comments" class="card">
         <p class="card__label">Общие комментарии к версии</p>
         <p v-if="versionComments.length === 0">Пока нет общих комментариев к этой версии.</p>
         <div v-for="comment in versionComments" :key="comment.id" class="comment">
@@ -44,15 +54,6 @@
           >
             {{ submitting ? "Отправляем..." : "Оставить комментарий" }}
           </button>
-        </div>
-      </article>
-
-      <article v-for="section in sections" :key="section.type" class="card">
-        <p class="card__label">{{ section.label }}</p>
-        <div v-for="item in section.items" :key="item.id" class="item">
-          <h3>{{ item.title }}</h3>
-          <p class="preview">{{ preview(item.bodyMarkdown) }}</p>
-          <button type="button" class="link-button" @click="openItem(item.id)">Открыть карточку</button>
         </div>
       </article>
     </template>
@@ -212,6 +213,13 @@ watch(
 
 .item + .item {
   margin-top: 12px;
+}
+
+.anchor-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #134c75;
+  font-weight: 700;
 }
 
 .comment {

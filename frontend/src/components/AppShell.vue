@@ -1,11 +1,11 @@
 <template>
   <div class="shell">
-    <header class="shell__header">
+    <header :class="['shell__header', { 'shell__header--with-image': showHeaderImage }]">
       <div>
         <p class="shell__eyebrow">FamilyTripHelper</p>
         <h1>Family Trip Helper</h1>
         <p class="shell__subtitle">Совместно планируем, комментируем, рассматриваем варианты общей части поездки</p>
-        <p v-if="guestToken" class="shell__guest-mode">Гостевой режим</p>
+        <p v-if="guestSummary" class="shell__guest-mode">{{ guestSummary }}</p>
       </div>
 
       <nav class="shell__nav">
@@ -20,15 +20,48 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
+import { getGuest } from "../api";
 import { buildOverviewPath } from "../paths";
 
 const route = useRoute();
 
 const guestToken = computed(() => String(route.params.guestToken || ""));
 const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefined));
+const guestName = ref("");
+
+const showHeaderImage = computed(() => {
+  const routeName = String(route.name || "");
+  return routeName !== "overview" && routeName !== "guest";
+});
+
+const guestSummary = computed(() => {
+  if (!guestName.value) {
+    return "";
+  }
+
+  return `Комментарии от имени ${guestName.value}`;
+});
+
+watch(
+  () => guestToken.value,
+  async (token) => {
+    if (!token) {
+      guestName.value = "";
+      return;
+    }
+
+    try {
+      const guest = await getGuest(token);
+      guestName.value = guest.participant.displayName;
+    } catch {
+      guestName.value = "";
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <style scoped>
@@ -47,6 +80,14 @@ const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefi
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+}
+
+.shell__header--with-image {
+  background-color: rgba(255, 255, 255, 0.9);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.94) 46%, rgba(255, 255, 255, 0.78) 64%, rgba(255, 255, 255, 0.2) 100%), url("/family-trip-v4.png");
+  background-position: left top, right center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, auto 100%;
 }
 
 .shell__eyebrow {
@@ -96,5 +137,20 @@ const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefi
 .shell__content {
   display: grid;
   gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .shell__header--with-image {
+    background-position: left top, right top;
+    background-size: auto, 48% auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell__header--with-image {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 52%, rgba(255, 255, 255, 0.88) 100%), url("/family-trip-v4.png");
+    background-position: left top, right -10px top 10px;
+    background-size: auto, 240px auto;
+  }
 }
 </style>

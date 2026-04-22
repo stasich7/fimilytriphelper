@@ -11,8 +11,8 @@
       </template>
       <template v-else-if="overview?.trip">
         <h2>{{ overview.trip.title }}</h2>
-        <p v-if="guestName" class="guest-summary">Гостевая ссылка для {{ guestName }}</p>
-        <img class="hero-image" src="/family-trip-v2.png" alt="Family Trip Helper" />
+        <p v-if="guestName" class="guest-summary">Комментарии от имени {{ guestName }}</p>
+        <img class="hero-image" src="/family-trip-v3.png" alt="Family Trip Helper" />
       </template>
       <template v-else>
         <h2>План поездки еще не загружен</h2>
@@ -20,7 +20,7 @@
       </template>
     </article>
 
-    <article class="card">
+    <article class="card card--wide">
       <p class="card__label">Текущая версия</p>
       <template v-if="overview?.currentVersion">
         <h3>{{ overview.currentVersion.versionCode }} - {{ overview.currentVersion.title }}</h3>
@@ -32,16 +32,7 @@
       <p v-else>Пока нет загруженных версий.</p>
     </article>
 
-    <article class="card">
-      <p class="card__label">Сводка</p>
-      <ul>
-        <li>Пунктов в текущей версии: {{ overview?.stats.items || 0 }}</li>
-        <li>Комментариев собрано: {{ overview?.stats.comments || 0 }}</li>
-        <li>Открытых комментариев: {{ overview?.stats.openComments || 0 }}</li>
-      </ul>
-    </article>
-
-    <article class="card">
+    <article class="card card--wide">
       <p class="card__label">Загруженные версии</p>
       <ul v-if="versions.length > 0" class="version-list">
         <li v-for="version in versions" :key="version.id">
@@ -129,6 +120,10 @@ watch(
   grid-column: 1 / -1;
 }
 
+.card--wide {
+  grid-column: span 2;
+}
+
 .card__label {
   margin: 0 0 8px;
   color: #2c6f9e;
@@ -172,5 +167,11 @@ ul {
   margin-top: 12px;
   color: #134c75;
   font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .card--wide {
+    grid-column: 1 / -1;
+  }
 }
 </style>

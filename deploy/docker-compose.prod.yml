@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: family-trip-helper-app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      APP_ADDR: :80
+      APP_STATIC_DIR: /app/web
+      DB_DSN: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+    ports:
+      - "127.0.0.1:18080:80"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: family-trip-helper-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
