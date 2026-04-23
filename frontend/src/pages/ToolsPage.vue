@@ -88,7 +88,7 @@
             <input
               v-model="newGuestName"
               type="text"
-              placeholder="Например, Анна"
+              placeholder="Например, Гэндальф"
               :disabled="creatingGuest"
               @keydown.enter.prevent="submitGuest"
             />
