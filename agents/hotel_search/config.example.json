@@ -1,0 +1,19 @@
+{
+  "trip_city": "Batumi",
+  "areas": ["Old Batumi", "Chakvi"],
+  "check_in": "2026-08-13",
+  "check_out": "2026-08-21",
+  "guests": {
+    "adults": 4,
+    "children": 2,
+    "rooms": 2
+  },
+  "price": {
+    "min": 100,
+    "max": 250,
+    "currency": "USD"
+  },
+  "required_amenities": ["wifi", "kitchen", "pool"],
+  "aggregators": ["booking", "ozon_travel"],
+  "max_results_per_area": 5
+}

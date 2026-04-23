@@ -7,6 +7,7 @@ type Config struct {
 	FrontendOrigin string
 	DatabaseDSN    string
 	StaticDir      string
+	ToolsPIN       string
 }
 
 func Load() Config {
@@ -15,6 +16,7 @@ func Load() Config {
 		FrontendOrigin: getenv("APP_FRONTEND_ORIGIN", ""),
 		DatabaseDSN:    getenv("DB_DSN", "postgres://family_trip_helper:family_trip_helper@localhost:5432/family_trip_helper?sslmode=disable"),
 		StaticDir:      getenv("APP_STATIC_DIR", ""),
+		ToolsPIN:       getenv("APP_TOOLS_PIN", "1234"),
 	}
 }
 

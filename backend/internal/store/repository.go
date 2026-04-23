@@ -56,6 +56,15 @@ type CodexExport struct {
 	Markdown    string `json:"markdown"`
 }
 
+type ManagedGuest struct {
+	ID            int64      `json:"id"`
+	DisplayName   string     `json:"displayName"`
+	GuestToken    string     `json:"guestToken"`
+	CreatedAt     time.Time  `json:"createdAt"`
+	LastSeenAt    *time.Time `json:"lastSeenAt"`
+	CommentsCount int        `json:"commentsCount"`
+}
+
 func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
 	var overview Overview
 	var trip domain.Trip
@@ -293,17 +302,9 @@ func (r *Repository) CreateGuest(ctx context.Context, displayName string) (domai
 		return domain.Participant{}, "", fmt.Errorf("display name is required")
 	}
 
-	var tripID int64
-	err := r.db.QueryRowContext(ctx, `
-		SELECT id
-		FROM trips
-		WHERE singleton_key = 'active'
-	`).Scan(&tripID)
+	tripID, err := r.getActiveTripID(ctx)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return domain.Participant{}, "", fmt.Errorf("active trip is not initialized")
-		}
-		return domain.Participant{}, "", fmt.Errorf("select active trip: %w", err)
+		return domain.Participant{}, "", err
 	}
 
 	for attempt := 0; attempt < 5; attempt++ {
@@ -334,6 +335,110 @@ func (r *Repository) CreateGuest(ctx context.Context, displayName string) (domai
 	}
 
 	return domain.Participant{}, "", fmt.Errorf("could not generate a unique guest token")
+}
+
+func (r *Repository) ListGuests(ctx context.Context) ([]ManagedGuest, error) {
+	tripID, err := r.getActiveTripID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	rows, err := r.db.QueryContext(ctx, `
+		SELECT
+			p.id,
+			p.display_name,
+			p.guest_token,
+			p.created_at,
+			p.last_seen_at,
+			COUNT(c.id) AS comments_count
+		FROM participants p
+		LEFT JOIN comments c ON c.participant_id = p.id
+		WHERE p.trip_id = $1
+		GROUP BY p.id, p.display_name, p.guest_token, p.created_at, p.last_seen_at
+		ORDER BY p.created_at DESC, p.id DESC
+	`, tripID)
+	if err != nil {
+		return nil, fmt.Errorf("list guests: %w", err)
+	}
+	defer rows.Close()
+
+	guests := make([]ManagedGuest, 0)
+	for rows.Next() {
+		var (
+			guest    ManagedGuest
+			lastSeen sql.NullTime
+		)
+		if err := rows.Scan(
+			&guest.ID,
+			&guest.DisplayName,
+			&guest.GuestToken,
+			&guest.CreatedAt,
+			&lastSeen,
+			&guest.CommentsCount,
+		); err != nil {
+			return nil, fmt.Errorf("scan guest: %w", err)
+		}
+		if lastSeen.Valid {
+			value := lastSeen.Time
+			guest.LastSeenAt = &value
+		}
+		guests = append(guests, guest)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("iterate guests: %w", err)
+	}
+
+	return guests, nil
+}
+
+func (r *Repository) CreateManagedGuest(ctx context.Context, displayName string) (ManagedGuest, error) {
+	participant, token, err := r.CreateGuest(ctx, displayName)
+	if err != nil {
+		return ManagedGuest{}, err
+	}
+
+	return ManagedGuest{
+		ID:            participant.ID,
+		DisplayName:   participant.DisplayName,
+		GuestToken:    token,
+		CreatedAt:     participant.CreatedAt,
+		LastSeenAt:    nil,
+		CommentsCount: 0,
+	}, nil
+}
+
+func (r *Repository) DeleteGuest(ctx context.Context, guestID int64) error {
+	var commentsCount int
+	err := r.db.QueryRowContext(ctx, `
+		SELECT COUNT(*)
+		FROM comments
+		WHERE participant_id = $1
+	`, guestID).Scan(&commentsCount)
+	if err != nil {
+		return fmt.Errorf("count guest comments: %w", err)
+	}
+	if commentsCount > 0 {
+		return fmt.Errorf("guest has comments and cannot be deleted")
+	}
+
+	result, err := r.db.ExecContext(ctx, `
+		DELETE FROM participants
+		WHERE id = $1
+	`, guestID)
+	if err != nil {
+		return fmt.Errorf("delete guest: %w", err)
+	}
+
+	affected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("delete guest rows affected: %w", err)
+	}
+	if affected == 0 {
+		return ErrNotFound
+	}
+
+	return nil
 }
 
 func (r *Repository) CreateCommentByGuestToken(ctx context.Context, guestToken string, planVersionID, planItemID int64, body string) (domain.Comment, error) {
@@ -605,6 +710,23 @@ func nullableInt64(value int64) any {
 	}
 
 	return value
+}
+
+func (r *Repository) getActiveTripID(ctx context.Context) (int64, error) {
+	var tripID int64
+	err := r.db.QueryRowContext(ctx, `
+		SELECT id
+		FROM trips
+		WHERE singleton_key = 'active'
+	`).Scan(&tripID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, fmt.Errorf("active trip is not initialized")
+		}
+		return 0, fmt.Errorf("select active trip: %w", err)
+	}
+
+	return tripID, nil
 }
 
 func (r *Repository) resolveVersionRef(ctx context.Context, versionRef string) (int64, string, error) {

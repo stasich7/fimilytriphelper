@@ -1,18 +1,22 @@
 import type {
   CodexExportResponse,
   CommentCreateResponse,
+  DeleteGuestResponse,
   GuestLookupResponse,
   ImportMarkdownResponse,
   ItemDetailsResponse,
+  ManagedGuestResponse,
+  ManagedGuestsResponse,
   OverviewResponse,
+  ToolsUnlockResponse,
   VersionDetailsResponse,
   VersionsResponse,
 } from "./types/api";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || "/api/v1").replace(/\/$/, "");
 
-async function requestJSON<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`);
+async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(`${API_BASE}${path}`, init);
   if (!response.ok) {
     let message = `Request failed with status ${response.status}`;
     try {
@@ -79,6 +83,36 @@ export async function createComment(input: {
   }
 
   return (await response.json()) as CommentCreateResponse;
+}
+
+export function unlockTools(pin: string): Promise<ToolsUnlockResponse> {
+  return requestJSON<ToolsUnlockResponse>("/tools/unlock", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ pin }),
+  });
+}
+
+export function getManagedGuests(): Promise<ManagedGuestsResponse> {
+  return requestJSON<ManagedGuestsResponse>("/tools/guests");
+}
+
+export function createManagedGuest(displayName: string): Promise<ManagedGuestResponse> {
+  return requestJSON<ManagedGuestResponse>("/tools/guests", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ displayName }),
+  });
+}
+
+export function deleteManagedGuest(guestId: number): Promise<DeleteGuestResponse> {
+  return requestJSON<DeleteGuestResponse>(`/tools/guests/${guestId}`, {
+    method: "DELETE",
+  });
 }
 
 export async function importMarkdown(source: string): Promise<ImportMarkdownResponse> {

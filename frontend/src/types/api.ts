@@ -38,6 +38,15 @@ export interface Participant {
   lastSeenAt: string;
 }
 
+export interface ManagedGuest {
+  id: number;
+  displayName: string;
+  guestToken: string;
+  createdAt: string;
+  lastSeenAt: string | null;
+  commentsCount: number;
+}
+
 export interface OverviewResponse {
   trip?: Trip;
   currentVersion?: PlanVersion;
@@ -81,4 +90,20 @@ export interface CodexExportResponse {
   versionID: number;
   versionCode: string;
   markdown: string;
+}
+
+export interface ToolsUnlockResponse {
+  ok: boolean;
+}
+
+export interface ManagedGuestsResponse {
+  guests: ManagedGuest[];
+}
+
+export interface ManagedGuestResponse {
+  guest: ManagedGuest;
+}
+
+export interface DeleteGuestResponse {
+  deleted: boolean;
 }

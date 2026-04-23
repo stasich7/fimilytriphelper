@@ -156,6 +156,94 @@ func (r *Router) handleCreateComment(w http.ResponseWriter, req *http.Request) {
 	})
 }
 
+func (r *Router) handleToolsUnlock(w http.ResponseWriter, req *http.Request) {
+	if req.Method != http.MethodPost {
+		writeMethodNotAllowed(w, http.MethodPost)
+		return
+	}
+
+	var payload struct {
+		PIN string `json:"pin"`
+	}
+	if err := json.NewDecoder(req.Body).Decode(&payload); err != nil {
+		writeBadRequest(w, "invalid JSON body")
+		return
+	}
+
+	if strings.TrimSpace(payload.PIN) != r.config.ToolsPIN {
+		writeJSON(w, http.StatusForbidden, map[string]string{
+			"error":   "invalid_pin",
+			"message": "Неверный пин-код.",
+		})
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]bool{
+		"ok": true,
+	})
+}
+
+func (r *Router) handleToolsGuests(w http.ResponseWriter, req *http.Request) {
+	switch req.Method {
+	case http.MethodGet:
+		guests, err := r.repo.ListGuests(req.Context())
+		if err != nil {
+			writeServerError(w, err)
+			return
+		}
+
+		writeJSON(w, http.StatusOK, map[string]any{
+			"guests": guests,
+		})
+	case http.MethodPost:
+		var payload struct {
+			DisplayName string `json:"displayName"`
+		}
+		if err := json.NewDecoder(req.Body).Decode(&payload); err != nil {
+			writeBadRequest(w, "invalid JSON body")
+			return
+		}
+
+		guest, err := r.repo.CreateManagedGuest(req.Context(), payload.DisplayName)
+		if err != nil {
+			writeBadRequest(w, err.Error())
+			return
+		}
+
+		writeJSON(w, http.StatusCreated, map[string]any{
+			"guest": guest,
+		})
+	default:
+		writeMethodNotAllowed(w, "GET, POST")
+	}
+}
+
+func (r *Router) handleToolsGuestByID(w http.ResponseWriter, req *http.Request) {
+	if req.Method != http.MethodDelete {
+		writeMethodNotAllowed(w, http.MethodDelete)
+		return
+	}
+
+	guestID, err := parseInt64PathParam(req.URL.Path, "/api/v1/tools/guests/")
+	if err != nil {
+		writeBadRequest(w, err.Error())
+		return
+	}
+
+	if err := r.repo.DeleteGuest(req.Context(), guestID); err != nil {
+		if errors.Is(err, store.ErrNotFound) {
+			writeNotFound(w)
+			return
+		}
+		writeBadRequest(w, err.Error())
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]bool{
+		"deleted": true,
+	})
+}
+
 func (r *Router) handleImportMarkdown(w http.ResponseWriter, req *http.Request) {
 	if req.Method != http.MethodPost {
 		writeMethodNotAllowed(w, http.MethodPost)
