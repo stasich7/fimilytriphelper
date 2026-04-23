@@ -52,6 +52,14 @@
 - Codex must not change locations, stays, hotels, ordering, or other accepted plan choices on its own initiative.
 - Every meaningful update must be delivered as a new plan version so the change history remains traceable.
 - Existing items should keep their stable keys whenever the logical item remains the same across versions.
+- The project should keep a canonical markdown plan file in the repository as the source of truth for future updates.
+- The project should also keep full snapshot files for each accepted version in a version archive.
+- When a comment targets a specific `stable_key`, only that block may be edited in the next version unless the owner explicitly asks for broader changes.
+- All untouched blocks must be copied forward without rewriting.
+- Comments should not be deleted after an update is released.
+- Comments should move through statuses such as `open`, `addressed`, and `rejected`.
+- If a comment is addressed, the record should keep the version where it was addressed, for example `resolved_in_version: v3`.
+- Comment history should be preserved alongside the plan history.
 
 ## Non-Goals
 

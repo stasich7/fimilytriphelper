@@ -111,6 +111,37 @@ https://www.booking.com/
 - Meaningful plan updates should be imported as a new version instead of overwriting the previous one.
 - When the logical item stays the same across versions, keep the same `stable_key` so the change history remains visible.
 
+## Canonical File Workflow
+
+- Keep one canonical markdown file in the repository for the current working plan.
+- Keep one full snapshot markdown file per accepted version in a version archive.
+- The canonical file should mirror the latest accepted version.
+- When a comment targets a specific `stable_key`, edit only that block in the next version unless the owner explicitly requests broader plan changes.
+- All other blocks should be carried forward unchanged.
+- Service imports should always be generated from a full version snapshot, not from a partial patch.
+
+## Comment History Workflow
+
+- Keep comment history in repository files alongside the plan snapshots.
+- Do not delete comments after a new version is released.
+- Comments should have a status such as `open`, `addressed`, or `rejected`.
+- Addressed comments should include `resolved_in_version`.
+- When a comment targets a specific `stable_key`, keep that association in the comment archive.
+- Comment history should remain readable as a timeline of discussion and decisions.
+
+Example:
+
+```md
+### stable_key=activity.mtskheta.daytrip
+title=Мцхета и Джвари
+
+1. author=Стас
+   created_at=2026-04-23T10:16:20Z
+   status=addressed
+   resolved_in_version=v3
+   text=Интересно было бы узнать как сюда добраться без экскурсии. Стоимость, расстояние, как вернуться обратно, где походить.
+```
+
 ## Export Format for Codex
 
 Markdown summary with explicit references to stable keys.

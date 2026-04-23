@@ -209,7 +209,7 @@ watch(
 }
 
 :deep(.markdown-body ul) {
-  margin: 12px 0 0;
+  margin: 12px 0 12px 0;
   padding-left: 20px;
 }
 
