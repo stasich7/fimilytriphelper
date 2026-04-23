@@ -121,7 +121,7 @@ func (r *Repository) ListVersions(ctx context.Context) ([]domain.PlanVersion, er
 	}
 	defer rows.Close()
 
-	var versions []domain.PlanVersion
+	versions := make([]domain.PlanVersion, 0)
 	for rows.Next() {
 		var version domain.PlanVersion
 		if err := rows.Scan(&version.ID, &version.VersionCode, &version.Title, &version.CreatedAt); err != nil {

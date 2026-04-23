@@ -23,7 +23,7 @@
         <p class="card__label">{{ section.label }}</p>
         <div v-for="item in section.items" :key="item.id" class="item">
           <h3>{{ item.title }}</h3>
-          <p class="preview">{{ preview(item.bodyMarkdown) }}</p>
+          <div class="preview markdown-body" v-html="preview(item.bodyMarkdown)"></div>
           <button type="button" class="link-button" @click="openItem(item.id)">Открыть карточку</button>
         </div>
       </article>
@@ -65,6 +65,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getVersion } from "../api";
+import { renderMarkdownPreview } from "../markdown";
 import { buildItemPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
 
@@ -109,11 +110,7 @@ const sections = computed(() =>
 );
 
 function preview(value: string): string {
-  if (value.length <= 220) {
-    return value;
-  }
-
-  return `${value.slice(0, 220)}...`;
+  return renderMarkdownPreview(value);
 }
 
 async function loadVersion(versionId: string): Promise<void> {
@@ -262,7 +259,34 @@ h3 {
 
 .preview {
   margin: 0;
-  white-space: pre-wrap;
+}
+
+:deep(.markdown-body p) {
+  margin: 0;
+}
+
+:deep(.markdown-body ul) {
+  margin: 0;
+  padding-left: 20px;
+}
+
+:deep(.markdown-body li + li) {
+  margin-top: 4px;
+}
+
+:deep(.markdown-body a) {
+  color: #134c75;
+  font-weight: 700;
+}
+
+:deep(.markdown-body img) {
+  display: block;
+  width: min(100%, 220px);
+  max-height: 140px;
+  margin-top: 12px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(31, 41, 55, 0.12);
 }
 
 textarea {

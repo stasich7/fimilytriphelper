@@ -18,7 +18,7 @@
     <article class="card" v-else-if="item">
       <p class="card__label">Карточка</p>
       <h2>{{ item.title }}</h2>
-      <div class="body">{{ item.bodyMarkdown }}</div>
+      <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)"></div>
     </article>
 
     <article class="card" v-if="item">
@@ -51,6 +51,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getItem } from "../api";
+import { renderMarkdown } from "../markdown";
 import { buildOverviewPath } from "../paths";
 import type { Comment, PlanItem } from "../types/api";
 
@@ -73,6 +74,10 @@ const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
   return token || "";
 });
+
+function renderBody(value: string): string {
+  return renderMarkdown(value);
+}
 
 async function loadItem(itemId: string): Promise<void> {
   loading.value = true;
@@ -193,7 +198,38 @@ watch(
 }
 
 .body {
-  white-space: pre-wrap;
+}
+
+:deep(.markdown-body p) {
+  margin: 0;
+}
+
+:deep(.markdown-body p + p) {
+  margin-top: 12px;
+}
+
+:deep(.markdown-body ul) {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+:deep(.markdown-body li + li) {
+  margin-top: 4px;
+}
+
+:deep(.markdown-body a) {
+  color: #134c75;
+  font-weight: 700;
+}
+
+:deep(.markdown-body img) {
+  display: block;
+  width: min(100%, 460px);
+  max-height: 300px;
+  margin-top: 16px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 14px 30px rgba(31, 41, 55, 0.12);
 }
 
 .comment {

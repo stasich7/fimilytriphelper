@@ -76,7 +76,7 @@ async function loadVersions(): Promise<void> {
 
   try {
     const response = await getVersions();
-    versions.value = response.versions;
+    versions.value = response.versions ?? [];
 
     if (!selectedVersionId.value && versions.value.length > 0) {
       selectedVersionId.value = String(versions.value[0].id);

@@ -30,6 +30,14 @@ Arguments:
 
 The command prints a ready-to-share personal guest URL.
 
+## Import content style
+
+When preparing a new plan version for import:
+- prefer markdown links in the form `[label](https://example.com)`;
+- plain URLs are allowed, but markdown links with readable labels are preferred;
+- add images in markdown form `![alt](https://example.com/image.jpg)` when a place benefits from a small visual cue;
+- links and images should stay inside the same item block they describe.
+
 Local development example:
 
 ```bash
