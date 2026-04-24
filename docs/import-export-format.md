@@ -53,6 +53,7 @@ Cons:
 - Put links directly inside the item block they describe.
 - Prefer markdown links in the form `[label](https://example.com)` instead of bare URLs.
 - Bare URLs are allowed, but markdown links with a readable label are the preferred import format.
+- Use `[label](item:stable_key)` for internal links to another plan item in the same version.
 - If an item benefits from a visual cue, add one small image inside the same block.
 - Images should use markdown form `![alt](https://example.com/image.jpg)`.
 - All prices should be shown in USD in the imported plan content.
@@ -60,6 +61,20 @@ Cons:
 - Every price should clearly say what it covers: per person, per vehicle, per room, or for a specific guest composition.
 - Stay items should include an approximate nightly price or total stay price when a reliable public source is available.
 - Activity and transport items should include booking links and approximate prices when a reliable public source is available.
+
+## Accommodation Fill Rules
+
+- Accommodation search results for publication must be merged into the canonical full plan snapshot, not saved as a separate publication summary file.
+- The only current publication source is `context/georgia-trip-plan-current.md`; each accepted publication version must also be archived as a full snapshot in `context/versions/vX.md`.
+- Replace outdated `stay.*.option.*` candidates inside the plan when the user asks to update accommodation options.
+- Keep existing area blocks when they still describe the intended geography; add a new area block only when a selected accommodation is outside existing areas.
+- Use stable keys in the form `stay.<city>.option.<hotel-slug>` for new accommodation candidates.
+- If a logical accommodation candidate continues across versions, keep its stable key.
+- Each live-checked accommodation option should state aggregator, search date, stay dates, guest composition, room count, required sleeping places, room configuration, availability status, total USD price, nightly USD price, and important risk notes.
+- Use USD for all accommodation prices. If the source currency differs, show USD in the plan and keep original currency only in internal search artifacts.
+- For Booking results, use a stable hotel page link in the published plan instead of a long volatile search-result URL.
+- Add the first object image only when the agent result or another reliable public source provides a direct image URL. Do not invent or scrape an image URL manually just to fill the field.
+- If beds, cancellation, taxes, or availability are not fully confirmed by the agent, say that explicitly inside the accommodation block.
 
 Example with a link and image:
 
@@ -102,6 +117,8 @@ https://www.booking.com/
 - Numbering starts from `v1`.
 - Every item heading must contain a stable key in square brackets.
 - Duplicate stable keys inside one import are invalid.
+- Supported publication item types are `route_option`, `day_plan`, `stay`, `transport`, `activity`, and `note`.
+- Use `day_plan` for separate day-by-day itinerary cards shown in the `Ритм по дням` UI section.
 - Unknown item type falls back to `note` or fails validation, depending on strict mode.
 
 ## Change Discipline Across Versions

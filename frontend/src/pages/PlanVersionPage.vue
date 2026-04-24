@@ -21,9 +21,22 @@
 
       <article v-for="section in sections" :key="section.type" class="card">
         <p class="card__label">{{ section.label }}</p>
+        <p v-if="likeError" class="submit-error">{{ likeError }}</p>
         <div v-for="item in section.items" :key="item.id" class="item">
-          <h3>{{ item.title }}</h3>
-          <div class="preview markdown-body" v-html="preview(item.bodyMarkdown)"></div>
+          <div class="item__header">
+            <h3>{{ item.title }}</h3>
+            <button
+              type="button"
+              :class="['like-button', { 'like-button--active': item.likedByCurrentGuest }]"
+              :disabled="!guestToken || likingItemId === item.id"
+              :title="guestToken ? 'Нравится' : 'Откройте по гостевой ссылке, чтобы поставить лайк'"
+              @click="toggleLike(item)"
+            >
+              <span aria-hidden="true">👍</span>
+              <span>{{ item.likesCount }}</span>
+            </button>
+          </div>
+          <div class="preview markdown-body" v-html="preview(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
           <button type="button" class="link-button" @click="openItem(item.id)">Открыть карточку</button>
         </div>
       </article>
@@ -64,8 +77,8 @@
 import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import { createComment, getGuest, getVersion } from "../api";
-import { renderMarkdownPreview } from "../markdown";
+import { createComment, getGuest, getVersion, toggleItemLike } from "../api";
+import { renderMarkdownPreviewWithOptions } from "../markdown";
 import { buildItemPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
 
@@ -84,15 +97,20 @@ const commentBody = ref("");
 const guestName = ref("");
 const submitError = ref("");
 const submitting = ref(false);
+const likeError = ref("");
+const likingItemId = ref<number | null>(null);
 
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
   return token || "";
 });
 
-const sectionOrder = ["route_option", "stay", "transport", "activity", "note"];
+const rhythmStableKeys = new Set(["note.plan.tbilisi.days", "note.plan.sea.days"]);
+
+const sectionOrder = ["route_option", "plan_days", "stay", "transport", "activity", "note"];
 const sectionLabels: Record<string, string> = {
   route_option: "Маршрут",
+  plan_days: "Ритм по дням",
   stay: "Проживание",
   transport: "Транспорт",
   activity: "Активности",
@@ -104,13 +122,27 @@ const sections = computed(() =>
     .map((type) => ({
       type,
       label: sectionLabels[type] || type,
-      items: items.value.filter((item) => item.type === type),
+      items: sectionItems(type),
     }))
     .filter((section) => section.items.length > 0),
 );
 
+function sectionItems(type: string): PlanItem[] {
+  if (type === "plan_days") {
+    return items.value.filter((item) => item.type === "day_plan" || rhythmStableKeys.has(item.stableKey));
+  }
+
+  if (type === "note") {
+    return items.value.filter((item) => item.type === type && !rhythmStableKeys.has(item.stableKey));
+  }
+
+  return items.value.filter((item) => item.type === type);
+}
+
 function preview(value: string): string {
-  return renderMarkdownPreview(value);
+  return renderMarkdownPreviewWithOptions(value, {
+    resolveItemLink,
+  });
 }
 
 async function loadVersion(versionId: string): Promise<void> {
@@ -118,7 +150,7 @@ async function loadVersion(versionId: string): Promise<void> {
   error.value = "";
 
   try {
-    const response = await getVersion(versionId);
+    const response = await getVersion(versionId, guestToken.value || undefined);
     version.value = response.version;
     items.value = response.items ?? [];
     versionComments.value = response.comments ?? [];
@@ -136,10 +168,66 @@ async function loadVersion(versionId: string): Promise<void> {
   }
 }
 
+async function toggleLike(item: PlanItem): Promise<void> {
+  if (!guestToken.value || likingItemId.value) {
+    return;
+  }
+
+  likingItemId.value = item.id;
+  likeError.value = "";
+
+  try {
+    const response = await toggleItemLike(item.id, guestToken.value);
+    items.value = items.value.map((currentItem) =>
+      currentItem.id === item.id
+        ? {
+            ...currentItem,
+            likedByCurrentGuest: response.liked,
+            likesCount: response.likesCount,
+          }
+        : currentItem,
+    );
+  } catch (err) {
+    likeError.value = err instanceof Error ? err.message : "Неизвестная ошибка";
+  } finally {
+    likingItemId.value = null;
+  }
+}
+
 function openItem(itemId: number): void {
   sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
   sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
   void router.push(buildItemPath(itemId, guestToken.value || undefined));
+}
+
+function resolveItemLink(stableKey: string): string | null {
+  const linkedItem = items.value.find((item) => item.stableKey === stableKey);
+
+  if (!linkedItem) {
+    return null;
+  }
+
+  return buildItemPath(linkedItem.id, guestToken.value || undefined);
+}
+
+function handleMarkdownClick(event: MouseEvent): void {
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const link = target.closest<HTMLAnchorElement>("a[data-internal-item-link='true']");
+  const href = link?.getAttribute("href");
+
+  if (!href) {
+    return;
+  }
+
+  event.preventDefault();
+  sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
+  sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
+  void router.push(href);
 }
 
 async function submitVersionComment(): Promise<void> {
@@ -210,6 +298,40 @@ watch(
 
 .item + .item {
   margin-top: 12px;
+}
+
+.item__header {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.like-button {
+  display: inline-flex;
+  min-width: 64px;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid rgba(19, 76, 117, 0.2);
+  border-radius: 999px;
+  background: #fff;
+  color: #134c75;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.like-button--active {
+  border-color: #134c75;
+  background: #dff0f8;
+}
+
+.like-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .anchor-link {

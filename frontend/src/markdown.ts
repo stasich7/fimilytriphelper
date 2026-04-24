@@ -7,15 +7,23 @@ function escapeHTML(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+export interface MarkdownRenderOptions {
+  resolveItemLink?: (stableKey: string) => string | null;
+}
+
 const imagePattern = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g;
-const markdownLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+const markdownLinkPattern = /\[([^\]]+)\]\(([^\s)]+)\)/g;
 const plainURLPattern = /(^|[\s(>])((https?:\/\/[^\s<]+))/g;
 
 function restoreTokens(value: string, tokens: string[]): string {
   return value.replace(/@@TOKEN_(\d+)@@/g, (_match, index: string) => tokens[Number(index)] || "");
 }
 
-function renderInline(text: string): string {
+function isExternalURL(value: string): boolean {
+  return /^https?:\/\//.test(value);
+}
+
+function renderInline(text: string, options: MarkdownRenderOptions): string {
   const tokens: string[] = [];
   const storeToken = (html: string): string => {
     const key = `@@TOKEN_${tokens.length}@@`;
@@ -31,9 +39,22 @@ function renderInline(text: string): string {
     ),
   );
 
-  rendered = rendered.replace(markdownLinkPattern, (_match, label: string, url: string) =>
-    storeToken(`<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`),
-  );
+  rendered = rendered.replace(markdownLinkPattern, (match: string, label: string, url: string) => {
+    if (isExternalURL(url)) {
+      return storeToken(`<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+    }
+
+    if (url.startsWith("item:")) {
+      const stableKey = url.slice("item:".length);
+      const href = options.resolveItemLink?.(stableKey);
+
+      if (href) {
+        return storeToken(`<a href="${href}" data-internal-item-link="true">${label}</a>`);
+      }
+    }
+
+    return match;
+  });
 
   rendered = rendered.replace(plainURLPattern, (_match, prefix: string, url: string) => {
     const link = storeToken(`<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`);
@@ -44,6 +65,10 @@ function renderInline(text: string): string {
 }
 
 export function renderMarkdown(value: string): string {
+  return renderMarkdownWithOptions(value, {});
+}
+
+export function renderMarkdownWithOptions(value: string, options: MarkdownRenderOptions): string {
   const lines = value.split(/\r?\n/);
   const blocks: string[] = [];
   let paragraph: string[] = [];
@@ -54,7 +79,7 @@ export function renderMarkdown(value: string): string {
       return;
     }
 
-    blocks.push(`<p>${paragraph.map(renderInline).join("<br />")}</p>`);
+    blocks.push(`<p>${paragraph.map((line) => renderInline(line, options)).join("<br />")}</p>`);
     paragraph = [];
   };
 
@@ -63,7 +88,7 @@ export function renderMarkdown(value: string): string {
       return;
     }
 
-    blocks.push(`<ul>${listItems.map((item) => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
+    blocks.push(`<ul>${listItems.map((item) => `<li>${renderInline(item, options)}</li>`).join("")}</ul>`);
     listItems = [];
   };
 
@@ -94,6 +119,14 @@ export function renderMarkdown(value: string): string {
 }
 
 export function renderMarkdownPreview(value: string, maxLength = 220): string {
+  return renderMarkdownPreviewWithOptions(value, {}, maxLength);
+}
+
+export function renderMarkdownPreviewWithOptions(
+  value: string,
+  options: MarkdownRenderOptions,
+  maxLength = 220,
+): string {
   const firstImage = value.match(imagePattern)?.[0] || "";
   const plainText = value
     .replace(imagePattern, "")
@@ -105,5 +138,5 @@ export function renderMarkdownPreview(value: string, maxLength = 220): string {
   const previewText = plainText.length <= maxLength ? plainText : `${plainText.slice(0, maxLength).trimEnd()}...`;
   const previewSource = [firstImage, previewText].filter(Boolean).join("\n\n");
 
-  return renderMarkdown(previewSource);
+  return renderMarkdownWithOptions(previewSource, options);
 }

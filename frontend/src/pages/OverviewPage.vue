@@ -12,7 +12,11 @@
       <template v-else-if="overview?.trip">
         <h2>{{ overview.trip.title }}</h2>
         <p v-if="guestName" class="guest-summary">Комментарии от имени {{ guestName }}</p>
-        <img class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
+        <RouterLink v-if="currentVersionPath" class="start-link" :to="currentVersionPath">Поехали</RouterLink>
+        <RouterLink v-if="currentVersionPath" class="hero-image-link" :to="currentVersionPath" aria-label="Открыть текущую версию плана">
+          <img class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
+        </RouterLink>
+        <img v-else class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
       </template>
       <template v-else>
         <h2>План поездки еще не загружен</h2>
@@ -64,6 +68,14 @@ const guestName = ref("");
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
   return token || undefined;
+});
+
+const currentVersionPath = computed(() => {
+  if (!overview.value?.currentVersion) {
+    return "";
+  }
+
+  return buildVersionPath(overview.value.currentVersion.id, guestToken.value);
 });
 
 function formatDate(value: string): string {
@@ -154,12 +166,42 @@ ul {
   font-weight: 700;
 }
 
+.start-link {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #134c75;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.start-link:hover,
+.start-link:focus-visible {
+  background: #0f3d5f;
+}
+
+.hero-image-link {
+  display: block;
+  margin-top: 18px;
+  border-radius: 20px;
+}
+
+.hero-image-link:focus-visible {
+  outline: 3px solid rgba(19, 76, 117, 0.35);
+  outline-offset: 4px;
+}
+
 .hero-image {
   display: block;
   width: 100%;
-  margin-top: 18px;
   border-radius: 20px;
   box-shadow: 0 18px 40px rgba(31, 41, 55, 0.16);
+}
+
+.card--hero > .hero-image {
+  margin-top: 18px;
 }
 
 .link {

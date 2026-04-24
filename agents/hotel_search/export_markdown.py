@@ -21,15 +21,24 @@ def render_markdown(request: SearchRequest, results: list[HotelResult]) -> str:
         lines.append(f"## [{stable_key}] {result.name}")
         lines.append("Type: stay")
         lines.append(f"Area: {result.area}")
+        lines.append(f"Category: {result.category}")
         lines.append(f"Aggregator: {result.aggregator}")
         lines.append(f"Dates: {result.check_in.isoformat()} to {result.check_out.isoformat()}")
         lines.append(f"Guests: {_format_guests(result)}")
+        if result.sleeping_places is not None:
+            lines.append(f"Sleeping places: {result.sleeping_places}")
         price_line = _format_price(result)
         if price_line:
             lines.append(f"Price: {price_line}")
         lines.append(f"Availability: {'confirmed' if result.availability_confirmed else 'not confirmed'}")
+        lines.append(f"Fit score: {result.score:.2f}")
+        lines.append(f"Area fit: {result.area_fit_score:.2f}")
+        lines.append(f"Sleeping fit: {result.sleeping_fit_score:.2f}")
+        lines.append(f"Transport fit: {result.transport_score:.2f}")
         if result.amenities:
             lines.append(f"Amenities: {', '.join(result.amenities)}")
+        if result.risk_flags:
+            lines.append(f"Risk flags: {', '.join(result.risk_flags)}")
         lines.append("")
 
         body_lines = [
@@ -81,7 +90,10 @@ def slugify(value: str) -> str:
 
 
 def _format_guests(result: HotelResult) -> str:
-    return f"{result.guests.adults} adults, {result.guests.children} children, {result.guests.rooms} rooms"
+    return (
+        f"{result.guests.adults} adults, {result.guests.children} children, "
+        f"{result.guests.rooms} rooms, {result.guests.own_beds_required()} own beds required"
+    )
 
 
 def _format_price(result: HotelResult) -> str:
@@ -90,4 +102,12 @@ def _format_price(result: HotelResult) -> str:
         parts.append(f"{result.price.nightly:.2f} {result.price.currency} per night")
     if result.price.total is not None:
         parts.append(f"{result.price.total:.2f} {result.price.currency} total")
+    if result.price.original_currency:
+        original_parts: list[str] = []
+        if result.price.original_nightly is not None:
+            original_parts.append(f"{result.price.original_nightly:.2f} {result.price.original_currency} per night")
+        if result.price.original_total is not None:
+            original_parts.append(f"{result.price.original_total:.2f} {result.price.original_currency} total")
+        if original_parts:
+            parts.append(f"original: {', '.join(original_parts)}")
     return ", ".join(parts)

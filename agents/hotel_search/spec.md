@@ -9,10 +9,12 @@ Responsibilities:
 - plan parallel jobs by `area x aggregator`;
 - collect adapter results;
 - normalize fields;
+- classify stay type;
 - deduplicate hotels across aggregators;
-- rank candidates;
+- rank candidates with soft area, transport, sleeping-place, budget, and risk signals;
 - export JSON for model consumption;
 - export markdown `stay` blocks for FamilyTripHelper import.
+- drop over-budget results before ranking when the request sets `price.max`.
 
 Non-goals for current iteration:
 - direct FamilyTripHelper API calls;
@@ -28,8 +30,9 @@ Top-level fields:
 - `check_out: YYYY-MM-DD`
 - `guests`
   - `adults: int`
-  - `children: int`
+  - `children: int | {age: int, needs_own_bed: bool}[]`
   - `rooms: int`
+  - `preferred_beds: int`
 - `price`
   - `min: number`
   - `max: number`
@@ -37,6 +40,20 @@ Top-level fields:
 - `required_amenities: string[]`
 - `aggregators: string[]`
 - `max_results_per_area: int`
+- `transport_preferences`
+  - `prefer_public_transport: bool`
+  - `avoid_taxi_dependency: bool`
+  - `metro_nearby_bonus: bool`
+  - `max_walk_to_metro_minutes: int`
+- `accommodation_mix: string[]`
+- `area_profiles`
+  - `name: string`
+  - `anchors: string[]`
+  - `nearby_landmarks: string[]`
+  - `transport_anchors: string[]`
+  - `positive_terms: string[]`
+  - `negative_terms: string[]`
+  - `accommodation_mix: string[]`
 
 ## Parallelism model
 
@@ -48,7 +65,8 @@ Each job receives:
 - same guest composition;
 - one area;
 - one aggregator;
-- same amenity and budget filters.
+- same amenity filters;
+- same hard nightly budget ceiling for the full guest composition when `price.max` is set.
 
 ## Adapter contract
 
@@ -65,6 +83,7 @@ Adapter returns normalized-enough hotel candidates with:
 - amenities;
 - features;
 - first image URL when available.
+- inferred category and sleeping-place details when available.
 
 If adapter cannot run:
 - raise explicit adapter error;
@@ -91,13 +110,35 @@ If two results share same dedupe key:
 
 ## Ranking
 
+Budget handling:
+- `price.max` is a hard nightly cap for the whole requested guest composition after currency normalization;
+- results above `price.max` are excluded before ranking;
+- results without a nightly price are excluded when any budget bound is set.
+
 Current default weights:
-- area match: `0.30`
-- price fit: `0.20`
-- amenities fit: `0.20`
-- family fit: `0.15`
-- rating fit: `0.10`
-- cancellation fit: `0.05`
+- soft area fit: `0.20`
+- exact availability: `0.15`
+- sleeping-place fit: `0.20`
+- price fit: `0.15`
+- public transport fit: `0.10`
+- amenities fit: `0.08`
+- rating fit: `0.07`
+- cancellation info: `0.03`
+- accommodation category fit: `0.02`
+
+Area fit is intentionally soft:
+- exact polygon boundaries are not required;
+- profile anchors such as `right bank`, `near metro`, `old square`, or `botanical garden` are treated as positive signals;
+- negative terms such as `very noisy`, `taxi`, or `car required` reduce fit.
+
+Sleeping-place fit uses `preferred_beds` first. If it is not set, each adult and each child with `needs_own_bed=true` counts as one required sleeping place.
+
+## Grouped shortlist
+
+JSON output includes `best_by_area_and_type`:
+- one bucket per area profile;
+- one list per category from `accommodation_mix`, usually `hotel`, `aparthotel`, `private`;
+- each list is sorted by final score.
 
 ## Markdown export rules
 
@@ -105,6 +146,7 @@ Each hotel exports as `stay` item:
 - stable key format: `stay.<city-or-area>.<slug>`
 - title = hotel name
 - metadata lines include area, aggregator, dates, guests, price, availability, amenities
+- metadata lines include category, sleeping places, fit scores, and risk flags when available
 - body contains:
   - source link
   - primary image

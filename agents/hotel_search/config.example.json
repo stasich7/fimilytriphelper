@@ -4,16 +4,49 @@
   "check_in": "2026-08-13",
   "check_out": "2026-08-21",
   "guests": {
-    "adults": 4,
-    "children": 2,
-    "rooms": 2
+    "adults": 3,
+    "children": [
+      {
+        "age": 6,
+        "needs_own_bed": true
+      }
+    ],
+    "rooms": 1,
+    "preferred_beds": 4
   },
   "price": {
-    "min": 100,
-    "max": 250,
+    "min": null,
+    "max": 100,
     "currency": "USD"
   },
   "required_amenities": ["wifi", "kitchen", "pool"],
-  "aggregators": ["booking", "ozon_travel"],
-  "max_results_per_area": 5
+  "aggregators": ["booking"],
+  "max_results_per_area": 5,
+  "transport_preferences": {
+    "prefer_public_transport": true,
+    "avoid_taxi_dependency": true,
+    "metro_nearby_bonus": true,
+    "max_walk_to_metro_minutes": 12
+  },
+  "accommodation_mix": ["hotel", "aparthotel", "private"],
+  "area_profiles": [
+    {
+      "name": "Old Batumi",
+      "anchors": ["Old Boulevard", "Europe Square", "Piazza"],
+      "nearby_landmarks": ["Batumi Boulevard", "Alphabet Tower", "Ali and Nino"],
+      "transport_anchors": ["bus", "station", "walking distance"],
+      "positive_terms": ["central", "walkable", "quiet", "family"],
+      "negative_terms": ["nightclub", "very noisy", "taxi"],
+      "accommodation_mix": ["hotel", "aparthotel", "private"]
+    },
+    {
+      "name": "Chakvi",
+      "anchors": ["Chakvi", "Botanical Garden"],
+      "nearby_landmarks": ["Batumi Botanical Garden", "Green Cape"],
+      "transport_anchors": ["bus", "station", "walking distance"],
+      "positive_terms": ["quiet", "garden", "beach", "family"],
+      "negative_terms": ["taxi", "car required"],
+      "accommodation_mix": ["hotel", "aparthotel", "private"]
+    }
+  ]
 }

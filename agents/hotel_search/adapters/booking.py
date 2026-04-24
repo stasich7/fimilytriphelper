@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import re
+import shutil
 import tempfile
 import time
 from html import unescape
@@ -11,6 +12,7 @@ from urllib.parse import quote_plus
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -23,20 +25,28 @@ from agents.hotel_search.models import GuestConfig, HotelResult, ImageInfo, Pric
 class BookingAdapter(AggregatorAdapter):
     name = "booking"
     _CHROME_BINARY = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+    _CHROMEDRIVER_CACHE_DIR = Path.home() / ".cache" / "selenium" / "chromedriver"
     _SEARCH_URL_TEMPLATE = (
         "https://www.booking.com/searchresults.en-gb.html?"
         "ss={query}&checkin={check_in}&checkout={check_out}&"
-        "group_adults={adults}&group_children={children}&no_rooms={rooms}"
+        "group_adults={adults}&group_children={children}&no_rooms={rooms}{child_age_params}"
     )
 
     def search(self, request: SearchRequest, area: str) -> list[HotelResult]:
         driver = self._build_driver()
         try:
-            url = self._build_search_url(request, area)
-            driver.get(url)
-            self._wait_for_results(driver)
-            cards = self._find_result_cards(driver)
-            return self._parse_cards(request, area, cards)
+            results: list[HotelResult] = []
+            seen_urls: set[str] = set()
+            for url in self._build_search_urls(request):
+                driver.get(url)
+                self._wait_for_results(driver)
+                cards = self._find_result_cards(driver)
+                for parsed in self._parse_cards(request, cards):
+                    if parsed.source_url in seen_urls:
+                        continue
+                    seen_urls.add(parsed.source_url)
+                    results.append(parsed)
+            return results
         except TimeoutException as err:
             raise AdapterUnavailableError(f"booking search page timeout for area {area}") from err
         finally:
@@ -71,7 +81,10 @@ class BookingAdapter(AggregatorAdapter):
         options.page_load_strategy = "eager"
 
         try:
-            driver = webdriver.Chrome(options=options)
+            driver = webdriver.Chrome(
+                service=ChromeService(executable_path=str(self._resolve_chromedriver_path())),
+                options=options,
+            )
         except WebDriverException as err:
             raise AdapterUnavailableError(
                 "booking adapter could not start Chrome WebDriver."
@@ -79,6 +92,23 @@ class BookingAdapter(AggregatorAdapter):
         driver.set_page_load_timeout(60)
         driver.set_window_size(1440, 1200)
         return driver
+
+    def _resolve_chromedriver_path(self) -> Path:
+        env_path = os.getenv("CHROMEDRIVER_PATH", "").strip()
+        if env_path:
+            candidate = Path(env_path).expanduser()
+            if candidate.exists():
+                return candidate
+
+        cached_versions = sorted(self._CHROMEDRIVER_CACHE_DIR.glob("*/*/chromedriver"))
+        if cached_versions:
+            return cached_versions[-1]
+
+        discovered = shutil.which("chromedriver")
+        if discovered:
+            return Path(discovered)
+
+        raise AdapterUnavailableError("booking adapter could not find a local chromedriver binary.")
 
     def _build_safari_driver(self) -> webdriver.Safari:
         try:
@@ -91,8 +121,7 @@ class BookingAdapter(AggregatorAdapter):
         return driver
 
     def _build_search_url(self, request: SearchRequest, area: str) -> str:
-        _ = area
-        query = request.trip_city
+        query = self._build_search_query(request, area)
         return self._SEARCH_URL_TEMPLATE.format(
             query=quote_plus(query),
             check_in=request.check_in.isoformat(),
@@ -100,19 +129,48 @@ class BookingAdapter(AggregatorAdapter):
             adults=request.guests.adults,
             children=request.guests.children,
             rooms=request.guests.rooms,
+            child_age_params=self._build_child_age_params(request),
         )
 
+    def _build_search_urls(self, request: SearchRequest) -> list[str]:
+        base_url = self._build_search_url(request, request.trip_city)
+        page_count = max(1, int(os.getenv("BOOKING_PAGE_COUNT", "6")))
+        page_size = max(1, int(os.getenv("BOOKING_PAGE_SIZE", "25")))
+        urls: list[str] = []
+        for page_index in range(page_count):
+            offset = page_index * page_size
+            if offset <= 0:
+                urls.append(base_url)
+                continue
+            urls.append(f"{base_url}&offset={offset}")
+        return urls
+
+    def _build_search_query(self, request: SearchRequest, area: str) -> str:
+        return request.trip_city
+
+    def _should_search_city(self, request: SearchRequest, area: str) -> bool:
+        normalized = area.strip().lower()
+        city = request.trip_city.strip().lower()
+        if not normalized or normalized == city:
+            return True
+        return normalized in {"old batumi", "new boulevard"}
+
+    def _build_child_age_params(self, request: SearchRequest) -> str:
+        if not request.guests.child_guests:
+            return ""
+        return "".join(f"&age={child.age}" for child in request.guests.child_guests)
+
     def _wait_for_results(self, driver) -> None:
-        time.sleep(8)
+        time.sleep(6)
         wait = WebDriverWait(driver, 45)
         wait.until(
             lambda current_driver: len(
                 current_driver.find_elements(By.XPATH, "//a[contains(@href, '/hotel/')]")
-            ) > 20
+            ) > 10
         )
 
     def _find_result_cards(self, driver: webdriver.Safari) -> list:
-        links = driver.find_elements(By.XPATH, "//a[contains(@href, '/hotel/')]")
+        links = self._collect_hotel_links(driver)
         seen: set[str] = set()
         cards: list = []
         for link in links:
@@ -124,15 +182,32 @@ class BookingAdapter(AggregatorAdapter):
                 continue
             seen.add(href)
             cards.append(container)
-            if len(cards) >= 10:
+            if len(cards) >= self._max_cards():
                 break
         return cards
+
+    def _collect_hotel_links(self, driver) -> list:
+        rounds = int(os.getenv("BOOKING_SCROLL_ROUNDS", "12"))
+        links: list = []
+        for _ in range(max(1, rounds)):
+            links = driver.find_elements(By.XPATH, "//a[contains(@href, '/hotel/')]")
+            if len(links) >= self._max_cards():
+                break
+            driver.execute_script("window.scrollBy(0, Math.floor(window.innerHeight * 0.9));")
+            time.sleep(1.2)
+        driver.execute_script("window.scrollTo(0, 0);")
+        return driver.find_elements(By.XPATH, "//a[contains(@href, '/hotel/')]")
+
+    def _max_cards(self) -> int:
+        return max(1, int(os.getenv("BOOKING_MAX_CARDS", "80")))
 
     def _find_card_container(self, link) -> object | None:
         xpath_candidates = [
             "./ancestor::*[.//a[contains(., 'See availability')]][1]",
             "./ancestor::*[.//a[contains(@href, '/hotel/')] and .//*[contains(text(), 'Price')]][1]",
             "./ancestor::*[.//*[contains(text(), 'See availability')]][1]",
+            "./ancestor::*[@data-testid='property-card'][1]",
+            "./ancestor::*[contains(@data-testid, 'property-card')][1]",
         ]
         for xpath in xpath_candidates:
             matches = link.find_elements(By.XPATH, xpath)
@@ -140,17 +215,16 @@ class BookingAdapter(AggregatorAdapter):
                 return matches[0]
         return None
 
-    def _parse_cards(self, request: SearchRequest, area: str, cards: list) -> list[HotelResult]:
+    def _parse_cards(self, request: SearchRequest, cards: list) -> list[HotelResult]:
         results: list[HotelResult] = []
         for card in cards:
             try:
-                parsed = self._parse_card(request, area, card)
+                parsed = self._parse_card(request, request.trip_city, card)
             except AdapterParsingError:
                 continue
             if parsed is not None:
                 results.append(parsed)
-        filtered = [result for result in results if self._matches_area(area, result)]
-        return filtered or results
+        return results
 
     def _parse_card(self, request: SearchRequest, area: str, card) -> HotelResult | None:
         hotel_link = card.find_element(By.XPATH, ".//a[contains(@href, '/hotel/')]")
@@ -173,7 +247,7 @@ class BookingAdapter(AggregatorAdapter):
             name=name,
             aggregator=self.name,
             source_url=source_url,
-            area=neighborhood or area,
+            area=neighborhood or request.trip_city,
             city=request.trip_city,
             location_summary=location_summary,
             check_in=request.check_in,
@@ -182,6 +256,8 @@ class BookingAdapter(AggregatorAdapter):
                 adults=request.guests.adults,
                 children=request.guests.children,
                 rooms=request.guests.rooms,
+                child_guests=list(request.guests.child_guests),
+                preferred_beds=request.guests.preferred_beds,
             ),
             availability_confirmed="See availability" in card_text,
             price=price,
@@ -289,12 +365,22 @@ class BookingAdapter(AggregatorAdapter):
         return features
 
     def _extract_image(self, card) -> str:
-        images = card.find_elements(By.XPATH, ".//img[@src]")
+        images = card.find_elements(By.XPATH, ".//img")
         for image in images:
-            src = (image.get_attribute("src") or "").strip()
-            if src:
+            src = self._best_image_attribute(image)
+            if src and src.startswith("http"):
                 return src
         return ""
+
+    def _best_image_attribute(self, image) -> str:
+        for attr in ["src", "currentSrc", "data-src", "data-lazy-src"]:
+            value = (image.get_attribute(attr) or "").strip()
+            if value:
+                return value
+        srcset = (image.get_attribute("srcset") or image.get_attribute("data-srcset") or "").strip()
+        if not srcset:
+            return ""
+        return srcset.split(",")[0].strip().split(" ")[0]
 
     def _extract_location_summary(self, text: str, area: str) -> str:
         if area.lower() in text.lower():
@@ -302,10 +388,17 @@ class BookingAdapter(AggregatorAdapter):
         match = re.search(r"([0-9]+(?:\.[0-9]+)? km from centre)", text)
         if match:
             return match.group(1)
-        return area
+        return ""
 
     def _extract_neighborhood(self, text: str, area: str) -> str:
         markers = [
+            "Sololaki",
+            "Freedom Square",
+            "Liberty Square",
+            "Old Tbilisi",
+            "Rustaveli",
+            "Mtatsminda",
+            "Old Batumi",
             "Old Boulevard",
             "New Boulevard",
             "Guests' favourite area",
@@ -315,7 +408,7 @@ class BookingAdapter(AggregatorAdapter):
         for marker in markers:
             if marker.lower() in text.lower():
                 return marker
-        return area
+        return ""
 
     def _matches_area(self, area: str, result: HotelResult) -> bool:
         haystack = " ".join(

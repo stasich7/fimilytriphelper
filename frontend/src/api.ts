@@ -4,6 +4,7 @@ import type {
   DeleteGuestResponse,
   GuestLookupResponse,
   ImportMarkdownResponse,
+  ItemLikeResponse,
   ItemDetailsResponse,
   ManagedGuestResponse,
   ManagedGuestsResponse,
@@ -42,16 +43,28 @@ export function getVersions(): Promise<VersionsResponse> {
   return requestJSON<VersionsResponse>("/versions");
 }
 
-export function getVersion(versionId: string): Promise<VersionDetailsResponse> {
-  return requestJSON<VersionDetailsResponse>(`/versions/${versionId}`);
+export function getVersion(versionId: string | number, guestToken?: string): Promise<VersionDetailsResponse> {
+  const query = guestToken ? `?guestToken=${encodeURIComponent(guestToken)}` : "";
+  return requestJSON<VersionDetailsResponse>(`/versions/${versionId}${query}`);
 }
 
-export function getItem(itemId: string): Promise<ItemDetailsResponse> {
-  return requestJSON<ItemDetailsResponse>(`/items/${itemId}`);
+export function getItem(itemId: string, guestToken?: string): Promise<ItemDetailsResponse> {
+  const query = guestToken ? `?guestToken=${encodeURIComponent(guestToken)}` : "";
+  return requestJSON<ItemDetailsResponse>(`/items/${itemId}${query}`);
 }
 
 export function getGuest(guestToken: string): Promise<GuestLookupResponse> {
   return requestJSON<GuestLookupResponse>(`/guests/${guestToken}`);
+}
+
+export function toggleItemLike(itemId: number, guestToken: string): Promise<ItemLikeResponse> {
+  return requestJSON<ItemLikeResponse>(`/items/${itemId}/like`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ guestToken }),
+  });
 }
 
 export async function createComment(input: {

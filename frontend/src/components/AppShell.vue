@@ -10,7 +10,7 @@
 
       <nav class="shell__nav">
         <RouterLink :to="overviewPath">В начало</RouterLink>
-        <RouterLink v-if="!guestToken" :to="toolsPath">Инструменты</RouterLink>
+        <RouterLink :to="toolsPath">Инструменты</RouterLink>
       </nav>
     </header>
 

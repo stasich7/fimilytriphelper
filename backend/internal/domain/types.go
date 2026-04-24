@@ -19,13 +19,16 @@ type PlanVersion struct {
 }
 
 type PlanItem struct {
-	ID           int64     `json:"id"`
-	StableKey    string    `json:"stableKey"`
-	Type         string    `json:"type"`
-	Title        string    `json:"title"`
-	BodyMarkdown string    `json:"bodyMarkdown"`
-	CreatedAt    time.Time `json:"createdAt"`
-	UpdatedAt    time.Time `json:"updatedAt"`
+	ID                  int64     `json:"id"`
+	PlanVersionID       int64     `json:"planVersionID"`
+	StableKey           string    `json:"stableKey"`
+	Type                string    `json:"type"`
+	Title               string    `json:"title"`
+	BodyMarkdown        string    `json:"bodyMarkdown"`
+	LikesCount          int       `json:"likesCount"`
+	LikedByCurrentGuest bool      `json:"likedByCurrentGuest"`
+	CreatedAt           time.Time `json:"createdAt"`
+	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
 type Participant struct {

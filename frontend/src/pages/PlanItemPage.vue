@@ -17,8 +17,21 @@
 
     <article class="card" v-else-if="item">
       <p class="card__label">Карточка</p>
-      <h2>{{ item.title }}</h2>
-      <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)"></div>
+      <div class="item-header">
+        <h2>{{ item.title }}</h2>
+        <button
+          type="button"
+          :class="['like-button', { 'like-button--active': item.likedByCurrentGuest }]"
+          :disabled="!guestToken || liking"
+          :title="guestToken ? 'Нравится' : 'Откройте по гостевой ссылке, чтобы поставить лайк'"
+          @click="toggleLike"
+        >
+          <span aria-hidden="true">👍</span>
+          <span>{{ item.likesCount }}</span>
+        </button>
+      </div>
+      <p v-if="likeError" class="submit-error">{{ likeError }}</p>
+      <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
     </article>
 
     <article class="card" v-if="item">
@@ -50,9 +63,9 @@
 import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import { createComment, getGuest, getItem } from "../api";
-import { renderMarkdown } from "../markdown";
-import { buildOverviewPath } from "../paths";
+import { createComment, getGuest, getItem, getVersion, toggleItemLike } from "../api";
+import { renderMarkdownWithOptions } from "../markdown";
+import { buildItemPath, buildOverviewPath } from "../paths";
 import type { Comment, PlanItem } from "../types/api";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
@@ -64,11 +77,14 @@ const router = useRouter();
 const loading = ref(true);
 const error = ref("");
 const item = ref<PlanItem | null>(null);
+const linkedItems = ref<PlanItem[]>([]);
 const comments = ref<Comment[]>([]);
 const commentBody = ref("");
 const guestName = ref("");
 const submitError = ref("");
 const submitting = ref(false);
+const likeError = ref("");
+const liking = ref(false);
 
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
@@ -76,7 +92,9 @@ const guestToken = computed(() => {
 });
 
 function renderBody(value: string): string {
-  return renderMarkdown(value);
+  return renderMarkdownWithOptions(value, {
+    resolveItemLink,
+  });
 }
 
 async function loadItem(itemId: string): Promise<void> {
@@ -84,9 +102,15 @@ async function loadItem(itemId: string): Promise<void> {
   error.value = "";
 
   try {
-    const response = await getItem(itemId);
+    const response = await getItem(itemId, guestToken.value || undefined);
     item.value = response.item;
     comments.value = response.comments ?? [];
+    linkedItems.value = [];
+
+    if (response.item.planVersionID) {
+      const versionResponse = await getVersion(response.item.planVersionID, guestToken.value || undefined);
+      linkedItems.value = versionResponse.items ?? [];
+    }
 
     if (guestToken.value) {
       const guest = await getGuest(guestToken.value);
@@ -98,6 +122,58 @@ async function loadItem(itemId: string): Promise<void> {
     error.value = err instanceof Error ? err.message : "Неизвестная ошибка";
   } finally {
     loading.value = false;
+  }
+}
+
+function resolveItemLink(stableKey: string): string | null {
+  const linkedItem = linkedItems.value.find((currentItem) => currentItem.stableKey === stableKey);
+
+  if (!linkedItem) {
+    return null;
+  }
+
+  return buildItemPath(linkedItem.id, guestToken.value || undefined);
+}
+
+function handleMarkdownClick(event: MouseEvent): void {
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const link = target.closest<HTMLAnchorElement>("a[data-internal-item-link='true']");
+  const href = link?.getAttribute("href");
+
+  if (!href) {
+    return;
+  }
+
+  event.preventDefault();
+  sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
+  sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
+  void router.push(href);
+}
+
+async function toggleLike(): Promise<void> {
+  if (!item.value || !guestToken.value || liking.value) {
+    return;
+  }
+
+  liking.value = true;
+  likeError.value = "";
+
+  try {
+    const response = await toggleItemLike(item.value.id, guestToken.value);
+    item.value = {
+      ...item.value,
+      likedByCurrentGuest: response.liked,
+      likesCount: response.likesCount,
+    };
+  } catch (err) {
+    likeError.value = err instanceof Error ? err.message : "Неизвестная ошибка";
+  } finally {
+    liking.value = false;
   }
 }
 
@@ -195,6 +271,44 @@ watch(
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.item-header {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.item-header h2 {
+  margin-top: 0;
+}
+
+.like-button {
+  display: inline-flex;
+  min-width: 64px;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid rgba(19, 76, 117, 0.2);
+  border-radius: 999px;
+  background: #fff;
+  color: #134c75;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.like-button--active {
+  border-color: #134c75;
+  background: #dff0f8;
+}
+
+.like-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .body {

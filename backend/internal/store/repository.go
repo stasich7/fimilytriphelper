@@ -65,6 +65,11 @@ type ManagedGuest struct {
 	CommentsCount int        `json:"commentsCount"`
 }
 
+type LikeToggleResult struct {
+	Liked      bool `json:"liked"`
+	LikesCount int  `json:"likesCount"`
+}
+
 func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
 	var overview Overview
 	var trip domain.Trip
@@ -146,7 +151,7 @@ func (r *Repository) ListVersions(ctx context.Context) ([]domain.PlanVersion, er
 	return versions, nil
 }
 
-func (r *Repository) GetVersion(ctx context.Context, versionID int64) (VersionDetails, error) {
+func (r *Repository) GetVersion(ctx context.Context, versionID int64, guestToken string) (VersionDetails, error) {
 	details := VersionDetails{
 		Items:    []domain.PlanItem{},
 		Comments: []domain.Comment{},
@@ -165,11 +170,34 @@ func (r *Repository) GetVersion(ctx context.Context, versionID int64) (VersionDe
 	}
 
 	rows, err := r.db.QueryContext(ctx, `
-		SELECT id, stable_key, type, title, body_markdown, created_at, updated_at
-		FROM plan_items
-		WHERE plan_version_id = $1
-		ORDER BY type ASC, id ASC
-	`, versionID)
+		WITH current_guest AS (
+			SELECT id
+			FROM participants
+			WHERE guest_token = NULLIF($2, '')
+			LIMIT 1
+		)
+		SELECT
+			pi.id,
+			pi.plan_version_id,
+			pi.stable_key,
+			pi.type,
+			pi.title,
+			pi.body_markdown,
+			COUNT(il.participant_id) AS likes_count,
+			EXISTS (
+				SELECT 1
+				FROM item_likes current_like
+				WHERE current_like.plan_item_id = pi.id
+					AND current_like.participant_id = (SELECT id FROM current_guest)
+			) AS liked_by_current_guest,
+			pi.created_at,
+			pi.updated_at
+		FROM plan_items pi
+		LEFT JOIN item_likes il ON il.plan_item_id = pi.id
+		WHERE pi.plan_version_id = $1
+		GROUP BY pi.id, pi.plan_version_id, pi.stable_key, pi.type, pi.title, pi.body_markdown, pi.created_at, pi.updated_at
+		ORDER BY pi.type ASC, pi.id ASC
+	`, versionID, strings.TrimSpace(guestToken))
 	if err != nil {
 		return VersionDetails{}, fmt.Errorf("select version items: %w", err)
 	}
@@ -177,7 +205,18 @@ func (r *Repository) GetVersion(ctx context.Context, versionID int64) (VersionDe
 
 	for rows.Next() {
 		var item domain.PlanItem
-		if err := rows.Scan(&item.ID, &item.StableKey, &item.Type, &item.Title, &item.BodyMarkdown, &item.CreatedAt, &item.UpdatedAt); err != nil {
+		if err := rows.Scan(
+			&item.ID,
+			&item.PlanVersionID,
+			&item.StableKey,
+			&item.Type,
+			&item.Title,
+			&item.BodyMarkdown,
+			&item.LikesCount,
+			&item.LikedByCurrentGuest,
+			&item.CreatedAt,
+			&item.UpdatedAt,
+		); err != nil {
 			return VersionDetails{}, fmt.Errorf("scan version item: %w", err)
 		}
 		details.Items = append(details.Items, item)
@@ -214,21 +253,137 @@ func (r *Repository) GetVersion(ctx context.Context, versionID int64) (VersionDe
 	return details, nil
 }
 
-func (r *Repository) GetItem(ctx context.Context, itemID int64) (ItemDetails, error) {
+func (r *Repository) ToggleItemLikeByGuestToken(ctx context.Context, itemID int64, guestToken string) (LikeToggleResult, error) {
+	token := strings.TrimSpace(guestToken)
+	if token == "" {
+		return LikeToggleResult{}, fmt.Errorf("guest token is required")
+	}
+
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return LikeToggleResult{}, fmt.Errorf("begin tx: %w", err)
+	}
+	defer tx.Rollback()
+
+	var participantID int64
+	if err := tx.QueryRowContext(ctx, `
+		SELECT id
+		FROM participants
+		WHERE guest_token = $1
+	`, token).Scan(&participantID); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return LikeToggleResult{}, ErrNotFound
+		}
+		return LikeToggleResult{}, fmt.Errorf("select participant by token: %w", err)
+	}
+
+	var itemExists bool
+	if err := tx.QueryRowContext(ctx, `
+		SELECT EXISTS (
+			SELECT 1
+			FROM plan_items
+			WHERE id = $1
+		)
+	`, itemID).Scan(&itemExists); err != nil {
+		return LikeToggleResult{}, fmt.Errorf("select item exists: %w", err)
+	}
+	if !itemExists {
+		return LikeToggleResult{}, ErrNotFound
+	}
+
+	result, err := tx.ExecContext(ctx, `
+		DELETE FROM item_likes
+		WHERE plan_item_id = $1 AND participant_id = $2
+	`, itemID, participantID)
+	if err != nil {
+		return LikeToggleResult{}, fmt.Errorf("delete item like: %w", err)
+	}
+
+	affected, err := result.RowsAffected()
+	if err != nil {
+		return LikeToggleResult{}, fmt.Errorf("delete item like rows affected: %w", err)
+	}
+
+	liked := false
+	if affected == 0 {
+		if _, err := tx.ExecContext(ctx, `
+			INSERT INTO item_likes (plan_item_id, participant_id)
+			VALUES ($1, $2)
+			ON CONFLICT (plan_item_id, participant_id) DO NOTHING
+		`, itemID, participantID); err != nil {
+			return LikeToggleResult{}, fmt.Errorf("insert item like: %w", err)
+		}
+		liked = true
+	}
+
+	if _, err := tx.ExecContext(ctx, `
+		UPDATE participants
+		SET last_seen_at = now()
+		WHERE id = $1
+	`, participantID); err != nil {
+		return LikeToggleResult{}, fmt.Errorf("touch participant last_seen_at: %w", err)
+	}
+
+	var likesCount int
+	if err := tx.QueryRowContext(ctx, `
+		SELECT COUNT(*)
+		FROM item_likes
+		WHERE plan_item_id = $1
+	`, itemID).Scan(&likesCount); err != nil {
+		return LikeToggleResult{}, fmt.Errorf("count item likes: %w", err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return LikeToggleResult{}, fmt.Errorf("commit item like: %w", err)
+	}
+
+	return LikeToggleResult{
+		Liked:      liked,
+		LikesCount: likesCount,
+	}, nil
+}
+
+func (r *Repository) GetItem(ctx context.Context, itemID int64, guestToken string) (ItemDetails, error) {
 	details := ItemDetails{
 		Comments: []domain.Comment{},
 	}
 
 	err := r.db.QueryRowContext(ctx, `
-		SELECT id, stable_key, type, title, body_markdown, created_at, updated_at
-		FROM plan_items
-		WHERE id = $1
-	`, itemID).Scan(
+		WITH current_guest AS (
+			SELECT id
+			FROM participants
+			WHERE guest_token = NULLIF($2, '')
+			LIMIT 1
+		)
+		SELECT
+			pi.id,
+			pi.plan_version_id,
+			pi.stable_key,
+			pi.type,
+			pi.title,
+			pi.body_markdown,
+			COUNT(il.participant_id) AS likes_count,
+			EXISTS (
+				SELECT 1
+				FROM item_likes current_like
+				WHERE current_like.plan_item_id = pi.id
+					AND current_like.participant_id = (SELECT id FROM current_guest)
+			) AS liked_by_current_guest,
+			pi.created_at,
+			pi.updated_at
+		FROM plan_items pi
+		LEFT JOIN item_likes il ON il.plan_item_id = pi.id
+		WHERE pi.id = $1
+		GROUP BY pi.id, pi.plan_version_id, pi.stable_key, pi.type, pi.title, pi.body_markdown, pi.created_at, pi.updated_at
+	`, itemID, strings.TrimSpace(guestToken)).Scan(
 		&details.Item.ID,
+		&details.Item.PlanVersionID,
 		&details.Item.StableKey,
 		&details.Item.Type,
 		&details.Item.Title,
 		&details.Item.BodyMarkdown,
+		&details.Item.LikesCount,
+		&details.Item.LikedByCurrentGuest,
 		&details.Item.CreatedAt,
 		&details.Item.UpdatedAt,
 	)
@@ -545,7 +700,7 @@ func (r *Repository) ExportCodex(ctx context.Context, versionRef string) (CodexE
 		return CodexExport{}, err
 	}
 
-	versionDetails, err := r.GetVersion(ctx, versionID)
+	versionDetails, err := r.GetVersion(ctx, versionID, "")
 	if err != nil {
 		return CodexExport{}, err
 	}

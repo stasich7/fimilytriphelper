@@ -16,10 +16,13 @@ export interface PlanVersion {
 
 export interface PlanItem {
   id: number;
+  planVersionID: number;
   stableKey: string;
   type: string;
   title: string;
   bodyMarkdown: string;
+  likesCount: number;
+  likedByCurrentGuest: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -106,4 +109,9 @@ export interface ManagedGuestResponse {
 
 export interface DeleteGuestResponse {
   deleted: boolean;
+}
+
+export interface ItemLikeResponse {
+  liked: boolean;
+  likesCount: number;
 }

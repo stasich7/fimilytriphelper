@@ -60,7 +60,8 @@ func (r *Router) handleVersionByID(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	details, err := r.repo.GetVersion(req.Context(), versionID)
+	guestToken := strings.TrimSpace(req.URL.Query().Get("guestToken"))
+	details, err := r.repo.GetVersion(req.Context(), versionID, guestToken)
 	if err != nil {
 		if errors.Is(err, store.ErrNotFound) {
 			writeNotFound(w)
@@ -74,6 +75,11 @@ func (r *Router) handleVersionByID(w http.ResponseWriter, req *http.Request) {
 }
 
 func (r *Router) handleItemByID(w http.ResponseWriter, req *http.Request) {
+	if strings.HasSuffix(req.URL.Path, "/like") {
+		r.handleItemLike(w, req)
+		return
+	}
+
 	if req.Method != http.MethodGet {
 		writeMethodNotAllowed(w, http.MethodGet)
 		return
@@ -85,7 +91,8 @@ func (r *Router) handleItemByID(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	details, err := r.repo.GetItem(req.Context(), itemID)
+	guestToken := strings.TrimSpace(req.URL.Query().Get("guestToken"))
+	details, err := r.repo.GetItem(req.Context(), itemID, guestToken)
 	if err != nil {
 		if errors.Is(err, store.ErrNotFound) {
 			writeNotFound(w)
@@ -96,6 +103,39 @@ func (r *Router) handleItemByID(w http.ResponseWriter, req *http.Request) {
 	}
 
 	writeJSON(w, http.StatusOK, details)
+}
+
+func (r *Router) handleItemLike(w http.ResponseWriter, req *http.Request) {
+	if req.Method != http.MethodPost {
+		writeMethodNotAllowed(w, http.MethodPost)
+		return
+	}
+
+	itemID, err := parseInt64PathParam(strings.TrimSuffix(req.URL.Path, "/like"), "/api/v1/items/")
+	if err != nil {
+		writeBadRequest(w, err.Error())
+		return
+	}
+
+	var payload struct {
+		GuestToken string `json:"guestToken"`
+	}
+	if err := json.NewDecoder(req.Body).Decode(&payload); err != nil {
+		writeBadRequest(w, "invalid JSON body")
+		return
+	}
+
+	result, err := r.repo.ToggleItemLikeByGuestToken(req.Context(), itemID, payload.GuestToken)
+	if err != nil {
+		if errors.Is(err, store.ErrNotFound) {
+			writeNotFound(w)
+			return
+		}
+		writeBadRequest(w, err.Error())
+		return
+	}
+
+	writeJSON(w, http.StatusOK, result)
 }
 
 func (r *Router) handleGuestByToken(w http.ResponseWriter, req *http.Request) {
