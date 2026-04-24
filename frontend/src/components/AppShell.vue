@@ -5,6 +5,7 @@
         <p class="shell__eyebrow">FamilyTripHelper</p>
         <h1>Family Trip Helper</h1>
         <p class="shell__subtitle">Совместно планируем, комментируем, рассматриваем варианты общей части поездки</p>
+        <p class="shell__subtitle">Пока <b>БЕЗ вариантов проживания</b>, но с предложениями по районам.</p>
         <p v-if="guestSummary" class="shell__guest-mode">{{ guestSummary }}</p>
       </div>
 
