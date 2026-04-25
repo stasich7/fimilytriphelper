@@ -11,7 +11,7 @@ export interface MarkdownRenderOptions {
   resolveItemLink?: (stableKey: string) => string | null;
 }
 
-const imagePattern = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g;
+const imagePattern = /!\[([^\]]*)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g;
 const markdownLinkPattern = /\[([^\]]+)\]\(([^\s)]+)\)/g;
 const plainURLPattern = /(^|[\s(>])((https?:\/\/[^\s<]+))/g;
 
@@ -33,11 +33,13 @@ function renderInline(text: string, options: MarkdownRenderOptions): string {
 
   let rendered = escapeHTML(text);
 
-  rendered = rendered.replace(imagePattern, (_match, alt: string, url: string) =>
-    storeToken(
-      `<img class="markdown-image" src="${url}" alt="${alt}" loading="lazy" referrerpolicy="no-referrer" />`,
-    ),
-  );
+  rendered = rendered.replace(imagePattern, (_match, alt: string, url: string) => {
+    const imageClass = url.startsWith("/chips/") ? "markdown-chip" : "markdown-image";
+
+    return storeToken(
+      `<img class="${imageClass}" src="${url}" alt="${alt}" loading="lazy" referrerpolicy="no-referrer" />`,
+    );
+  });
 
   rendered = rendered.replace(markdownLinkPattern, (match: string, label: string, url: string) => {
     if (isExternalURL(url)) {

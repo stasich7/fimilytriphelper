@@ -36,8 +36,7 @@
               <span>{{ item.likesCount }}</span>
             </button>
           </div>
-          <div class="preview markdown-body" v-html="preview(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
-          <button type="button" class="link-button" @click="openItem(item.id)">Открыть карточку</button>
+          <button type="button" class="link-button" @click="openItem(item.id)">Смотреть</button>
         </div>
       </article>
 
@@ -78,12 +77,10 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getVersion, toggleItemLike } from "../api";
-import { renderMarkdownPreviewWithOptions } from "../markdown";
 import { buildItemPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
-const RETURN_SCROLL_KEY = "family-trip-helper:return-scroll";
 
 const route = useRoute();
 const router = useRouter();
@@ -139,12 +136,6 @@ function sectionItems(type: string): PlanItem[] {
   return items.value.filter((item) => item.type === type);
 }
 
-function preview(value: string): string {
-  return renderMarkdownPreviewWithOptions(value, {
-    resolveItemLink,
-  });
-}
-
 async function loadVersion(versionId: string): Promise<void> {
   loading.value = true;
   error.value = "";
@@ -196,38 +187,7 @@ async function toggleLike(item: PlanItem): Promise<void> {
 
 function openItem(itemId: number): void {
   sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
-  sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
   void router.push(buildItemPath(itemId, guestToken.value || undefined));
-}
-
-function resolveItemLink(stableKey: string): string | null {
-  const linkedItem = items.value.find((item) => item.stableKey === stableKey);
-
-  if (!linkedItem) {
-    return null;
-  }
-
-  return buildItemPath(linkedItem.id, guestToken.value || undefined);
-}
-
-function handleMarkdownClick(event: MouseEvent): void {
-  const target = event.target;
-
-  if (!(target instanceof Element)) {
-    return;
-  }
-
-  const link = target.closest<HTMLAnchorElement>("a[data-internal-item-link='true']");
-  const href = link?.getAttribute("href");
-
-  if (!href) {
-    return;
-  }
-
-  event.preventDefault();
-  sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
-  sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
-  void router.push(href);
 }
 
 async function submitVersionComment(): Promise<void> {
@@ -403,12 +363,23 @@ h3 {
 
 :deep(.markdown-body img) {
   display: block;
-  width: min(100%, 220px);
-  max-height: 140px;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
   margin-top: 12px;
   border-radius: 16px;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow: 0 10px 24px rgba(31, 41, 55, 0.12);
+}
+
+:deep(.markdown-body img.markdown-chip) {
+  display: inline-block;
+  width: 1.45em;
+  height: 1.45em;
+  margin: 0 0.22em 0 0;
+  border-radius: 999px;
+  vertical-align: -0.34em;
+  box-shadow: none;
 }
 
 textarea {

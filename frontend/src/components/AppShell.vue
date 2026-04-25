@@ -1,17 +1,10 @@
 <template>
   <div class="shell">
-    <header :class="['shell__header', { 'shell__header--with-image': showHeaderImage }]">
-      <div>
-        <p class="shell__eyebrow">FamilyTripHelper</p>
-        <h1>Family Trip Helper</h1>
-        <p class="shell__subtitle">Совместно планируем, комментируем, рассматриваем варианты общей части поездки</p>
-        <p class="shell__subtitle">Пока <b>БЕЗ вариантов проживания</b>, но с предложениями по районам.</p>
-        <p v-if="guestSummary" class="shell__guest-mode">{{ guestSummary }}</p>
-      </div>
-
+    <header class="shell__header">
       <nav class="shell__nav">
         <RouterLink :to="overviewPath">В начало</RouterLink>
-        <RouterLink :to="toolsPath">Инструменты</RouterLink>
+        <button v-if="showBack" type="button" class="shell__nav-button" @click="goBack">Назад</button>
+        <RouterLink class="shell__tools" :to="toolsPath" aria-label="Инструменты" title="Инструменты">⚙</RouterLink>
       </nav>
     </header>
 
@@ -22,114 +15,78 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-import { getGuest } from "../api";
 import { buildOverviewPath, buildToolsPath } from "../paths";
 
+const RETURN_PATH_KEY = "family-trip-helper:return-path";
+
 const route = useRoute();
+const router = useRouter();
 
 const guestToken = computed(() => String(route.params.guestToken || ""));
 const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefined));
 const toolsPath = buildToolsPath();
-const guestName = ref("");
 
-const showHeaderImage = computed(() => {
+const showBack = computed(() => {
   const routeName = String(route.name || "");
   return routeName !== "overview" && routeName !== "guest";
 });
 
-const guestSummary = computed(() => {
-  if (!guestName.value) {
-    return "";
+async function goBack(): Promise<void> {
+  const returnPath = sessionStorage.getItem(RETURN_PATH_KEY);
+
+  if (returnPath) {
+    sessionStorage.removeItem(RETURN_PATH_KEY);
+    await router.push(returnPath);
+    return;
   }
 
-  return `Комментарии от имени ${guestName.value}`;
-});
-
-watch(
-  () => guestToken.value,
-  async (token) => {
-    if (!token) {
-      guestName.value = "";
-      return;
-    }
-
-    try {
-      const guest = await getGuest(token);
-      guestName.value = guest.participant.displayName;
-    } catch {
-      guestName.value = "";
-    }
-  },
-  { immediate: true },
-);
+  await router.push(overviewPath.value);
+}
 </script>
 
 <style scoped>
 .shell {
   max-width: 1160px;
   margin: 0 auto;
-  padding: 32px 20px 48px;
+  padding: 10px 12px 40px;
 }
 
 .shell__header {
-  display: grid;
-  gap: 20px;
-  margin-bottom: 28px;
-  padding: 24px;
+  margin-bottom: 12px;
+  padding: 8px;
   border: 1px solid rgba(39, 74, 103, 0.12);
-  border-radius: 24px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
 }
 
-.shell__header--with-image {
-  background-color: rgba(255, 255, 255, 0.9);
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.94) 46%, rgba(255, 255, 255, 0.78) 64%, rgba(255, 255, 255, 0.2) 100%), url("/family-trip-v4.png");
-  background-position: left top, right bottom;
-  background-repeat: no-repeat, no-repeat;
-  background-size: auto, 39%;
-}
-
-.shell__eyebrow {
-  margin: 0 0 8px;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #2c6f9e;
-}
-
-.shell__header h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
-.shell__subtitle {
-  margin: 8px 0 0;
-  max-width: 720px;
-  color: #4b5563;
-}
-
-.shell__guest-mode {
-  margin: 10px 0 0;
-  color: #134c75;
-  font-weight: 700;
-}
-
 .shell__nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
 }
 
-.shell__nav a {
-  padding: 10px 14px;
+.shell__nav a,
+.shell__nav-button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 0;
   border-radius: 999px;
   background: #e9f4fb;
   color: #134c75;
+  cursor: pointer;
+  font: inherit;
   font-weight: 600;
+}
+
+.shell__tools {
+  width: 38px;
+  margin-left: auto;
+  padding: 8px 0;
+  text-align: center;
 }
 
 .shell__nav a.router-link-active {
@@ -139,21 +96,6 @@ watch(
 
 .shell__content {
   display: grid;
-  gap: 20px;
-}
-
-@media (max-width: 900px) {
-  .shell__header--with-image {
-    background-position: left top, right bottom;
-    background-size: auto, 48% auto;
-  }
-}
-
-@media (max-width: 640px) {
-  .shell__header--with-image {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 52%, rgba(255, 255, 255, 0.88) 100%), url("/family-trip-v4.png");
-    background-position: left top, right bottom;
-    background-size: auto, 240px auto;
-  }
+  gap: 12px;
 }
 </style>

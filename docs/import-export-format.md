@@ -55,7 +55,8 @@ Cons:
 - Bare URLs are allowed, but markdown links with a readable label are the preferred import format.
 - Use `[label](item:stable_key)` for internal links to another plan item in the same version.
 - If an item benefits from a visual cue, add one small image inside the same block.
-- Images should use markdown form `![alt](https://example.com/image.jpg)`.
+- Images should use markdown form `![alt](https://example.com/image.jpg)` for external images or `![alt](/maps/day.png)` for local generated route maps.
+- Route map images should be published as PNG assets, not SVG assets. The current route-map target size is `1600x1000`; route maps should use a real map tile basemap with route overlays.
 - All prices should be shown in USD in the imported plan content.
 - When the source price is in GEL, convert it using the working planning rate `1 GEL = 0.37 USD`.
 - Every price should clearly say what it covers: per person, per vehicle, per room, or for a specific guest composition.

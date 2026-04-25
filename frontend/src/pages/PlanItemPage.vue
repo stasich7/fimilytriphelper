@@ -1,9 +1,5 @@
 <template>
   <section class="layout">
-    <article class="card card--compact">
-      <button type="button" class="back-button" @click="goBack">Назад</button>
-    </article>
-
     <article class="card" v-if="loading">
       <p class="card__label">Карточка</p>
       <h2>Загружаем карточку...</h2>
@@ -16,7 +12,6 @@
     </article>
 
     <article class="card" v-else-if="item">
-      <p class="card__label">Карточка</p>
       <div class="item-header">
         <h2>{{ item.title }}</h2>
         <button
@@ -32,6 +27,10 @@
       </div>
       <p v-if="likeError" class="submit-error">{{ likeError }}</p>
       <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
+      <div class="item-nav">
+        <button v-if="nextItem" type="button" class="nav-next" @click="openNextItem">Следующий</button>
+        <button v-else type="button" class="nav-next" @click="goBack">К списку</button>
+      </div>
     </article>
 
     <article class="card" v-if="item">
@@ -65,11 +64,10 @@ import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getItem, getVersion, toggleItemLike } from "../api";
 import { renderMarkdownWithOptions } from "../markdown";
-import { buildItemPath, buildOverviewPath } from "../paths";
+import { buildItemPath, buildOverviewPath, buildVersionPath } from "../paths";
 import type { Comment, PlanItem } from "../types/api";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
-const RETURN_SCROLL_KEY = "family-trip-helper:return-scroll";
 
 const route = useRoute();
 const router = useRouter();
@@ -89,6 +87,23 @@ const liking = ref(false);
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
   return token || "";
+});
+
+const currentItemIndex = computed(() => {
+  if (!item.value) {
+    return -1;
+  }
+
+  return linkedItems.value.findIndex((currentItem) => currentItem.id === item.value?.id);
+});
+
+const nextItem = computed(() => {
+  const nextIndex = currentItemIndex.value + 1;
+  if (nextIndex <= 0 || nextIndex >= linkedItems.value.length) {
+    return null;
+  }
+
+  return linkedItems.value[nextIndex];
 });
 
 function renderBody(value: string): string {
@@ -151,7 +166,6 @@ function handleMarkdownClick(event: MouseEvent): void {
 
   event.preventDefault();
   sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
-  sessionStorage.setItem(RETURN_SCROLL_KEY, String(window.scrollY));
   void router.push(href);
 }
 
@@ -202,37 +216,26 @@ async function submitComment(): Promise<void> {
 }
 
 async function goBack(): Promise<void> {
-  const fallbackPath = buildOverviewPath(guestToken.value || undefined);
+  const fallbackPath = item.value?.planVersionID
+    ? buildVersionPath(item.value.planVersionID, guestToken.value || undefined)
+    : buildOverviewPath(guestToken.value || undefined);
   const returnPath = sessionStorage.getItem(RETURN_PATH_KEY);
-  const storedScroll = Number(sessionStorage.getItem(RETURN_SCROLL_KEY) || "0");
-  const scrollTop = Number.isFinite(storedScroll) ? storedScroll : 0;
 
   if (returnPath) {
+    sessionStorage.removeItem(RETURN_PATH_KEY);
     await router.push(returnPath);
-    restoreScroll(scrollTop);
     return;
   }
 
   await router.push(fallbackPath);
 }
 
-function restoreScroll(scrollTop: number): void {
-  let attempts = 0;
+function openNextItem(): void {
+  if (!nextItem.value) {
+    return;
+  }
 
-  const apply = () => {
-    window.scrollTo({ top: scrollTop, behavior: "auto" });
-    attempts += 1;
-
-    if (attempts < 8 && Math.abs(window.scrollY - scrollTop) > 4) {
-      window.setTimeout(apply, 80);
-      return;
-    }
-
-    sessionStorage.removeItem(RETURN_PATH_KEY);
-    sessionStorage.removeItem(RETURN_SCROLL_KEY);
-  };
-
-  window.setTimeout(apply, 0);
+  void router.push(buildItemPath(nextItem.value.id, guestToken.value || undefined));
 }
 
 watch(
@@ -258,10 +261,6 @@ watch(
   border: 1px solid rgba(39, 74, 103, 0.12);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.9);
-}
-
-.card--compact {
-  padding: 16px 20px;
 }
 
 .card__label {
@@ -314,6 +313,16 @@ watch(
 .body {
 }
 
+.item-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.nav-next {
+  min-width: 132px;
+}
+
 :deep(.markdown-body p) {
   margin: 0;
 }
@@ -338,12 +347,23 @@ watch(
 
 :deep(.markdown-body img) {
   display: block;
-  width: min(100%, 460px);
-  max-height: 300px;
+  width: 100%;
+  max-width: 1080px;
+  height: auto;
   margin-top: 16px;
   border-radius: 18px;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow: 0 14px 30px rgba(31, 41, 55, 0.12);
+}
+
+:deep(.markdown-body img.markdown-chip) {
+  display: inline-block;
+  width: 1.45em;
+  height: 1.45em;
+  margin: 0 0.22em 0 0;
+  border-radius: 999px;
+  vertical-align: -0.34em;
+  box-shadow: none;
 }
 
 .comment {
@@ -387,7 +407,6 @@ textarea {
   resize: vertical;
 }
 
-.back-button,
 button {
   justify-self: start;
   padding: 10px 16px;
