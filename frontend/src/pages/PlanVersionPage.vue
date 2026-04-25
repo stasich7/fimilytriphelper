@@ -1,19 +1,16 @@
 <template>
   <section class="layout">
     <article class="card" v-if="loading">
-      <p class="card__label">Версия плана</p>
       <h2>Загружаем версию...</h2>
     </article>
 
     <article class="card" v-else-if="error">
-      <p class="card__label">Версия плана</p>
       <h2>Не удалось загрузить версию</h2>
       <p>{{ error }}</p>
     </article>
 
     <template v-else-if="version">
       <article class="card">
-        <p class="card__label">Версия плана</p>
         <h2>{{ version.versionCode }} - {{ version.title }}</h2>
         <p>Здесь собраны все варианты и общие комментарии к этой версии поездки.</p>
         <a class="anchor-link" href="#version-comments">Общие комментарии к версии</a>
@@ -22,7 +19,7 @@
       <article v-for="section in sections" :key="section.type" class="card">
         <p class="card__label">{{ section.label }}</p>
         <p v-if="likeError" class="submit-error">{{ likeError }}</p>
-        <div v-for="item in section.items" :key="item.id" class="item">
+        <div v-for="item in section.items" :id="itemAnchorId(item.id)" :key="item.id" class="item">
           <div class="item__header">
             <h3>{{ item.title }}</h3>
             <button
@@ -73,11 +70,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getVersion, toggleItemLike } from "../api";
-import { buildItemPath } from "../paths";
+import { buildItemPath, buildVersionItemAnchorPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
@@ -152,11 +149,28 @@ async function loadVersion(versionId: string): Promise<void> {
     } else {
       guestName.value = "";
     }
+
+    loading.value = false;
+    await scrollToHashTarget();
   } catch (err) {
     error.value = err instanceof Error ? err.message : "Неизвестная ошибка";
-  } finally {
     loading.value = false;
   }
+}
+
+function itemAnchorId(itemId: number): string {
+  return `item-${itemId}`;
+}
+
+async function scrollToHashTarget(): Promise<void> {
+  if (!route.hash) {
+    return;
+  }
+
+  await nextTick();
+
+  const target = document.getElementById(route.hash.slice(1));
+  target?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 async function toggleLike(item: PlanItem): Promise<void> {
@@ -185,9 +199,20 @@ async function toggleLike(item: PlanItem): Promise<void> {
   }
 }
 
-function openItem(itemId: number): void {
-  sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
-  void router.push(buildItemPath(itemId, guestToken.value || undefined));
+async function openItem(itemId: number): Promise<void> {
+  const itemPath = buildItemPath(itemId, guestToken.value || undefined);
+
+  if (version.value) {
+    const anchorPath = buildVersionItemAnchorPath(version.value.id, itemId, guestToken.value || undefined);
+    sessionStorage.setItem(RETURN_PATH_KEY, anchorPath);
+    await router.replace(anchorPath);
+    await router.push(itemPath);
+    return;
+  } else {
+    sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
+  }
+
+  await router.push(itemPath);
 }
 
 async function submitVersionComment(): Promise<void> {

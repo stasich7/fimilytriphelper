@@ -28,6 +28,7 @@
       <p v-if="likeError" class="submit-error">{{ likeError }}</p>
       <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
       <div class="item-nav">
+        <button v-if="previousItem" type="button" class="nav-step" @click="openPreviousItem">Предыдущий</button>
         <button v-if="nextItem" type="button" class="nav-next" @click="openNextItem">Следующий</button>
         <button v-else type="button" class="nav-next" @click="goBack">К списку</button>
       </div>
@@ -64,7 +65,7 @@ import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getItem, getVersion, toggleItemLike } from "../api";
 import { renderMarkdownWithOptions } from "../markdown";
-import { buildItemPath, buildOverviewPath, buildVersionPath } from "../paths";
+import { buildItemPath, buildOverviewPath, buildVersionItemAnchorPath } from "../paths";
 import type { Comment, PlanItem } from "../types/api";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
@@ -104,6 +105,15 @@ const nextItem = computed(() => {
   }
 
   return linkedItems.value[nextIndex];
+});
+
+const previousItem = computed(() => {
+  const previousIndex = currentItemIndex.value - 1;
+  if (previousIndex < 0 || previousIndex >= linkedItems.value.length) {
+    return null;
+  }
+
+  return linkedItems.value[previousIndex];
 });
 
 function renderBody(value: string): string {
@@ -217,7 +227,7 @@ async function submitComment(): Promise<void> {
 
 async function goBack(): Promise<void> {
   const fallbackPath = item.value?.planVersionID
-    ? buildVersionPath(item.value.planVersionID, guestToken.value || undefined)
+    ? buildVersionItemAnchorPath(item.value.planVersionID, item.value.id, guestToken.value || undefined)
     : buildOverviewPath(guestToken.value || undefined);
   const returnPath = sessionStorage.getItem(RETURN_PATH_KEY);
 
@@ -236,6 +246,14 @@ function openNextItem(): void {
   }
 
   void router.push(buildItemPath(nextItem.value.id, guestToken.value || undefined));
+}
+
+function openPreviousItem(): void {
+  if (!previousItem.value) {
+    return;
+  }
+
+  void router.push(buildItemPath(previousItem.value.id, guestToken.value || undefined));
 }
 
 watch(
@@ -315,10 +333,12 @@ watch(
 
 .item-nav {
   display: flex;
+  gap: 10px;
   justify-content: flex-end;
   margin-top: 20px;
 }
 
+.nav-step,
 .nav-next {
   min-width: 132px;
 }

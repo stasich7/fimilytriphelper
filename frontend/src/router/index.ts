@@ -7,9 +7,16 @@ import ToolsPage from "../pages/ToolsPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
-  scrollBehavior(_to, _from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
+    }
+
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
     }
 
     return { top: 0 };
