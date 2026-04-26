@@ -73,6 +73,10 @@ async function openCurrentVersion(): Promise<void> {
   .shell__tools {
     display: none !important;
   }
+  .shell__header {
+    background-position: right bottom;
+    background-size: 30vh;
+  }
 }
 
 .shell__header {
@@ -84,7 +88,7 @@ async function openCurrentVersion(): Promise<void> {
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
   background: url(/family-trip-v4.png);
-  background-position: right, bottom;
+  background-position: right bottom;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: white;
