@@ -55,20 +55,13 @@
 
     <div v-if="item" class="floating-nav" role="navigation" aria-label="Навигация по карточкам">
       <div class="floating-nav__inner">
-        <button
-          v-if="previousItem"
-          type="button"
-          class="floating-nav__button"
-          @click="openPreviousItem"
-        >
+        <button v-if="returnItemId" type="button" class="floating-nav__button" @click="openReturnItem">
+          Назад
+        </button>
+        <button v-else-if="previousItem" type="button" class="floating-nav__button" @click="openPreviousItem">
           Предыдущий
         </button>
-        <button
-          v-else
-          type="button"
-          class="floating-nav__button floating-nav__button--disabled"
-          disabled
-        >
+        <button v-else type="button" class="floating-nav__button floating-nav__button--disabled" disabled>
           Предыдущий
         </button>
 
@@ -117,6 +110,12 @@ const liking = ref(false);
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
   return token || "";
+});
+
+const returnItemId = computed(() => {
+  const rawValue = String(route.query.from || "");
+  const parsedValue = Number(rawValue);
+  return Number.isFinite(parsedValue) && parsedValue > 0 ? parsedValue : 0;
 });
 
 const currentItemIndex = computed(() => {
@@ -213,7 +212,9 @@ function handleMarkdownClick(event: MouseEvent): void {
 
   event.preventDefault();
   sessionStorage.setItem(RETURN_PATH_KEY, route.fullPath);
-  void router.push(href);
+  const currentItemId = item.value?.id;
+  const nextHref = currentItemId ? `${href}${href.includes("?") ? "&" : "?"}from=${currentItemId}` : href;
+  void router.push(nextHref);
 }
 
 async function toggleLike(): Promise<void> {
@@ -291,6 +292,14 @@ function openPreviousItem(): void {
   }
 
   void router.push(buildItemPath(previousItem.value.id, guestToken.value || undefined));
+}
+
+function openReturnItem(): void {
+  if (!returnItemId.value) {
+    return;
+  }
+
+  void router.push(buildItemPath(returnItemId.value, guestToken.value || undefined));
 }
 
 watch(
