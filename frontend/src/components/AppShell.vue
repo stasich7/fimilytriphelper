@@ -73,13 +73,13 @@ async function openCurrentVersion(): Promise<void> {
   .shell__tools {
     display: none !important;
   }
-  .shell__header {
-    background-position: right bottom;
-    background-size: min(48%, 160px);
+  .shell__header::after {
+    width: min(48%, 160px);
   }
 }
 
 .shell__header {
+  position: relative;
   display: grid;
   gap: 8px;
   margin-bottom: 12px;
@@ -87,11 +87,21 @@ async function openCurrentVersion(): Promise<void> {
   border: 1px solid rgba(39, 74, 103, 0.12);
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+  background-color: white;
+}
+
+.shell__header::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  top: 8px;
+  width: min(40%, 220px);
   background: url(/family-trip-v4.png);
   background-position: right bottom;
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: white;
+  pointer-events: none;
 }
 
 .shell__image {
