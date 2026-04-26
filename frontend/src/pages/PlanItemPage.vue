@@ -73,7 +73,9 @@
         >
           Следующий
         </button>
-        <button v-else type="button" class="floating-nav__button" @click="goBack">К списку</button>
+        <button v-else type="button" class="floating-nav__button floating-nav__button--disabled" disabled>
+          Следующий
+        </button>
       </div>
     </div>
   </section>
