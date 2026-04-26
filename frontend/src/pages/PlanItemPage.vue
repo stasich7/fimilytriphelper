@@ -12,6 +12,7 @@
     </article>
 
     <article class="card" v-else-if="item">
+      <p v-if="currentSectionLabel" class="card__label">{{ currentSectionLabel }}</p>
       <div class="item-header">
         <h2>{{ item.title }}</h2>
         <button
@@ -65,6 +66,7 @@ import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getItem, getVersion, toggleItemLike } from "../api";
 import { renderMarkdownWithOptions } from "../markdown";
+import { buildReadingOrder, buildReadingSections } from "../planOrder";
 import { buildItemPath, buildOverviewPath, buildVersionItemAnchorPath } from "../paths";
 import type { Comment, PlanItem } from "../types/api";
 
@@ -77,6 +79,7 @@ const loading = ref(true);
 const error = ref("");
 const item = ref<PlanItem | null>(null);
 const linkedItems = ref<PlanItem[]>([]);
+const currentSectionLabel = ref("");
 const comments = ref<Comment[]>([]);
 const commentBody = ref("");
 const guestName = ref("");
@@ -134,7 +137,15 @@ async function loadItem(itemId: string): Promise<void> {
 
     if (response.item.planVersionID) {
       const versionResponse = await getVersion(response.item.planVersionID, guestToken.value || undefined);
-      linkedItems.value = versionResponse.items ?? [];
+      const versionItems = versionResponse.items ?? [];
+      linkedItems.value = buildReadingOrder(versionItems);
+
+      const section = buildReadingSections(versionItems).find((currentSection) =>
+        currentSection.items.some((currentItem) => currentItem.id === response.item.id),
+      );
+      currentSectionLabel.value = section?.label || "";
+    } else {
+      currentSectionLabel.value = "";
     }
 
     if (guestToken.value) {

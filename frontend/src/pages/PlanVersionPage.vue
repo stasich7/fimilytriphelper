@@ -16,7 +16,7 @@
         <a class="anchor-link" href="#version-comments">Общие комментарии к версии</a>
       </article>
 
-      <article v-for="section in sections" :key="section.type" class="card">
+      <article v-for="section in sections" :key="section.key" class="card">
         <p class="card__label">{{ section.label }}</p>
         <p v-if="likeError" class="submit-error">{{ likeError }}</p>
         <div v-for="item in section.items" :id="itemAnchorId(item.id)" :key="item.id" class="item">
@@ -74,6 +74,7 @@ import { computed, nextTick, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getVersion, toggleItemLike } from "../api";
+import { buildReadingSections } from "../planOrder";
 import { buildItemPath, buildVersionItemAnchorPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
 
@@ -99,39 +100,7 @@ const guestToken = computed(() => {
   return token || "";
 });
 
-const rhythmStableKeys = new Set(["note.plan.tbilisi.days", "note.plan.sea.days"]);
-
-const sectionOrder = ["route_option", "plan_days", "stay", "transport", "activity", "note"];
-const sectionLabels: Record<string, string> = {
-  route_option: "Маршрут",
-  plan_days: "Ритм по дням",
-  stay: "Проживание",
-  transport: "Транспорт",
-  activity: "Активности",
-  note: "Заметки",
-};
-
-const sections = computed(() =>
-  sectionOrder
-    .map((type) => ({
-      type,
-      label: sectionLabels[type] || type,
-      items: sectionItems(type),
-    }))
-    .filter((section) => section.items.length > 0),
-);
-
-function sectionItems(type: string): PlanItem[] {
-  if (type === "plan_days") {
-    return items.value.filter((item) => item.type === "day_plan" || rhythmStableKeys.has(item.stableKey));
-  }
-
-  if (type === "note") {
-    return items.value.filter((item) => item.type === type && !rhythmStableKeys.has(item.stableKey));
-  }
-
-  return items.value.filter((item) => item.type === type);
-}
+const sections = computed(() => buildReadingSections(items.value));
 
 async function loadVersion(versionId: string): Promise<void> {
   loading.value = true;

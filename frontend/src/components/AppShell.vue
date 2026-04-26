@@ -70,7 +70,7 @@ async function openCurrentVersion(): Promise<void> {
 }
 
 @media screen and (max-width: 767px) {
-  .shell__header {
+  .shell__tools {
     display: none !important;
   }
 }
@@ -141,9 +141,4 @@ async function openCurrentVersion(): Promise<void> {
   gap: 12px;
 }
 
-@media (max-width: 860px) {
-  .shell__tools {
-    display: none;
-  }
-}
 </style>
