@@ -28,11 +28,6 @@
       </div>
       <p v-if="likeError" class="submit-error">{{ likeError }}</p>
       <div class="body markdown-body" v-html="renderBody(item.bodyMarkdown)" @click="handleMarkdownClick"></div>
-      <div class="item-nav">
-        <button v-if="previousItem" type="button" class="nav-step" @click="openPreviousItem">Предыдущий</button>
-        <button v-if="nextItem" type="button" class="nav-next" @click="openNextItem">Следующий</button>
-        <button v-else type="button" class="nav-next" @click="goBack">К списку</button>
-      </div>
     </article>
 
     <article class="card" v-if="item">
@@ -57,6 +52,37 @@
         </button>
       </div>
     </article>
+
+    <div v-if="item" class="floating-nav" role="navigation" aria-label="Навигация по карточкам">
+      <div class="floating-nav__inner">
+        <button
+          v-if="previousItem"
+          type="button"
+          class="floating-nav__button"
+          @click="openPreviousItem"
+        >
+          Предыдущий
+        </button>
+        <button
+          v-else
+          type="button"
+          class="floating-nav__button floating-nav__button--disabled"
+          disabled
+        >
+          Предыдущий
+        </button>
+
+        <button
+          v-if="nextItem"
+          type="button"
+          class="floating-nav__button"
+          @click="openNextItem"
+        >
+          Следующий
+        </button>
+        <button v-else type="button" class="floating-nav__button" @click="goBack">К списку</button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -283,6 +309,7 @@ watch(
 .layout {
   display: grid;
   gap: 20px;
+  padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
 }
 
 .card {
@@ -342,16 +369,43 @@ watch(
 .body {
 }
 
-.item-nav {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 20px;
+.floating-nav {
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid rgba(39, 74, 103, 0.14);
+  box-shadow: 0 -14px 30px rgba(31, 41, 55, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-.nav-step,
-.nav-next {
-  min-width: 132px;
+.floating-nav__inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.floating-nav__button {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #134c75;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.floating-nav__button--disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 :deep(.markdown-body p) {

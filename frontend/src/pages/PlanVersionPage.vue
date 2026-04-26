@@ -10,12 +10,6 @@
     </article>
 
     <template v-else-if="version">
-      <article class="card">
-        <h2>{{ version.versionCode }} - {{ version.title }}</h2>
-        <p>Здесь собраны все варианты и общие комментарии к этой версии поездки.</p>
-        <a class="anchor-link" href="#version-comments">Общие комментарии к версии</a>
-      </article>
-
       <article v-for="section in sections" :key="section.key" class="card">
         <p class="card__label">{{ section.label }}</p>
         <p v-if="likeError" class="submit-error">{{ likeError }}</p>

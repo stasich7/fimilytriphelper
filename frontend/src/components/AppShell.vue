@@ -75,7 +75,7 @@ async function openCurrentVersion(): Promise<void> {
   }
   .shell__header {
     background-position: right bottom;
-    background-size: 30vh;
+    background-size: min(48%, 160px);
   }
 }
 
