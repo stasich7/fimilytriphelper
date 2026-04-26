@@ -13,13 +13,13 @@ PROD_IMAGE_STORAGE_ENDPOINT_URL ?= https://storage.familytrip.stasich7.ru
 .DEFAULT: update
 
 update:
-	docker-compose --env-file .env -f deploy/docker-compose.prod.yml stop app
+	docker compose --env-file .env -f deploy/docker-compose.prod.yml stop app
 	git pull origin main
-	docker-compose --env-file .env -f deploy/docker-compose.prod.yml up -d --build app 
+	docker compose --env-file .env -f deploy/docker-compose.prod.yml up -d --build app 
 
 
 stop:
-	docker-compose --env-file .env -f deploy/docker-compose.prod.yml stop app
+	docker compose --env-file .env -f deploy/docker-compose.prod.yml stop app
 
 .venv/bin/python:
 	python3 -m venv .venv
