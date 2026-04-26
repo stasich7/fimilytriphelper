@@ -69,6 +69,12 @@ async function openCurrentVersion(): Promise<void> {
   padding: 10px 12px 40px;
 }
 
+@media screen and (max-width: 767px) {
+  .shell__header {
+    display: none !important;
+  }
+}
+
 .shell__header {
   display: grid;
   gap: 8px;
@@ -133,5 +139,11 @@ async function openCurrentVersion(): Promise<void> {
 .shell__content {
   display: grid;
   gap: 12px;
+}
+
+@media (max-width: 860px) {
+  .shell__tools {
+    display: none;
+  }
 }
 </style>
