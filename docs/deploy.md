@@ -4,6 +4,7 @@
 
 - publishes the app only on `127.0.0.1:18080`
 - keeps `postgres` private inside the Docker network
+- runs MinIO image storage on `127.0.0.1:19000` for host nginx
 - expects the host `nginx` to proxy public traffic to the app container
 - runs the backend as a single app container that serves both API and frontend static files
 
@@ -30,6 +31,9 @@ cp .env.example .env
 
 3. Edit `.env` and set:
    - `POSTGRES_PASSWORD`
+   - `MINIO_ROOT_USER`
+   - `MINIO_ROOT_PASSWORD`
+   - `MINIO_BUCKET`
 
 4. Start the stack:
 
@@ -78,6 +82,10 @@ server {
 
 If you already have a matching `server` block, only the `location /` part is required.
 
+7. Add an `nginx` server for image storage, for example `storage.familytrip.stasich7.ru`.
+
+See `docs/image-publication.md` for the storage nginx config and image publication workflow.
+
 ## Update
 
 ```bash
@@ -114,6 +122,8 @@ cat family-trip-helper-backup.sql | docker exec -i family-trip-helper-postgres p
 ## Notes
 
 - do not publish the postgres port to the public internet
+- do not publish the MinIO console to the public internet without additional protection
 - the app is intentionally bound to `127.0.0.1:18080`, so it is reachable only from the VPS itself
+- the storage S3 API is intentionally bound to `127.0.0.1:19000`, so public access should go through host nginx
 - guest links should be generated with the production domain in `--base-url`
 - named volumes keep data across container rebuilds

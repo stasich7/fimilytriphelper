@@ -17,6 +17,7 @@ const arrivalStableKeys = ["transport.arrival.tbilisi-airport"];
 const departureStableKeys = ["transport.departure.batumi-airport"];
 const detailStableKeys = [
   "transport.train.tbilisi-batumi",
+  "note.transport.cableways",
   "activity.tbilisi.old-town",
   "activity.mtskheta.daytrip",
   "activity.kakheti.sighnaghi",
