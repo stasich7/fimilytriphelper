@@ -81,6 +81,17 @@ Install the CLI dependency:
 python3 -m pip install -r tools/requirements-image-publish.txt
 ```
 
+The normal local pre-import command is:
+
+```bash
+AWS_ACCESS_KEY_ID=family_trip_helper \
+AWS_SECRET_ACCESS_KEY=family_trip_helper_storage \
+PYTHON=/tmp/familytriphelper-image-publish-venv/bin/python \
+make publish-images-local
+```
+
+This command writes `context/georgia-trip-plan-current.published.md` and fails if any external image URLs remain.
+
 Local example:
 
 ```bash
@@ -90,7 +101,8 @@ python3 tools/publish_plan_images.py \
   --bucket family-trip-assets \
   --prefix trips/georgia-2026-08 \
   --public-base-url http://127.0.0.1:19000 \
-  --endpoint-url http://127.0.0.1:19000
+  --endpoint-url http://127.0.0.1:19000 \
+  --fail-if-unpublished
 ```
 
 Production example:
@@ -102,10 +114,29 @@ python3 tools/publish_plan_images.py \
   --bucket family-trip-assets \
   --prefix trips/georgia-2026-08 \
   --public-base-url https://storage.familytrip.stasich7.ru \
-  --endpoint-url https://storage.familytrip.stasich7.ru
+  --endpoint-url https://storage.familytrip.stasich7.ru \
+  --fail-if-unpublished
 ```
 
 Then import `context/georgia-trip-plan-current.published.md` through the app tools.
+
+To verify an already published file:
+
+```bash
+AWS_ACCESS_KEY_ID=family_trip_helper \
+AWS_SECRET_ACCESS_KEY=family_trip_helper_storage \
+PYTHON=/tmp/familytriphelper-image-publish-venv/bin/python \
+make verify-published-images
+```
+
+Before importing into production, verify that the file does not contain localhost image URLs:
+
+```bash
+PYTHON=/tmp/familytriphelper-image-publish-venv/bin/python \
+make verify-prod-published-images
+```
+
+This production guard fails on image URLs pointing to `localhost`, `127.0.0.1`, `0.0.0.0`, or `::1`.
 
 ## Behavior
 

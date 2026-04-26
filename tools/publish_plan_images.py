@@ -20,6 +20,7 @@ from botocore.exceptions import ClientError
 
 IMAGE_PATTERN = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 DEFAULT_USER_AGENT = "FamilyTripHelper image publisher/1.0"
+LOCALHOST_HOSTS = {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
 
 
 @dataclass(frozen=True)
@@ -44,6 +45,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cache-dir", default=".cache/published-images")
     parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT)
     parser.add_argument("--on-download-error", choices=("fail", "keep-source"), default="fail")
+    parser.add_argument(
+        "--fail-if-unpublished",
+        action="store_true",
+        help="Exit with an error if external image URLs remain after rewriting.",
+    )
+    parser.add_argument(
+        "--forbid-localhost-urls",
+        action="store_true",
+        help="Exit with an error if markdown image URLs point to localhost or loopback hosts.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -66,6 +77,21 @@ def find_image_urls(markdown: str, public_base_url: str) -> list[str]:
             continue
         seen.add(url)
         urls.append(url)
+
+    return urls
+
+
+def find_localhost_image_urls(markdown: str) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+
+    for match in IMAGE_PATTERN.finditer(markdown):
+        url = match.group(2)
+        parsed = urlparse(url)
+        hostname = parsed.hostname or ""
+        if hostname in LOCALHOST_HOSTS and url not in seen:
+            seen.add(url)
+            urls.append(url)
 
     return urls
 
@@ -183,6 +209,13 @@ def main() -> int:
     input_path = Path(args.input)
     output_path = Path(args.output)
     markdown = input_path.read_text(encoding="utf-8")
+    input_localhost_urls = find_localhost_image_urls(markdown)
+    if args.forbid_localhost_urls and input_localhost_urls:
+        print("error: localhost image URLs are not allowed:", file=sys.stderr)
+        for url in input_localhost_urls:
+            print(f"- {url}", file=sys.stderr)
+        return 3
+
     urls = find_image_urls(markdown, args.public_base_url)
 
     if not urls:
@@ -193,14 +226,29 @@ def main() -> int:
 
     published = publish_images(args, urls)
     rewritten = rewrite_markdown(markdown, published)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(rewritten, encoding="utf-8")
+    unpublished_urls = find_image_urls(rewritten, args.public_base_url)
+    localhost_urls = find_localhost_image_urls(rewritten)
+    if not args.dry_run:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rewritten, encoding="utf-8")
 
     for image in published.values():
         status = "uploaded" if image.uploaded else "exists"
         if args.dry_run:
             status = "dry-run"
         print(f"{status}: {image.source_url} -> {image.public_url}")
+
+    if args.fail_if_unpublished and unpublished_urls:
+        print("error: external image URLs remain after publication:", file=sys.stderr)
+        for url in unpublished_urls:
+            print(f"- {url}", file=sys.stderr)
+        return 2
+
+    if args.forbid_localhost_urls and localhost_urls:
+        print("error: localhost image URLs are not allowed:", file=sys.stderr)
+        for url in localhost_urls:
+            print(f"- {url}", file=sys.stderr)
+        return 3
 
     return 0
 

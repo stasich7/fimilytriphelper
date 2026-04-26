@@ -319,30 +319,30 @@ Type: note
 Грузинская часть:
 - `Хинкали` — не “маленькие пельмени”, а бульон, перец, мясо и тесто, которое должно держать форму, но не быть тяжелым.
 Изображение:
-![Хинкали](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/1e/1e31f9be8b1d1318b747a6fa69f66948a0e4da796cbc608fad5d5331472bf3a8.webp)
+![Хинкали](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1e/1e31f9be8b1d1318b747a6fa69f66948a0e4da796cbc608fad5d5331472bf3a8.webp)
 - `Мцвади` — грузинский шашлык, где вкус держится на мясе, огне и соли, а не на сложном маринаде.
 Изображение:
-![Мцвади](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/19/19040162746a3d97d953bfaaf47802c66b7dda87715b957c67c02bb58350eeea.webp)
+![Мцвади](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/19/19040162746a3d97d953bfaaf47802c66b7dda87715b957c67c02bb58350eeea.webp)
 - `Пхали` — холодные овощные закуски с ореховой основой. Через них очень хорошо чувствуется грузинская любовь к зелени, чесноку, кориандру и ореху.
 Изображение:
-![Пхали](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/bd/bd8cd7a2f221513a06bc4ed00d6504f42530f5c87a9d98860287fe328133a482.webp)
+![Пхали](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/bd/bd8cd7a2f221513a06bc4ed00d6504f42530f5c87a9d98860287fe328133a482.webp)
 - `Лобио` — фасоль в горшке, часто простая на вид, но очень глубокая по вкусу. Особенно хорошо идет с мчади, сыром и соленьями.
 Изображение:
-![Лобио](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/40/40bb7fc5cc616aa5c2cbc563794a6a5356d2f7e7b11cf1b178f5a3792164a86e.webp)
+![Лобио](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/40/40bb7fc5cc616aa5c2cbc563794a6a5356d2f7e7b11cf1b178f5a3792164a86e.webp)
 
 Аджарская часть:
 - `Аджарский хачапури` — лодочка из теста с сыром, маслом и яйцом. Его надо есть сразу, пока он горячий и живой.
 Изображение:
-![Аджарский хачапури](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/5c/5c15891c07fe1a4c5c1a1fc7839ebf8a22a2d53b23c7b189ad525a384d585c3c.webp)
+![Аджарский хачапури](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5c/5c15891c07fe1a4c5c1a1fc7839ebf8a22a2d53b23c7b189ad525a384d585c3c.webp)
 - `Борано` — аджарское блюдо с расплавленным сыром и маслом. Очень насыщенное, очень вкусное и лучше всего работает как “одно яркое блюдо на стол”, а не как скучный повседневный заказ.
 Изображение:
-![Борано](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/cd/cd906d59edbaf296def24fafb03ac0d67e16838f63068493fe173bda0cf1650f.webp)
+![Борано](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/cd/cd906d59edbaf296def24fafb03ac0d67e16838f63068493fe173bda0cf1650f.webp)
 - `Ачма` или `синори` — мягкая, слоистая, сливочная часть западногрузинской кухни, где важны сыр, масло и домашняя щедрость.
 Изображение:
-![Ачма](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/db/db2b2420626c3c3baa73f18e184af903b1e75e4d300c24b0eff9e416dcae6fc1.webp)
+![Ачма](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/db/db2b2420626c3c3baa73f18e184af903b1e75e4d300c24b0eff9e416dcae6fc1.webp)
 - `Чурчхела` — не большой обед, а лучший сладкий перекус и самый понятный съедобный сувенир с дороги.
 Изображение:
-![Чурчхела](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/4b/4b83acac915edb1cbd2fd260a2051c69a70c9af8fd3c660dddb2a103ebce2c68.webp)
+![Чурчхела](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4b/4b83acac915edb1cbd2fd260a2051c69a70c9af8fd3c660dddb2a103ebce2c68.webp)
 
 Где есть без пафоса в Тбилиси:
 - `Racha` — старая городская классика для тех, кто хочет хинкали, лобио и очень тбилисскую еду без глянца.
@@ -379,10 +379,10 @@ Type: note
 - `Квеври-вайны` — вина, выдержанные в глиняных сосудах. Белые здесь могут быть янтарными, чуть танинными и совсем не похожими на обычное “просто белое”.
 
 Изображение:
-![Саперави](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/9f/9f2cfd0938a10c697fe0669800c1d54d1eed476485244e6bf4418c66d9452a36.webp)
+![Саперави](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/9f/9f2cfd0938a10c697fe0669800c1d54d1eed476485244e6bf4418c66d9452a36.webp)
 
 Изображение:
-![Квеври](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/19/1952a2811c7cb3a59124d5fc0aa4d580a89df0c9afd5d300ca2dec46a6262007.jpg)
+![Квеври](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/19/1952a2811c7cb3a59124d5fc0aa4d580a89df0c9afd5d300ca2dec46a6262007.jpg)
 
 Как пробовать без перегруза:
 - в Тбилиси удобно заказать по бокалу `Саперави` и `Ркацители`, чтобы быстро почувствовать разницу между красным и белым базовым стилем;
@@ -414,7 +414,7 @@ Type: note
 - Приятная деталь: линия открылась в 2012 году и почти сразу стала одним из самых понятных городских ритуалов первого визита в Тбилиси.
 - Из верхней станции удобно сразу уйти к Нарикале, к Матери Грузии или в сторону Ботанического сада.
 Изображение:
-![Канатка к Нарикале](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/04/04ab2c7bda1fcb99de939fbafe1b6b9448f7b3a487a00e533e37681130dd6ee9.webp)
+![Канатка к Нарикале](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/04/04ab2c7bda1fcb99de939fbafe1b6b9448f7b3a487a00e533e37681130dd6ee9.webp)
 
 Тбилиси: фуникулер на Мтацминду
 - Это уже не “короткий городской трюк”, а отдельный тбилисский сюжет: исторический подъем на гору с видом, парком и ощущением старого столичного отдыха.
@@ -423,7 +423,7 @@ Type: note
 - Интересная деталь: тбилисский фуникулер работает с 1905 года, так что это не просто аттракцион, а часть городской памяти.
 - Наверху особенно удобно с детьми, потому что вид можно сразу совместить с парком и аттракционами, а не заканчивать прогулку только смотровой площадкой.
 Изображение:
-![Фуникулер на Мтацминду](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/d8/d82298610a5f4d07732bc83b4e3b29dcc51646f494d608da2275b1d4936fd840.webp)
+![Фуникулер на Мтацминду](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d8/d82298610a5f4d07732bc83b4e3b29dcc51646f494d608da2275b1d4936fd840.webp)
 
 Батуми: канатная дорога `Арго`
 - `Арго` хороша тем, что показывает Батуми не как “линию пляжа”, а как город между морем, портом и холмами.
@@ -432,7 +432,7 @@ Type: note
 - Интересная деталь: верхняя станция стоит на горе Анурия примерно на 256 м над уровнем моря, а наверху уже не просто видовая точка, а целый развлекательный комплекс с террасами, кафе и вечерней программой.
 - Лучше всего идти сюда во второй половине дня, чтобы совместить подъем, порт, Парк чудес и закатный свет над морем.
 Изображение:
-![Канатная дорога Арго](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/d0/d0c128728b8fab7e5baf276d0fd9804adbb29c1ec5dba33d180650482af881c3.webp)
+![Канатная дорога Арго](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d0/d0c128728b8fab7e5baf276d0fd9804adbb29c1ec5dba33d180650482af881c3.webp)
 
 Как выбирать без перегруза:
 - если нужен самый сильный вид на старый Тбилиси за минимум усилий, брать Рике — Нарикала;
@@ -498,7 +498,7 @@ Area: Sololaki / Freedom Square
 - [Карта района](https://yandex.ru/maps/?text=Sololaki%20Tbilisi)
 
 Изображение:
-![Сололаки, Тбилиси](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/1e/1e8b4b3431a01b9f181630ae74f2233ef62aaf446476738cbf843c24f54ab8b6.jpg)
+![Сололаки, Тбилиси](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1e/1e8b4b3431a01b9f181630ae74f2233ef62aaf446476738cbf843c24f54ab8b6.jpg)
 
 ## [stay.tbilisi.area.mtatsminda] Тбилиси: Мтацминда и Руставели
 Type: stay
@@ -527,7 +527,7 @@ Area: Mtatsminda / Rustaveli
 - [Карта района](https://yandex.ru/maps/?text=Mtatsminda%20Tbilisi)
 
 Изображение:
-![Тбилиси и Мтацминда](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/71/710df38b555c33a1114a17478ce26d2ec2f2bf2677abae8bae0941048f3a24d2.png)
+![Тбилиси и Мтацминда](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/71/710df38b555c33a1114a17478ce26d2ec2f2bf2677abae8bae0941048f3a24d2.png)
 
 ## [activity.tbilisi.old-town] Старый Тбилиси и обзорные точки
 Type: activity
@@ -559,7 +559,7 @@ Type: activity
 - [Справка о Старом Тбилиси](https://ru.wikipedia.org/wiki/Старый_Тбилиси)
 
 Изображение:
-![Старый Тбилиси](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/a2/a261cf8f5cb54039c375228aeb59b4bba06cc649e898bfee8aecf4026dcc109b.jpg)
+![Старый Тбилиси](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/a2/a261cf8f5cb54039c375228aeb59b4bba06cc649e898bfee8aecf4026dcc109b.jpg)
 
 ## [activity.mtskheta.daytrip] Мцхета и Джвари
 Type: activity
@@ -607,7 +607,7 @@ Type: activity
 - [GoTrip: Tbilisi → Mtskheta, от $30 за машину до 4 пассажиров](https://gotrip.ge/en/transfer/from-tbilisi-to-mtskheta)
 
 Изображение:
-![Мцхета](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/fb/fb0d39f57ad2abd5a959243b3cb0a10ea3bff1409ea4d49e73bd88d707f79c92.jpg)
+![Мцхета](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/fb/fb0d39f57ad2abd5a959243b3cb0a10ea3bff1409ea4d49e73bd88d707f79c92.jpg)
 
 ## [activity.kakheti.sighnaghi] Кахетия, Сигнахи и Бодбе
 Type: activity
@@ -651,10 +651,10 @@ Type: activity
 - [Sputnik8: Кахетия, Сигнахи, Бодбе, $215 за экскурсию](https://www.sputnik8.com/ru/tbilisi/activities/68624-kaheti-signahi-bodbe-s-ziplanynom)
 
 Изображение:
-![Сигнахи](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/51/51ffbf599d30e87a005fb18087d65b0b9787f2f09dfc764b29e6d0e4540059c6.jpg)
+![Сигнахи](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/51/51ffbf599d30e87a005fb18087d65b0b9787f2f09dfc764b29e6d0e4540059c6.jpg)
 
 Изображение:
-![Алазанская долина](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/43/43ab1da9665313c8ac7909a186ca38e61c7550e395f8df578cb69445138e3e9b.jpg)
+![Алазанская долина](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/43/43ab1da9665313c8ac7909a186ca38e61c7550e395f8df578cb69445138e3e9b.jpg)
 
 ## [activity.kazbegi.daytrip] Казбеги и Военно-Грузинская дорога
 Type: activity
@@ -687,7 +687,7 @@ Type: activity
 - [GoTrip: Tbilisi → Stepantsminda, от $65 за машину](https://gotrip.ge/en/transfer/from-tbilisi-to-kazbegi-to-tbilisi/)
 
 Изображение:
-![Казбеги и Степанцминда](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/67/67e73d398dcb4f25eefe426a4343b847b61c1e978ffd2f0ae96d7f13f7f8c181.jpg)
+![Казбеги и Степанцминда](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/67/67e73d398dcb4f25eefe426a4343b847b61c1e978ffd2f0ae96d7f13f7f8c181.jpg)
 
 ## [activity.borjomi.daytrip] Боржоми: парк, минералка и ущелье
 Type: activity
@@ -732,7 +732,7 @@ Type: activity
 - [Боржоми-Харагаули: национальный парк рядом с городом](https://nationalparks.ge/en/site/borjomi-kharagaulinationalpark)
 
 Изображение:
-![Боржоми, Центральный парк](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/ae/aec32a5b613086ce2982c1d8d6939d586fa47a342206d3af175ac487fdca8544.jpg)
+![Боржоми, Центральный парк](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/ae/aec32a5b613086ce2982c1d8d6939d586fa47a342206d3af175ac487fdca8544.jpg)
 
 ## [transport.train.tbilisi-batumi] Переезд Тбилиси-Батуми на поезде
 Type: transport
@@ -805,7 +805,7 @@ Area: Old Batumi / Old Boulevard
 - [Карта района](https://yandex.ru/maps/?text=Old%20Batumi)
 
 Изображение:
-![Батуми вечером](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/1c/1cc280f78364d41f6270e1a55d3f42076a6ac0656b5af494e63d3befd92d6cdd.jpg)
+![Батуми вечером](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1c/1cc280f78364d41f6270e1a55d3f42076a6ac0656b5af494e63d3befd92d6cdd.jpg)
 
 ## [stay.batumi.area.chakvi] Пригород Батуми: Махинджаури, Зеленый мыс и Чакви
 Type: stay
@@ -814,10 +814,10 @@ Area: Batumi Suburbs
 Если хочется жить не в самом Батуми, а у моря и зелени, то смотреть стоит не только один Чакви, а весь северный пригородный пояс. Для этой поездки там есть три понятных сценария: самый близкий к городу `Махинджаури`, самый красивый `Зеленый мыс / Мцване-Концхи` и самый спокойный `Чакви`.
 
 Изображение:
-![Махинджаури, вид района](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/90/90393b6550b653d959ffd9a86c2720a967367f7cde4540d94a4350b92b88bb8e.jpg)
+![Махинджаури, вид района](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/90/90393b6550b653d959ffd9a86c2720a967367f7cde4540d94a4350b92b88bb8e.jpg)
 
 Изображение:
-![Пляж в Махинджаури](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/ee/eef0a963fd1a4c1efea65cf08215dae3ec75107c78186121a1dd232d3b9fcdce.jpg)
+![Пляж в Махинджаури](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/ee/eef0a963fd1a4c1efea65cf08215dae3ec75107c78186121a1dd232d3b9fcdce.jpg)
 
 Вариант 1: Махинджаури
 - это ближайший к Батуми пригородный морской вариант: примерно `5 км` до города;
@@ -826,10 +826,10 @@ Area: Batumi Suburbs
 - пляж здесь галечный, спокойнее городского и без ощущения, что вы уехали совсем далеко.
 
 Изображение:
-![Зеленый мыс, вид на побережье](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/79/79a2d6af49da563c2bf3487eefb3c8f54c2c49fbf0c8bb461e1863bca2112123.jpg)
+![Зеленый мыс, вид на побережье](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/79/79a2d6af49da563c2bf3487eefb3c8f54c2c49fbf0c8bb461e1863bca2112123.jpg)
 
 Изображение:
-![Пляж на Зеленом мысе](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/65/652c1ea2efa8077335bbc9483e26140056a43182c15fd62b9afad5432c08009d.jpg)
+![Пляж на Зеленом мысе](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/65/652c1ea2efa8077335bbc9483e26140056a43182c15fd62b9afad5432c08009d.jpg)
 
 Вариант 2: Зеленый мыс / Мцване-Концхи
 - это самый красивый пригородный сценарий рядом с Батуми: море, склоны, густая зелень и близость Ботанического сада;
@@ -838,10 +838,10 @@ Area: Batumi Suburbs
 - слабое место у варианта то же, что и его сила: это не городской район, а курортно-природная локация, так что за вечерами “вышли и сразу старый центр” нужно ехать в Батуми.
 
 Изображение:
-![Чакви, атмосферный вид](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/00/006d73cee45410742e575484fd5e2fa87205aee06302378f87c56445b9d4af27.jpg)
+![Чакви, атмосферный вид](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/00/006d73cee45410742e575484fd5e2fa87205aee06302378f87c56445b9d4af27.jpg)
 
 Изображение:
-![Пляж в Чакви](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/63/63781073c4998bbf8f40bbab3373f04422aab05cc19f36f2ff518941e0f7a693.jpg)
+![Пляж в Чакви](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/63/63781073c4998bbf8f40bbab3373f04422aab05cc19f36f2ff518941e0f7a693.jpg)
 
 Вариант 3: Чакви
 - Чакви дальше от Батуми, чем `Махинджаури` и `Зеленый мыс`, зато дает самый мягкий и расслабленный ритм;
@@ -940,7 +940,7 @@ Type: activity
 - [Справка](https://ru.wikipedia.org/wiki/Батумский_ботанический_сад)
 
 Изображение:
-![Батумский ботанический сад](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/c6/c6aaed1117f93c5f46da6e42fcdb3bd71dc4c5c6ae54903a80d3744ac454dc99.jpg)
+![Батумский ботанический сад](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c6/c6aaed1117f93c5f46da6e42fcdb3bd71dc4c5c6ae54903a80d3744ac454dc99.jpg)
 
 ## [activity.adjara.makhuntseti] Горная Аджария и Махунцети
 Type: activity
@@ -968,7 +968,7 @@ Type: activity
 - [Дополнительный обзор](https://www.airgeo.org/ru/regions/adjara/batumi/makhuntseti-waterfall/)
 
 Изображение:
-![Водопад Махунцети](http://127.0.0.1:19000/family-trip-assets/trips/georgia-2026-08/images/1a/1a18041059e225fbe1e1e8dafd26b88be3d8efd5be4bd247f6f4d13fb291ebc0.jpg)
+![Водопад Махунцети](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1a/1a18041059e225fbe1e1e8dafd26b88be3d8efd5be4bd247f6f4d13fb291ebc0.jpg)
 
 ## [transport.departure.batumi-airport] Вылет из Батуми
 Type: transport

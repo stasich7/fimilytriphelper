@@ -94,7 +94,7 @@ async function openCurrentVersion(): Promise<void> {
   content: "";
   position: absolute;
   right: 8px;
-  bottom: 8px;
+  bottom: 0px;
   top: 8px;
   width: min(40%, 220px);
   background: url(/family-trip-v4.png);
