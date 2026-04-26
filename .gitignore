@@ -2,6 +2,7 @@
 /backend/bin/
 /backend/.cache/
 /.cache/
+/.venv/
 
 # Frontend
 /frontend/node_modules/

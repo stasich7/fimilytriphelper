@@ -38,6 +38,42 @@ When preparing a new plan version for import:
 - add images in markdown form `![alt](https://example.com/image.jpg)` when a place benefits from a small visual cue;
 - links and images should stay inside the same item block they describe.
 
+## Publishing plan images
+
+The image publishing commands create `.venv` and install Python dependencies automatically.
+
+You can publish external images to the local S3-compatible storage:
+
+```bash
+AWS_ACCESS_KEY_ID=family_trip_helper \
+AWS_SECRET_ACCESS_KEY=family_trip_helper_storage \
+make publish-images-local
+```
+
+Copy all image objects referenced by the published markdown from local storage to production storage:
+
+```bash
+LOCAL_AWS_ACCESS_KEY_ID=family_trip_helper \
+LOCAL_AWS_SECRET_ACCESS_KEY=family_trip_helper_storage \
+PROD_AWS_ACCESS_KEY_ID=... \
+PROD_AWS_SECRET_ACCESS_KEY=... \
+make sync-images-prod
+```
+
+The sync command reads `context/georgia-trip-plan-current.published.md`, copies only referenced objects from `http://127.0.0.1:19000` to `https://storage.familytrip.stasich7.ru`, and rewrites the markdown image URLs to the production storage host.
+
+Verify that the published markdown no longer contains localhost image URLs before importing it to production:
+
+```bash
+make verify-prod-published-images
+```
+
+If you want to use a different Python environment, override `IMAGE_PYTHON`:
+
+```bash
+IMAGE_PYTHON=/path/to/python make sync-images-prod
+```
+
 Local development example:
 
 ```bash
