@@ -15,7 +15,7 @@ PROD_IMAGE_STORAGE_ENDPOINT_URL ?= https://storage.familytrip.stasich7.ru
 update:
 	docker-compose --env-file .env -f deploy/docker-compose.prod.yml stop app
 	git pull origin main
-	docker-compose --env-file .env -f deploy/docker-compose.prod.yml up -d app --build
+	docker-compose --env-file .env -f deploy/docker-compose.prod.yml up -d --build app 
 
 
 stop:
