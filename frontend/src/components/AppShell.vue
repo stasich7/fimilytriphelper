@@ -12,9 +12,13 @@
           <span aria-hidden="true" class="shell__home-icon">⌂</span>
         </button>
         <button type="button" class="shell__nav-button shell__lang-button" @click="toggleLanguage">
-          {{ text.langToggle }}
+          <span aria-hidden="true" class="shell__lang-label">Рус/Eng</span>
+          <span aria-hidden="true" class="shell__lang-icon">🌐</span>
         </button>
-        <button v-if="showBack" type="button" class="shell__nav-button" @click="goBack">{{ text.back }}</button>
+        <button v-if="showBack" type="button" class="shell__nav-button shell__back-button" :aria-label="text.back" :title="text.back" @click="goBack">
+          <span aria-hidden="true" class="shell__back-label">{{ text.back }}</span>
+          <span aria-hidden="true" class="shell__back-icon">←</span>
+        </button>
         <RouterLink class="shell__tools" :to="toolsPath" :aria-label="text.tools" :title="text.tools">⚙</RouterLink>
       </nav>
     </header>
@@ -180,6 +184,11 @@ async function toggleLanguage(): Promise<void> {
   min-width: 84px;
 }
 
+.shell__lang-icon,
+.shell__back-icon {
+  display: none;
+}
+
 .shell__tools {
   display: inline-flex;
   width: 54px;
@@ -200,6 +209,31 @@ async function toggleLanguage(): Promise<void> {
 .shell__content {
   display: grid;
   gap: 12px;
+}
+
+@media screen and (max-width: 430px) {
+  .shell__lang-button,
+  .shell__back-button {
+    width: 54px;
+    min-width: 54px;
+    min-height: 54px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .shell__lang-label,
+  .shell__back-label {
+    display: none;
+  }
+
+  .shell__lang-icon,
+  .shell__back-icon {
+    display: inline-block;
+    font-size: 28px;
+    line-height: 1;
+  }
 }
 
 </style>
