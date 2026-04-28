@@ -7,7 +7,7 @@
           class="shell__nav-button shell__nav-button--icon"
           :aria-label="text.home"
           :title="text.home"
-          @click="openCurrentVersion"
+          @click="goHome"
         >
           <span aria-hidden="true" class="shell__home-icon">⌂</span>
         </button>
@@ -72,6 +72,10 @@ async function openCurrentVersion(): Promise<void> {
     // Fall back to the public overview when the current version cannot be loaded.
   }
 
+  await router.push(overviewPath.value);
+}
+
+async function goHome(): Promise<void> {
   await router.push(overviewPath.value);
 }
 
