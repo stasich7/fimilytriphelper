@@ -14,6 +14,7 @@ type Trip struct {
 type PlanVersion struct {
 	ID          int64     `json:"id"`
 	VersionCode string    `json:"versionCode"`
+	Language    string    `json:"language"`
 	Title       string    `json:"title"`
 	CreatedAt   time.Time `json:"createdAt"`
 }

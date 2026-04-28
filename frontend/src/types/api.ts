@@ -10,6 +10,7 @@ export interface Trip {
 export interface PlanVersion {
   id: number;
   versionCode: string;
+  language?: string;
   title: string;
   createdAt: string;
 }

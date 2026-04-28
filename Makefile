@@ -3,6 +3,8 @@ IMAGE_PYTHON ?= .venv/bin/python
 IMAGE_PIP ?= .venv/bin/pip
 IMAGE_SOURCE ?= context/georgia-trip-plan-current.md
 IMAGE_OUTPUT ?= context/georgia-trip-plan-current.published.md
+IMAGE_SOURCE_EN ?= context/georgia-trip-plan-current.en.md
+IMAGE_OUTPUT_EN ?= context/georgia-trip-plan-current.en.published.md
 IMAGE_STORAGE_BUCKET ?= family-trip-assets
 IMAGE_STORAGE_PREFIX ?= trips/georgia-2026-08
 IMAGE_STORAGE_PUBLIC_BASE_URL ?= http://127.0.0.1:19000
@@ -39,10 +41,32 @@ publish-images-local: .venv/.image-publish-deps
 		--on-download-error keep-source \
 		--fail-if-unpublished
 
+publish-images-local-en: .venv/.image-publish-deps
+	$(IMAGE_PYTHON) tools/publish_plan_images.py \
+		--input $(IMAGE_SOURCE_EN) \
+		--output $(IMAGE_OUTPUT_EN) \
+		--bucket $(IMAGE_STORAGE_BUCKET) \
+		--prefix $(IMAGE_STORAGE_PREFIX) \
+		--public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
+		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
+		--on-download-error keep-source \
+		--fail-if-unpublished
+
 verify-published-images: .venv/.image-publish-deps
 	$(IMAGE_PYTHON) tools/publish_plan_images.py \
 		--input $(IMAGE_OUTPUT) \
 		--output $(IMAGE_OUTPUT) \
+		--bucket $(IMAGE_STORAGE_BUCKET) \
+		--prefix $(IMAGE_STORAGE_PREFIX) \
+		--public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
+		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
+		--dry-run \
+		--fail-if-unpublished
+
+verify-published-images-en: .venv/.image-publish-deps
+	$(IMAGE_PYTHON) tools/publish_plan_images.py \
+		--input $(IMAGE_OUTPUT_EN) \
+		--output $(IMAGE_OUTPUT_EN) \
 		--bucket $(IMAGE_STORAGE_BUCKET) \
 		--prefix $(IMAGE_STORAGE_PREFIX) \
 		--public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
@@ -62,10 +86,32 @@ verify-prod-published-images: .venv/.image-publish-deps
 		--forbid-localhost-urls \
 		--fail-if-unpublished
 
+verify-prod-published-images-en: .venv/.image-publish-deps
+	$(IMAGE_PYTHON) tools/publish_plan_images.py \
+		--input $(IMAGE_OUTPUT_EN) \
+		--output $(IMAGE_OUTPUT_EN) \
+		--bucket $(IMAGE_STORAGE_BUCKET) \
+		--prefix $(IMAGE_STORAGE_PREFIX) \
+		--public-base-url $(PROD_IMAGE_STORAGE_PUBLIC_BASE_URL) \
+		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
+		--dry-run \
+		--forbid-localhost-urls \
+		--fail-if-unpublished
+
 sync-images-prod: .venv/.image-publish-deps
 	$(IMAGE_PYTHON) tools/sync_plan_images.py \
 		--input $(IMAGE_OUTPUT) \
 		--output $(IMAGE_OUTPUT) \
+		--bucket $(IMAGE_STORAGE_BUCKET) \
+		--source-public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
+		--dest-public-base-url $(PROD_IMAGE_STORAGE_PUBLIC_BASE_URL) \
+		--source-endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
+		--dest-endpoint-url $(PROD_IMAGE_STORAGE_ENDPOINT_URL)
+
+sync-images-prod-en: .venv/.image-publish-deps
+	$(IMAGE_PYTHON) tools/sync_plan_images.py \
+		--input $(IMAGE_OUTPUT_EN) \
+		--output $(IMAGE_OUTPUT_EN) \
 		--bucket $(IMAGE_STORAGE_BUCKET) \
 		--source-public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
 		--dest-public-base-url $(PROD_IMAGE_STORAGE_PUBLIC_BASE_URL) \

@@ -1,13 +1,13 @@
 <template>
   <section class="layout">
     <article class="card" v-if="loading">
-      <p class="card__label">Карточка</p>
-      <h2>Загружаем карточку...</h2>
+      <p class="card__label">{{ text.cardLabel }}</p>
+      <h2>{{ text.itemLoading }}</h2>
     </article>
 
     <article class="card" v-else-if="error">
-      <p class="card__label">Карточка</p>
-      <h2>Не удалось загрузить карточку</h2>
+      <p class="card__label">{{ text.cardLabel }}</p>
+      <h2>{{ text.itemLoadError }}</h2>
       <p>{{ error }}</p>
     </article>
 
@@ -19,7 +19,7 @@
           type="button"
           :class="['like-button', { 'like-button--active': item.likedByCurrentGuest }]"
           :disabled="!guestToken || liking"
-          :title="guestToken ? 'Нравится' : 'Откройте по гостевой ссылке, чтобы поставить лайк'"
+          :title="guestToken ? text.likesTitle : text.likesGuestHint"
           @click="toggleLike"
         >
           <span aria-hidden="true">👍</span>
@@ -31,38 +31,38 @@
     </article>
 
     <article class="card" v-if="item">
-      <p class="card__label">Комментарии</p>
-      <p v-if="comments.length === 0">Пока нет комментариев.</p>
+      <p class="card__label">{{ text.comments }}</p>
+      <p v-if="comments.length === 0">{{ text.noItemComments }}</p>
       <div v-for="comment in comments" :key="comment.id" class="comment">
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.body }}</p>
       </div>
-      <p v-if="guestName" class="guest-summary">Комментарий будет отправлен от имени {{ guestName }}</p>
-      <p v-else class="guest-hint">Чтобы оставить комментарий к карточке, откройте ее по персональной гостевой ссылке.</p>
+      <p v-if="guestName" class="guest-summary">{{ text.commentFrom }} {{ guestName }}</p>
+      <p v-else class="guest-hint">{{ text.itemGuestHint }}</p>
       <p v-if="submitError" class="submit-error">{{ submitError }}</p>
       <div class="comment-form">
         <textarea
           v-model="commentBody"
           rows="4"
           :disabled="!guestToken || submitting"
-          placeholder="Напишите комментарий к этому пункту плана."
+          :placeholder="text.itemCommentPlaceholder"
         />
         <button type="button" :disabled="!guestToken || submitting || !commentBody.trim()" @click="submitComment">
-          {{ submitting ? "Отправляем..." : "Оставить комментарий" }}
+          {{ submitting ? text.sending : text.leaveComment }}
         </button>
       </div>
     </article>
 
-    <div v-if="item" class="floating-nav" role="navigation" aria-label="Навигация по карточкам">
+    <div v-if="item" class="floating-nav" role="navigation" :aria-label="text.cardNavigation">
       <div class="floating-nav__inner">
         <button v-if="returnItemId" type="button" class="floating-nav__button" @click="openReturnItem">
-          Назад
+          {{ text.navBack }}
         </button>
         <button v-else-if="previousItem" type="button" class="floating-nav__button" @click="openPreviousItem">
-          Предыдущий
+          {{ text.previous }}
         </button>
         <button v-else type="button" class="floating-nav__button floating-nav__button--disabled" disabled>
-          Предыдущий
+          {{ text.previous }}
         </button>
 
         <button
@@ -71,10 +71,10 @@
           class="floating-nav__button"
           @click="openNextItem"
         >
-          Следующий
+          {{ text.next }}
         </button>
         <button v-else type="button" class="floating-nav__button floating-nav__button--disabled" disabled>
-          Следующий
+          {{ text.next }}
         </button>
       </div>
     </div>
@@ -86,6 +86,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getItem, getVersion, toggleItemLike } from "../api";
+import { getRouteLang, getUIText } from "../lang";
 import { renderMarkdownWithOptions } from "../markdown";
 import { buildReadingOrder, buildReadingSections } from "../planOrder";
 import { buildItemPath, buildOverviewPath, buildVersionItemAnchorPath } from "../paths";
@@ -95,6 +96,8 @@ const RETURN_PATH_KEY = "family-trip-helper:return-path";
 
 const route = useRoute();
 const router = useRouter();
+const lang = computed(() => getRouteLang(route));
+const text = computed(() => getUIText(lang.value));
 
 const loading = ref(true);
 const error = ref("");
@@ -157,17 +160,17 @@ async function loadItem(itemId: string): Promise<void> {
   error.value = "";
 
   try {
-    const response = await getItem(itemId, guestToken.value || undefined);
+    const response = await getItem(itemId, guestToken.value || undefined, lang.value);
     item.value = response.item;
     comments.value = response.comments ?? [];
     linkedItems.value = [];
 
     if (response.item.planVersionID) {
-      const versionResponse = await getVersion(response.item.planVersionID, guestToken.value || undefined);
+      const versionResponse = await getVersion(response.item.planVersionID, guestToken.value || undefined, lang.value);
       const versionItems = versionResponse.items ?? [];
-      linkedItems.value = buildReadingOrder(versionItems);
+      linkedItems.value = buildReadingOrder(versionItems, lang.value);
 
-      const section = buildReadingSections(versionItems).find((currentSection) =>
+      const section = buildReadingSections(versionItems, lang.value).find((currentSection) =>
         currentSection.items.some((currentItem) => currentItem.id === response.item.id),
       );
       currentSectionLabel.value = section?.label || "";
@@ -195,7 +198,7 @@ function resolveItemLink(stableKey: string): string | null {
     return null;
   }
 
-  return buildItemPath(linkedItem.id, guestToken.value || undefined);
+  return buildItemPath(linkedItem.id, guestToken.value || undefined, lang.value);
 }
 
 function handleMarkdownClick(event: MouseEvent): void {
@@ -267,8 +270,8 @@ async function submitComment(): Promise<void> {
 
 async function goBack(): Promise<void> {
   const fallbackPath = item.value?.planVersionID
-    ? buildVersionItemAnchorPath(item.value.planVersionID, item.value.id, guestToken.value || undefined)
-    : buildOverviewPath(guestToken.value || undefined);
+    ? buildVersionItemAnchorPath(item.value.planVersionID, item.value.id, guestToken.value || undefined, lang.value)
+    : buildOverviewPath(guestToken.value || undefined, lang.value);
   const returnPath = sessionStorage.getItem(RETURN_PATH_KEY);
 
   if (returnPath) {
@@ -285,7 +288,7 @@ function openNextItem(): void {
     return;
   }
 
-  void router.push(buildItemPath(nextItem.value.id, guestToken.value || undefined));
+  void router.push(buildItemPath(nextItem.value.id, guestToken.value || undefined, lang.value));
 }
 
 function openPreviousItem(): void {
@@ -293,7 +296,7 @@ function openPreviousItem(): void {
     return;
   }
 
-  void router.push(buildItemPath(previousItem.value.id, guestToken.value || undefined));
+  void router.push(buildItemPath(previousItem.value.id, guestToken.value || undefined, lang.value));
 }
 
 function openReturnItem(): void {
@@ -301,11 +304,11 @@ function openReturnItem(): void {
     return;
   }
 
-  void router.push(buildItemPath(returnItemId.value, guestToken.value || undefined));
+  void router.push(buildItemPath(returnItemId.value, guestToken.value || undefined, lang.value));
 }
 
 watch(
-  () => `${String(route.params.itemId || "")}:${String(route.params.guestToken || "")}`,
+  () => `${String(route.params.itemId || "")}:${String(route.params.guestToken || "")}:${String(route.query.lang || "")}`,
   (compositeValue) => {
     const [itemId] = compositeValue.split(":");
     if (itemId) {

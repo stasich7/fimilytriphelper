@@ -70,9 +70,10 @@ type LikeToggleResult struct {
 	LikesCount int  `json:"likesCount"`
 }
 
-func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
+func (r *Repository) GetOverview(ctx context.Context, language string) (Overview, error) {
 	var overview Overview
 	var trip domain.Trip
+	language = normalizePlanLanguage(language)
 
 	err := r.db.QueryRowContext(ctx, `
 		SELECT id, slug, title, status, created_at, updated_at
@@ -87,19 +88,13 @@ func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
 	}
 	overview.Trip = &trip
 
-	var currentVersion domain.PlanVersion
-	err = r.db.QueryRowContext(ctx, `
-		SELECT id, version_code, title, created_at
-		FROM plan_versions
-		WHERE trip_id = $1
-		ORDER BY created_at DESC, id DESC
-		LIMIT 1
-	`, trip.ID).Scan(&currentVersion.ID, &currentVersion.VersionCode, &currentVersion.Title, &currentVersion.CreatedAt)
+	versions, err := r.listVersionsByTrip(ctx, trip.ID)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return overview, nil
-		}
-		return Overview{}, fmt.Errorf("select current version: %w", err)
+		return Overview{}, err
+	}
+	currentVersion, ok := selectCurrentVersionForLanguage(versions, language)
+	if !ok {
+		return overview, nil
 	}
 	overview.CurrentVersion = &currentVersion
 
@@ -124,7 +119,8 @@ func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
 	return overview, nil
 }
 
-func (r *Repository) ListVersions(ctx context.Context) ([]domain.PlanVersion, error) {
+func (r *Repository) ListVersions(ctx context.Context, language string) ([]domain.PlanVersion, error) {
+	language = normalizePlanLanguage(language)
 	rows, err := r.db.QueryContext(ctx, `
 		SELECT id, version_code, title, created_at
 		FROM plan_versions
@@ -141,6 +137,10 @@ func (r *Repository) ListVersions(ctx context.Context) ([]domain.PlanVersion, er
 		if err := rows.Scan(&version.ID, &version.VersionCode, &version.Title, &version.CreatedAt); err != nil {
 			return nil, fmt.Errorf("scan version: %w", err)
 		}
+		version.Language = detectVersionLanguage(version.VersionCode)
+		if version.Language != language {
+			continue
+		}
 		versions = append(versions, version)
 	}
 
@@ -151,7 +151,16 @@ func (r *Repository) ListVersions(ctx context.Context) ([]domain.PlanVersion, er
 	return versions, nil
 }
 
-func (r *Repository) GetVersion(ctx context.Context, versionID int64, guestToken string) (VersionDetails, error) {
+func (r *Repository) GetVersion(ctx context.Context, versionID int64, guestToken, language string) (VersionDetails, error) {
+	targetVersionID, err := r.resolveLocalizedVersionID(ctx, versionID, language)
+	if err != nil {
+		return VersionDetails{}, err
+	}
+
+	return r.loadVersionDetailsByID(ctx, targetVersionID, guestToken)
+}
+
+func (r *Repository) loadVersionDetailsByID(ctx context.Context, versionID int64, guestToken string) (VersionDetails, error) {
 	details := VersionDetails{
 		Items:    []domain.PlanItem{},
 		Comments: []domain.Comment{},
@@ -168,6 +177,7 @@ func (r *Repository) GetVersion(ctx context.Context, versionID int64, guestToken
 		}
 		return VersionDetails{}, fmt.Errorf("select version: %w", err)
 	}
+	details.Version.Language = detectVersionLanguage(details.Version.VersionCode)
 
 	rows, err := r.db.QueryContext(ctx, `
 		WITH current_guest AS (
@@ -343,7 +353,16 @@ func (r *Repository) ToggleItemLikeByGuestToken(ctx context.Context, itemID int6
 	}, nil
 }
 
-func (r *Repository) GetItem(ctx context.Context, itemID int64, guestToken string) (ItemDetails, error) {
+func (r *Repository) GetItem(ctx context.Context, itemID int64, guestToken, language string) (ItemDetails, error) {
+	targetItemID, err := r.resolveLocalizedItemID(ctx, itemID, language)
+	if err != nil {
+		return ItemDetails{}, err
+	}
+
+	return r.loadItemDetailsByID(ctx, targetItemID, guestToken)
+}
+
+func (r *Repository) loadItemDetailsByID(ctx context.Context, itemID int64, guestToken string) (ItemDetails, error) {
 	details := ItemDetails{
 		Comments: []domain.Comment{},
 	}
@@ -700,7 +719,7 @@ func (r *Repository) ExportCodex(ctx context.Context, versionRef string) (CodexE
 		return CodexExport{}, err
 	}
 
-	versionDetails, err := r.GetVersion(ctx, versionID, "")
+	versionDetails, err := r.GetVersion(ctx, versionID, "", detectVersionLanguage(versionCode))
 	if err != nil {
 		return CodexExport{}, err
 	}
@@ -882,6 +901,170 @@ func (r *Repository) getActiveTripID(ctx context.Context) (int64, error) {
 	}
 
 	return tripID, nil
+}
+
+func normalizePlanLanguage(value string) string {
+	switch strings.ToLower(strings.TrimSpace(value)) {
+	case "en":
+		return "en"
+	default:
+		return "ru"
+	}
+}
+
+func detectVersionLanguage(versionCode string) string {
+	if strings.HasSuffix(strings.ToLower(strings.TrimSpace(versionCode)), "-en") {
+		return "en"
+	}
+
+	return "ru"
+}
+
+func splitVersionCode(versionCode string) (string, string) {
+	normalized := strings.TrimSpace(versionCode)
+	language := detectVersionLanguage(normalized)
+	if language == "en" {
+		return strings.TrimSuffix(normalized, "-en"), "en"
+	}
+
+	return normalized, "ru"
+}
+
+func buildLocalizedVersionCode(baseCode, language string) string {
+	if normalizePlanLanguage(language) == "en" {
+		return fmt.Sprintf("%s-en", baseCode)
+	}
+
+	return baseCode
+}
+
+func selectCurrentVersionForLanguage(versions []domain.PlanVersion, language string) (domain.PlanVersion, bool) {
+	for _, version := range versions {
+		if version.Language == language {
+			return version, true
+		}
+	}
+
+	return domain.PlanVersion{}, false
+}
+
+func (r *Repository) listVersionsByTrip(ctx context.Context, tripID int64) ([]domain.PlanVersion, error) {
+	rows, err := r.db.QueryContext(ctx, `
+		SELECT id, version_code, title, created_at
+		FROM plan_versions
+		WHERE trip_id = $1
+		ORDER BY created_at DESC, id DESC
+	`, tripID)
+	if err != nil {
+		return nil, fmt.Errorf("list versions by trip: %w", err)
+	}
+	defer rows.Close()
+
+	versions := make([]domain.PlanVersion, 0)
+	for rows.Next() {
+		var version domain.PlanVersion
+		if err := rows.Scan(&version.ID, &version.VersionCode, &version.Title, &version.CreatedAt); err != nil {
+			return nil, fmt.Errorf("scan trip version: %w", err)
+		}
+		version.Language = detectVersionLanguage(version.VersionCode)
+		versions = append(versions, version)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("iterate trip versions: %w", err)
+	}
+
+	return versions, nil
+}
+
+func (r *Repository) resolveLocalizedVersionID(ctx context.Context, versionID int64, language string) (int64, error) {
+	language = normalizePlanLanguage(language)
+
+	var (
+		tripID      int64
+		versionCode string
+	)
+
+	err := r.db.QueryRowContext(ctx, `
+		SELECT trip_id, version_code
+		FROM plan_versions
+		WHERE id = $1
+	`, versionID).Scan(&tripID, &versionCode)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, ErrNotFound
+		}
+		return 0, fmt.Errorf("select version for language resolution: %w", err)
+	}
+
+	baseCode, _ := splitVersionCode(versionCode)
+	targetCode := buildLocalizedVersionCode(baseCode, language)
+	if targetCode == versionCode {
+		return versionID, nil
+	}
+
+	var targetVersionID int64
+	err = r.db.QueryRowContext(ctx, `
+		SELECT id
+		FROM plan_versions
+		WHERE trip_id = $1 AND version_code = $2
+	`, tripID, targetCode).Scan(&targetVersionID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, ErrNotFound
+		}
+		return 0, fmt.Errorf("select localized version: %w", err)
+	}
+
+	return targetVersionID, nil
+}
+
+func (r *Repository) resolveLocalizedItemID(ctx context.Context, itemID int64, language string) (int64, error) {
+	language = normalizePlanLanguage(language)
+
+	var (
+		tripID      int64
+		stableKey   string
+		versionCode string
+	)
+
+	err := r.db.QueryRowContext(ctx, `
+		SELECT pi.trip_id, pi.stable_key, pv.version_code
+		FROM plan_items pi
+		JOIN plan_versions pv ON pv.id = pi.plan_version_id
+		WHERE pi.id = $1
+	`, itemID).Scan(&tripID, &stableKey, &versionCode)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, ErrNotFound
+		}
+		return 0, fmt.Errorf("select item for language resolution: %w", err)
+	}
+
+	baseCode, _ := splitVersionCode(versionCode)
+	targetCode := buildLocalizedVersionCode(baseCode, language)
+	if targetCode == versionCode {
+		return itemID, nil
+	}
+
+	var targetItemID int64
+	err = r.db.QueryRowContext(ctx, `
+		SELECT localized_item.id
+		FROM plan_items localized_item
+		JOIN plan_versions localized_version ON localized_version.id = localized_item.plan_version_id
+		WHERE localized_item.trip_id = $1
+			AND localized_item.stable_key = $2
+			AND localized_version.version_code = $3
+		LIMIT 1
+	`, tripID, stableKey, targetCode).Scan(&targetItemID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return 0, ErrNotFound
+		}
+		return 0, fmt.Errorf("select localized item: %w", err)
+	}
+
+	return targetItemID, nil
 }
 
 func (r *Repository) resolveVersionRef(ctx context.Context, versionRef string) (int64, string, error) {

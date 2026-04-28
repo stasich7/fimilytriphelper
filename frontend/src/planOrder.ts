@@ -1,4 +1,6 @@
 import type { PlanItem } from "./types/api";
+import type { AppLang } from "./lang";
+import { getUIText } from "./lang";
 
 export interface ReadingSection {
   key: string;
@@ -59,9 +61,10 @@ function collectByStableKeys(
   return result;
 }
 
-export function buildReadingSections(items: PlanItem[]): ReadingSection[] {
+export function buildReadingSections(items: PlanItem[], lang: AppLang = "ru"): ReadingSection[] {
   const itemsByStableKey = new Map(items.map((item) => [item.stableKey, item]));
   const usedStableKeys = new Set<string>();
+  const text = getUIText(lang);
 
   const planItems = collectByStableKeys(itemsByStableKey, planStableKeys, usedStableKeys);
   const stayItems = collectByStableKeys(itemsByStableKey, stayStableKeys, usedStableKeys);
@@ -92,17 +95,17 @@ export function buildReadingSections(items: PlanItem[]): ReadingSection[] {
     .sort((left, right) => left.stableKey.localeCompare(right.stableKey, "ru"));
 
   const sections: ReadingSection[] = [
-    { key: "plan", label: "План поездки", items: planItems },
-    { key: "stay", label: "Районы для выбора проживания", items: stayItems },
-    { key: "arrival", label: "Прилет и трансфер", items: arrivalItems },
-    { key: "days", label: "Ритм по дням", items: dayItems },
-    { key: "departure", label: "Отъезд", items: departureItems },
-    { key: "details", label: "Подробности", items: [...detailItems, ...remainingItems] },
+    { key: "plan", label: text.planSection, items: planItems },
+    { key: "stay", label: text.staySection, items: stayItems },
+    { key: "arrival", label: text.arrivalSection, items: arrivalItems },
+    { key: "days", label: text.daySection, items: dayItems },
+    { key: "departure", label: text.departureSection, items: departureItems },
+    { key: "details", label: text.detailsSection, items: [...detailItems, ...remainingItems] },
   ];
 
   return sections.filter((section) => section.items.length > 0);
 }
 
-export function buildReadingOrder(items: PlanItem[]): PlanItem[] {
-  return buildReadingSections(items).flatMap((section) => section.items);
+export function buildReadingOrder(items: PlanItem[], lang: AppLang = "ru"): PlanItem[] {
+  return buildReadingSections(items, lang).flatMap((section) => section.items);
 }

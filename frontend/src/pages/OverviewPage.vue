@@ -1,51 +1,27 @@
 <template>
   <section class="grid">
     <article class="card card--hero">
-      <p class="card__label">Поездка</p>
+      <p class="card__label">{{ text.trip }}</p>
       <template v-if="loading">
-        <h2>Загружаем данные поездки...</h2>
+        <h2>{{ text.loadingTrip }}</h2>
       </template>
       <template v-else-if="error">
-        <h2>Не удалось загрузить данные поездки</h2>
+        <h2>{{ text.tripLoadError }}</h2>
         <p>{{ error }}</p>
       </template>
       <template v-else-if="overview?.trip">
         <h2>{{ overview.trip.title }}</h2>
-        <p v-if="guestName" class="guest-summary">Комментарии от имени {{ guestName }}</p>
-        <RouterLink v-if="currentVersionPath" class="start-link" :to="currentVersionPath">Поехали</RouterLink>
-        <RouterLink v-if="currentVersionPath" class="hero-image-link" :to="currentVersionPath" aria-label="Открыть текущую версию плана">
+        <p v-if="guestName" class="guest-summary">{{ text.guestCommentsFrom }} {{ guestName }}</p>
+        <RouterLink v-if="currentVersionPath" class="start-link" :to="currentVersionPath">{{ text.letsGo }}</RouterLink>
+        <RouterLink v-if="currentVersionPath" class="hero-image-link" :to="currentVersionPath" :aria-label="text.openCurrentVersion">
           <img class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
         </RouterLink>
         <img v-else class="hero-image" src="/family-trip-v5.png" alt="Family Trip Helper" />
       </template>
       <template v-else>
-        <h2>План поездки еще не загружен</h2>
-        <p>Загрузите первую версию плана, чтобы заполнить это пространство.</p>
+        <h2>{{ text.tripPlanNotLoaded }}</h2>
+        <p>{{ text.loadFirstVersion }}</p>
       </template>
-    </article>
-
-    <article class="card card--wide">
-      <p class="card__label">Текущая версия</p>
-      <template v-if="overview?.currentVersion">
-        <h3>{{ overview.currentVersion.versionCode }} - {{ overview.currentVersion.title }}</h3>
-        <p>{{ formatDate(overview.currentVersion.createdAt) }}</p>
-        <RouterLink class="link" :to="buildVersionPath(overview.currentVersion.id, guestToken)">
-          Открыть версию
-        </RouterLink>
-      </template>
-      <p v-else>Пока нет загруженных версий.</p>
-    </article>
-
-    <article class="card card--wide">
-      <p class="card__label">Загруженные версии</p>
-      <ul v-if="versions.length > 0" class="version-list">
-        <li v-for="version in versions" :key="version.id">
-          <RouterLink class="link" :to="buildVersionPath(version.id, guestToken)">
-            {{ version.versionCode }} - {{ version.title }}
-          </RouterLink>
-        </li>
-      </ul>
-      <p v-else>Пока нет загруженных версий.</p>
     </article>
   </section>
 </template>
@@ -54,16 +30,18 @@
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import { getGuest, getOverview, getVersions } from "../api";
+import { getGuest, getOverview } from "../api";
+import { getRouteLang, getUIText } from "../lang";
 import { buildVersionPath } from "../paths";
-import type { OverviewResponse, PlanVersion } from "../types/api";
+import type { OverviewResponse } from "../types/api";
 
 const route = useRoute();
 const loading = ref(true);
 const error = ref("");
 const overview = ref<OverviewResponse | null>(null);
-const versions = ref<PlanVersion[]>([]);
 const guestName = ref("");
+const lang = computed(() => getRouteLang(route));
+const text = computed(() => getUIText(lang.value));
 
 const guestToken = computed(() => {
   const token = String(route.params.guestToken || "");
@@ -75,21 +53,16 @@ const currentVersionPath = computed(() => {
     return "";
   }
 
-  return buildVersionPath(overview.value.currentVersion.id, guestToken.value);
+  return buildVersionPath(overview.value.currentVersion.id, guestToken.value, lang.value);
 });
-
-function formatDate(value: string): string {
-  return new Date(value).toLocaleString("ru-RU");
-}
 
 async function loadPage(): Promise<void> {
   loading.value = true;
   error.value = "";
 
   try {
-    const [overviewResponse, versionsResponse] = await Promise.all([getOverview(), getVersions()]);
+    const overviewResponse = await getOverview(lang.value);
     overview.value = overviewResponse;
-    versions.value = versionsResponse.versions;
 
     if (guestToken.value) {
       const guest = await getGuest(guestToken.value);
@@ -105,7 +78,7 @@ async function loadPage(): Promise<void> {
 }
 
 watch(
-  () => String(route.params.guestToken || ""),
+  () => `${String(route.params.guestToken || "")}:${String(route.query.lang || "")}`,
   () => {
     void loadPage();
   },
@@ -132,10 +105,6 @@ watch(
   grid-column: 1 / -1;
 }
 
-.card--wide {
-  grid-column: span 2;
-}
-
 .card__label {
   margin: 0 0 8px;
   color: #2c6f9e;
@@ -145,19 +114,8 @@ watch(
   text-transform: uppercase;
 }
 
-h2,
-h3 {
+h2 {
   margin-top: 0;
-}
-
-ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.version-list {
-  display: grid;
-  gap: 10px;
 }
 
 .guest-summary {
@@ -209,11 +167,5 @@ ul {
   margin-top: 12px;
   color: #134c75;
   font-weight: 700;
-}
-
-@media (max-width: 860px) {
-  .card--wide {
-    grid-column: 1 / -1;
-  }
 }
 </style>

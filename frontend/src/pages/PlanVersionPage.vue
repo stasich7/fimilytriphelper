@@ -1,11 +1,11 @@
 <template>
   <section class="layout">
     <article class="card" v-if="loading">
-      <h2>Загружаем версию...</h2>
+      <h2>{{ text.versionLoading }}</h2>
     </article>
 
     <article class="card" v-else-if="error">
-      <h2>Не удалось загрузить версию</h2>
+      <h2>{{ text.versionLoadError }}</h2>
       <p>{{ error }}</p>
     </article>
 
@@ -20,27 +20,27 @@
               type="button"
               :class="['like-button', { 'like-button--active': item.likedByCurrentGuest }]"
               :disabled="!guestToken || likingItemId === item.id"
-              :title="guestToken ? 'Нравится' : 'Откройте по гостевой ссылке, чтобы поставить лайк'"
+              :title="guestToken ? text.likesTitle : text.likesGuestHint"
               @click="toggleLike(item)"
             >
               <span aria-hidden="true">👍</span>
               <span>{{ item.likesCount }}</span>
             </button>
           </div>
-          <button type="button" class="link-button" @click="openItem(item.id)">Смотреть</button>
+          <button type="button" class="link-button" @click="openItem(item.id)">{{ text.viewItem }}</button>
         </div>
       </article>
 
       <article id="version-comments" class="card">
-        <p class="card__label">Общие комментарии к версии</p>
-        <p v-if="versionComments.length === 0">Пока нет общих комментариев к этой версии.</p>
+        <p class="card__label">{{ text.generalVersionComments }}</p>
+        <p v-if="versionComments.length === 0">{{ text.noVersionComments }}</p>
         <div v-for="comment in versionComments" :key="comment.id" class="comment">
           <strong>{{ comment.author }}</strong>
           <p>{{ comment.body }}</p>
         </div>
 
-        <p v-if="guestName" class="guest-summary">Комментарий будет отправлен от имени {{ guestName }}</p>
-        <p v-else class="guest-hint">Чтобы оставить общий комментарий к версии, откройте ее по персональной гостевой ссылке.</p>
+        <p v-if="guestName" class="guest-summary">{{ text.commentFrom }} {{ guestName }}</p>
+        <p v-else class="guest-hint">{{ text.versionGuestHint }}</p>
         <p v-if="submitError" class="submit-error">{{ submitError }}</p>
 
         <div class="comment-form">
@@ -48,14 +48,14 @@
             v-model="commentBody"
             rows="4"
             :disabled="!guestToken || submitting"
-            placeholder="Напишите общий комментарий к этой версии поездки."
+            :placeholder="text.versionCommentPlaceholder"
           />
           <button
             type="button"
             :disabled="!guestToken || submitting || !commentBody.trim()"
             @click="submitVersionComment"
           >
-            {{ submitting ? "Отправляем..." : "Оставить комментарий" }}
+            {{ submitting ? text.sending : text.leaveComment }}
           </button>
         </div>
       </article>
@@ -68,6 +68,7 @@ import { computed, nextTick, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { createComment, getGuest, getVersion, toggleItemLike } from "../api";
+import { getRouteLang, getUIText } from "../lang";
 import { buildReadingSections } from "../planOrder";
 import { buildItemPath, buildVersionItemAnchorPath } from "../paths";
 import type { Comment, PlanItem, PlanVersion } from "../types/api";
@@ -76,6 +77,8 @@ const RETURN_PATH_KEY = "family-trip-helper:return-path";
 
 const route = useRoute();
 const router = useRouter();
+const lang = computed(() => getRouteLang(route));
+const text = computed(() => getUIText(lang.value));
 
 const loading = ref(true);
 const error = ref("");
@@ -94,14 +97,14 @@ const guestToken = computed(() => {
   return token || "";
 });
 
-const sections = computed(() => buildReadingSections(items.value));
+const sections = computed(() => buildReadingSections(items.value, lang.value));
 
 async function loadVersion(versionId: string): Promise<void> {
   loading.value = true;
   error.value = "";
 
   try {
-    const response = await getVersion(versionId, guestToken.value || undefined);
+    const response = await getVersion(versionId, guestToken.value || undefined, lang.value);
     version.value = response.version;
     items.value = response.items ?? [];
     versionComments.value = response.comments ?? [];
@@ -163,10 +166,10 @@ async function toggleLike(item: PlanItem): Promise<void> {
 }
 
 async function openItem(itemId: number): Promise<void> {
-  const itemPath = buildItemPath(itemId, guestToken.value || undefined);
+  const itemPath = buildItemPath(itemId, guestToken.value || undefined, lang.value);
 
   if (version.value) {
-    const anchorPath = buildVersionItemAnchorPath(version.value.id, itemId, guestToken.value || undefined);
+    const anchorPath = buildVersionItemAnchorPath(version.value.id, itemId, guestToken.value || undefined, lang.value);
     sessionStorage.setItem(RETURN_PATH_KEY, anchorPath);
     await router.replace(anchorPath);
     await router.push(itemPath);
@@ -203,7 +206,7 @@ async function submitVersionComment(): Promise<void> {
 }
 
 watch(
-  () => `${String(route.params.versionId || "")}:${String(route.params.guestToken || "")}`,
+  () => `${String(route.params.versionId || "")}:${String(route.params.guestToken || "")}:${String(route.query.lang || "")}`,
   (compositeValue) => {
     const [versionId] = compositeValue.split(":");
     if (versionId) {

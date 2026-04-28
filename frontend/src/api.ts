@@ -13,8 +13,19 @@ import type {
   VersionDetailsResponse,
   VersionsResponse,
 } from "./types/api";
+import { normalizeLang, type AppLang } from "./lang";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || "/api/v1").replace(/\/$/, "");
+
+function appendLangParam(path: string, lang?: AppLang): string {
+  const normalizedLang = normalizeLang(lang);
+  if (normalizedLang === "ru") {
+    return path;
+  }
+
+  const separator = path.includes("?") ? "&" : "?";
+  return `${path}${separator}lang=${normalizedLang}`;
+}
 
 async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, init);
@@ -35,22 +46,22 @@ async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
   return (await response.json()) as T;
 }
 
-export function getOverview(): Promise<OverviewResponse> {
-  return requestJSON<OverviewResponse>("/overview");
+export function getOverview(lang?: AppLang): Promise<OverviewResponse> {
+  return requestJSON<OverviewResponse>(appendLangParam("/overview", lang));
 }
 
-export function getVersions(): Promise<VersionsResponse> {
-  return requestJSON<VersionsResponse>("/versions");
+export function getVersions(lang?: AppLang): Promise<VersionsResponse> {
+  return requestJSON<VersionsResponse>(appendLangParam("/versions", lang));
 }
 
-export function getVersion(versionId: string | number, guestToken?: string): Promise<VersionDetailsResponse> {
+export function getVersion(versionId: string | number, guestToken?: string, lang?: AppLang): Promise<VersionDetailsResponse> {
   const query = guestToken ? `?guestToken=${encodeURIComponent(guestToken)}` : "";
-  return requestJSON<VersionDetailsResponse>(`/versions/${versionId}${query}`);
+  return requestJSON<VersionDetailsResponse>(appendLangParam(`/versions/${versionId}${query}`, lang));
 }
 
-export function getItem(itemId: string, guestToken?: string): Promise<ItemDetailsResponse> {
+export function getItem(itemId: string, guestToken?: string, lang?: AppLang): Promise<ItemDetailsResponse> {
   const query = guestToken ? `?guestToken=${encodeURIComponent(guestToken)}` : "";
-  return requestJSON<ItemDetailsResponse>(`/items/${itemId}${query}`);
+  return requestJSON<ItemDetailsResponse>(appendLangParam(`/items/${itemId}${query}`, lang));
 }
 
 export function getGuest(guestToken: string): Promise<GuestLookupResponse> {

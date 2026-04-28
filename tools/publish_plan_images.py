@@ -21,6 +21,7 @@ from botocore.exceptions import ClientError
 IMAGE_PATTERN = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 DEFAULT_USER_AGENT = "FamilyTripHelper image publisher/1.0"
 LOCALHOST_HOSTS = {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+CONTENT_IMAGE_PREFIXES = ("/images/trip/",)
 
 
 @dataclass(frozen=True)
@@ -29,6 +30,12 @@ class PublishedImage:
     public_url: str
     object_key: str
     uploaded: bool
+
+
+@dataclass(frozen=True)
+class ImageSource:
+    markdown_url: str
+    source_path: Optional[Path]
 
 
 def parse_args() -> argparse.Namespace:
@@ -43,6 +50,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--secret-access-key", default=os.getenv("AWS_SECRET_ACCESS_KEY"))
     parser.add_argument("--region", default=os.getenv("AWS_DEFAULT_REGION", "us-east-1"))
     parser.add_argument("--cache-dir", default=".cache/published-images")
+    parser.add_argument("--public-dir", default="frontend/public")
     parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT)
     parser.add_argument("--on-download-error", choices=("fail", "keep-source"), default="fail")
     parser.add_argument(
@@ -56,6 +64,11 @@ def parse_args() -> argparse.Namespace:
         help="Exit with an error if markdown image URLs point to localhost or loopback hosts.",
     )
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--write-output-on-dry-run",
+        action="store_true",
+        help="Write rewritten markdown during dry-run without uploading objects.",
+    )
     return parser.parse_args()
 
 
@@ -67,16 +80,44 @@ def is_external_image_url(url: str, public_base_url: str) -> bool:
     return not url.startswith(public_base_url.rstrip("/") + "/")
 
 
-def find_image_urls(markdown: str, public_base_url: str) -> list[str]:
+def is_publishable_local_image_url(url: str) -> bool:
+    return any(url.startswith(prefix) for prefix in CONTENT_IMAGE_PREFIXES)
+
+
+def find_image_sources(markdown: str, public_base_url: str, public_dir: Path) -> list[ImageSource]:
+    sources: list[ImageSource] = []
+    seen: set[str] = set()
+
+    for match in IMAGE_PATTERN.finditer(markdown):
+        url = match.group(2)
+        if url in seen:
+            continue
+
+        if is_external_image_url(url, public_base_url):
+            sources.append(ImageSource(markdown_url=url, source_path=None))
+            seen.add(url)
+            continue
+
+        if is_publishable_local_image_url(url):
+            sources.append(ImageSource(markdown_url=url, source_path=public_dir / url.lstrip("/")))
+            seen.add(url)
+            continue
+
+    return sources
+
+
+def find_unpublished_image_urls(markdown: str, public_base_url: str) -> list[str]:
     urls: list[str] = []
     seen: set[str] = set()
 
     for match in IMAGE_PATTERN.finditer(markdown):
         url = match.group(2)
-        if url in seen or not is_external_image_url(url, public_base_url):
+        if url in seen:
             continue
-        seen.add(url)
-        urls.append(url)
+
+        if is_external_image_url(url, public_base_url) or is_publishable_local_image_url(url):
+            seen.add(url)
+            urls.append(url)
 
     return urls
 
@@ -134,6 +175,16 @@ def download_image(url: str, cache_dir: Path, user_agent: str) -> tuple[Path, st
     return image_path, digest, content_type or "application/octet-stream"
 
 
+def read_local_image(path: Path) -> tuple[Path, str, str]:
+    if not path.is_file():
+        raise RuntimeError(f"local image {path} does not exist")
+
+    data = path.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+    return path, digest, content_type
+
+
 def object_exists(client, bucket: str, object_key: str) -> bool:
     try:
         client.head_object(Bucket=bucket, Key=object_key)
@@ -145,7 +196,7 @@ def object_exists(client, bucket: str, object_key: str) -> bool:
         raise
 
 
-def publish_images(args: argparse.Namespace, urls: Iterable[str]) -> dict[str, PublishedImage]:
+def publish_images(args: argparse.Namespace, sources: Iterable[ImageSource]) -> dict[str, PublishedImage]:
     if not args.access_key_id or not args.secret_access_key:
         raise RuntimeError("AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are required")
 
@@ -162,9 +213,12 @@ def publish_images(args: argparse.Namespace, urls: Iterable[str]) -> dict[str, P
     public_base_url = args.public_base_url.rstrip("/")
     published: dict[str, PublishedImage] = {}
 
-    for url in urls:
+    for source in sources:
         try:
-            image_path, digest, content_type = download_image(url, cache_dir, args.user_agent)
+            if source.source_path is None:
+                image_path, digest, content_type = download_image(source.markdown_url, cache_dir, args.user_agent)
+            else:
+                image_path, digest, content_type = read_local_image(source.source_path)
         except RuntimeError as exc:
             if args.on_download_error == "fail":
                 raise
@@ -187,8 +241,8 @@ def publish_images(args: argparse.Namespace, urls: Iterable[str]) -> dict[str, P
             )
             uploaded = True
 
-        published[url] = PublishedImage(
-            source_url=url,
+        published[source.markdown_url] = PublishedImage(
+            source_url=source.markdown_url,
             public_url=public_url,
             object_key=object_key,
             uploaded=uploaded,
@@ -208,6 +262,7 @@ def main() -> int:
     args = parse_args()
     input_path = Path(args.input)
     output_path = Path(args.output)
+    public_dir = Path(args.public_dir)
     markdown = input_path.read_text(encoding="utf-8")
     input_localhost_urls = find_localhost_image_urls(markdown)
     if args.forbid_localhost_urls and input_localhost_urls:
@@ -216,19 +271,19 @@ def main() -> int:
             print(f"- {url}", file=sys.stderr)
         return 3
 
-    urls = find_image_urls(markdown, args.public_base_url)
+    sources = find_image_sources(markdown, args.public_base_url, public_dir)
 
-    if not urls:
+    if not sources:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(markdown, encoding="utf-8")
         print("No external images found.")
         return 0
 
-    published = publish_images(args, urls)
+    published = publish_images(args, sources)
     rewritten = rewrite_markdown(markdown, published)
-    unpublished_urls = find_image_urls(rewritten, args.public_base_url)
+    unpublished_urls = find_unpublished_image_urls(rewritten, args.public_base_url)
     localhost_urls = find_localhost_image_urls(rewritten)
-    if not args.dry_run:
+    if not args.dry_run or args.write_output_on_dry_run:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(rewritten, encoding="utf-8")
 

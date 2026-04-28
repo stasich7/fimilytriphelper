@@ -24,7 +24,7 @@ func (r *Router) handleOverview(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	overview, err := r.repo.GetOverview(req.Context())
+	overview, err := r.repo.GetOverview(req.Context(), requestPlanLanguage(req))
 	if err != nil {
 		writeServerError(w, err)
 		return
@@ -39,7 +39,7 @@ func (r *Router) handleVersions(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	versions, err := r.repo.ListVersions(req.Context())
+	versions, err := r.repo.ListVersions(req.Context(), requestPlanLanguage(req))
 	if err != nil {
 		writeServerError(w, err)
 		return
@@ -61,7 +61,7 @@ func (r *Router) handleVersionByID(w http.ResponseWriter, req *http.Request) {
 	}
 
 	guestToken := strings.TrimSpace(req.URL.Query().Get("guestToken"))
-	details, err := r.repo.GetVersion(req.Context(), versionID, guestToken)
+	details, err := r.repo.GetVersion(req.Context(), versionID, guestToken, requestPlanLanguage(req))
 	if err != nil {
 		if errors.Is(err, store.ErrNotFound) {
 			writeNotFound(w)
@@ -92,7 +92,7 @@ func (r *Router) handleItemByID(w http.ResponseWriter, req *http.Request) {
 	}
 
 	guestToken := strings.TrimSpace(req.URL.Query().Get("guestToken"))
-	details, err := r.repo.GetItem(req.Context(), itemID, guestToken)
+	details, err := r.repo.GetItem(req.Context(), itemID, guestToken, requestPlanLanguage(req))
 	if err != nil {
 		if errors.Is(err, store.ErrNotFound) {
 			writeNotFound(w)
@@ -221,6 +221,10 @@ func (r *Router) handleToolsUnlock(w http.ResponseWriter, req *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]bool{
 		"ok": true,
 	})
+}
+
+func requestPlanLanguage(req *http.Request) string {
+	return strings.TrimSpace(req.URL.Query().Get("lang"))
 }
 
 func (r *Router) handleToolsGuests(w http.ResponseWriter, req *http.Request) {

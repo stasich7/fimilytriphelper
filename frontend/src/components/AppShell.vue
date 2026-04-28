@@ -2,9 +2,20 @@
   <div class="shell">
     <header class="shell__header">
       <nav class="shell__nav">
-        <button type="button" class="shell__nav-button" @click="openCurrentVersion">В начало</button>
-        <button v-if="showBack" type="button" class="shell__nav-button" @click="goBack">Назад</button>
-        <RouterLink class="shell__tools" :to="toolsPath" aria-label="Инструменты" title="Инструменты">⚙</RouterLink>
+        <button
+          type="button"
+          class="shell__nav-button shell__nav-button--icon"
+          :aria-label="text.home"
+          :title="text.home"
+          @click="openCurrentVersion"
+        >
+          <span aria-hidden="true" class="shell__home-icon">⌂</span>
+        </button>
+        <button type="button" class="shell__nav-button shell__lang-button" @click="toggleLanguage">
+          {{ text.langToggle }}
+        </button>
+        <button v-if="showBack" type="button" class="shell__nav-button" @click="goBack">{{ text.back }}</button>
+        <RouterLink class="shell__tools" :to="toolsPath" :aria-label="text.tools" :title="text.tools">⚙</RouterLink>
       </nav>
     </header>
 
@@ -19,6 +30,7 @@ import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { getOverview } from "../api";
+import { buildLangQuery, getNextLang, getRouteLang, getUIText } from "../lang";
 import { buildOverviewPath, buildToolsPath, buildVersionPath } from "../paths";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
@@ -26,8 +38,10 @@ const RETURN_PATH_KEY = "family-trip-helper:return-path";
 const route = useRoute();
 const router = useRouter();
 
+const lang = computed(() => getRouteLang(route));
+const text = computed(() => getUIText(lang.value));
 const guestToken = computed(() => String(route.params.guestToken || ""));
-const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefined));
+const overviewPath = computed(() => buildOverviewPath(guestToken.value || undefined, lang.value));
 const toolsPath = buildToolsPath();
 
 const showBack = computed(() => {
@@ -49,9 +63,9 @@ async function goBack(): Promise<void> {
 
 async function openCurrentVersion(): Promise<void> {
   try {
-    const overview = await getOverview();
+    const overview = await getOverview(lang.value);
     if (overview.currentVersion) {
-      await router.push(buildVersionPath(overview.currentVersion.id, guestToken.value || undefined));
+      await router.push(buildVersionPath(overview.currentVersion.id, guestToken.value || undefined, lang.value));
       return;
     }
   } catch {
@@ -59,6 +73,16 @@ async function openCurrentVersion(): Promise<void> {
   }
 
   await router.push(overviewPath.value);
+}
+
+async function toggleLanguage(): Promise<void> {
+  const nextLang = getNextLang(lang.value);
+  await router.push({
+    name: route.name || undefined,
+    params: route.params,
+    query: buildLangQuery(nextLang, route.query),
+    hash: route.hash,
+  });
 }
 </script>
 
@@ -118,6 +142,7 @@ async function openCurrentVersion(): Promise<void> {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .shell__nav a,
@@ -131,6 +156,24 @@ async function openCurrentVersion(): Promise<void> {
   cursor: pointer;
   font: inherit;
   font-weight: 600;
+}
+
+.shell__nav-button--icon {
+  width: 54px;
+  min-height: 54px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shell__home-icon {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.shell__lang-button {
+  min-width: 84px;
 }
 
 .shell__tools {
