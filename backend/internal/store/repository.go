@@ -240,9 +240,9 @@ func (r *Repository) loadVersionDetailsByID(ctx context.Context, versionID int64
 		SELECT c.id, p.display_name, c.body, c.created_at
 		FROM comments c
 		JOIN participants p ON p.id = c.participant_id
-		WHERE c.plan_version_id = $1 AND c.plan_item_id IS NULL
 		ORDER BY c.created_at ASC, c.id ASC
-	`, versionID)
+		`)
+	// WHERE c.plan_version_id = $1 AND c.plan_item_id IS NULL
 	if err != nil {
 		return VersionDetails{}, fmt.Errorf("select version comments: %w", err)
 	}
@@ -417,7 +417,12 @@ func (r *Repository) loadItemDetailsByID(ctx context.Context, itemID int64, gues
 		SELECT c.id, p.display_name, c.body, c.created_at
 		FROM comments c
 		JOIN participants p ON p.id = c.participant_id
-		WHERE c.plan_item_id = $1
+		WHERE c.plan_item_id in (
+			select pi.id 
+			from plan_items pi 
+			join plan_items pii on pi.stable_key = pii.stable_key 
+			where pii.id = $1 
+			)
 		ORDER BY c.created_at ASC, c.id ASC
 	`, itemID)
 	if err != nil {

@@ -61,6 +61,7 @@ verify-published-images: .venv/.image-publish-deps
 		--public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
 		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
 		--dry-run \
+		--forbid-local-content-image-urls \
 		--fail-if-unpublished
 
 verify-published-images-en: .venv/.image-publish-deps
@@ -72,6 +73,7 @@ verify-published-images-en: .venv/.image-publish-deps
 		--public-base-url $(IMAGE_STORAGE_PUBLIC_BASE_URL) \
 		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
 		--dry-run \
+		--forbid-local-content-image-urls \
 		--fail-if-unpublished
 
 verify-prod-published-images: .venv/.image-publish-deps
@@ -84,6 +86,7 @@ verify-prod-published-images: .venv/.image-publish-deps
 		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
 		--dry-run \
 		--forbid-localhost-urls \
+		--forbid-local-content-image-urls \
 		--fail-if-unpublished
 
 verify-prod-published-images-en: .venv/.image-publish-deps
@@ -96,7 +99,10 @@ verify-prod-published-images-en: .venv/.image-publish-deps
 		--endpoint-url $(IMAGE_STORAGE_ENDPOINT_URL) \
 		--dry-run \
 		--forbid-localhost-urls \
+		--forbid-local-content-image-urls \
 		--fail-if-unpublished
+
+check-published-content: verify-prod-published-images verify-prod-published-images-en
 
 sync-images-prod: .venv/.image-publish-deps
 	$(IMAGE_PYTHON) tools/sync_plan_images.py \

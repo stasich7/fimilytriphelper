@@ -68,6 +68,24 @@ Verify that the published markdown no longer contains localhost image URLs befor
 make verify-prod-published-images
 ```
 
+Hard rule:
+- content images from markdown blocks must not remain as local `/images/trip/...` URLs in any published markdown;
+- only UI assets such as `/maps/...` and `/chips/...` may stay local in published files;
+- `make verify-published-images`, `make verify-published-images-en`, `make verify-prod-published-images`, and `make verify-prod-published-images-en` now fail if `/images/trip/...` is still present.
+
+CI-friendly published-content check:
+
+```bash
+AWS_ACCESS_KEY_ID=family_trip_helper \
+AWS_SECRET_ACCESS_KEY=family_trip_helper_storage \
+make check-published-content
+```
+
+This target verifies both Russian and English published markdown files and fails if:
+- local content image URLs like `/images/trip/...` remain;
+- localhost image URLs remain;
+- unpublished external content image URLs remain.
+
 If you want to use a different Python environment, override `IMAGE_PYTHON`:
 
 ```bash

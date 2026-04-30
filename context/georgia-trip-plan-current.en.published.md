@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Georgia Trip, August 2026
-version_id: v10-en
+version_id: v12-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -60,17 +60,14 @@ Date: 2026-08-06
 
 ![Day map: Old Tbilisi](/maps/2026-08-06-tbilisi-old-town.png?v=maptiler-5)
 
-- The point of the day is to walk through the most recognizable part of Tbilisi and understand why the city feels so layered: baths, cliffs, fortress, river, churches, and new bridges all sit almost on top of one another.
+- The point of the day is to walk through the most recognizable part of Tbilisi and understand why the city feels so layered: baths, rock, fortress, river, churches, and newer bridges all stand side by side.
 - ![1](/chips/map-chip-1.png?v=chips-2) Abanotubani is the sulfur bath district with its brick domes. This is one of the places Tbilisi grew from: the city is tied to hot springs, and here you feel that directly on the street rather than through a museum plaque.
 - ![2](/chips/map-chip-2.png?v=chips-2) Leghvtakhevi Gorge is a short passage from the baths to a small waterfall inside the city. In 10-15 minutes the urban noise gives way to rock, water, and greenery.
 - ![3](/chips/map-chip-3.png?v=chips-2) Narikala is the old fortress above the city. People do not come here to inspect walls but for the panorama: the Kura, Old Tbilisi, Metekhi, Rike, and Mtatsminda all come together in one view.
 - ![4](/chips/map-chip-4.png?v=chips-2) The cable car to Narikala leaves from Rike Park on the left bank of the Kura. It is a fast and beautiful way up, especially if it is hot or nobody wants to drag a child uphill. Price guide: about `$0.93` one way per person.
 - ![5](/chips/map-chip-5.png?v=chips-2) Metekhi is the church and cliff on the other bank of the Kura. From here it is easy to look back toward Abanotubani and the old city and feel how the city sits around the river.
-- Walking logic: Abanotubani → Leghvtakhevi Gorge → Narikala on foot or by cable car → down toward Metekhi and Rike.
-- Children may find the cable car itself worth it for the same roughly `$0.93` one-way fare, and the small waterfall in Leghvtakhevi makes the day feel less like “another church” and more like height, motion, and water.
-- Food: `Racha` for simple city cooking or `Veliaminov` if you want an old Tbilisi style place without gloss.
-- More: [Old Tbilisi and the main viewpoints](item:activity.tbilisi.old-town).
-- More: [Cableways: Tbilisi and Batumi](item:note.transport.cableways).
+- Walking logic: Abanotubani → Leghvtakhevi Gorge → Narikala on foot or by cable car → down to Metekhi and Rike.
+- Food: `Racha` for simple city food or `Veliaminov`, if you want an old Tbilisi format without gloss.
 - Day area map: [Abanotubani, Narikala, Metekhi, and Rike Park](https://www.google.com/maps/search/Abanotubani+Narikala+Metekhi+Rike+Park+Tbilisi)
 
 ## [day.tbilisi.2026-08-07] August 7 — grand Tbilisi, museums, and Mtatsminda
@@ -79,17 +76,15 @@ Date: 2026-08-07
 
 ![Day map: Rustaveli and Mtatsminda](/maps/2026-08-07-tbilisi-rustaveli-mtatsminda.png?v=maptiler-5)
 
-- The point of the day is to see not only old balconies but also Tbilisi as a capital city: boulevard, theatres, museums, and an evening view from above.
+- The point of the day is to see not only old balconies, but also the “capital city façade” of Tbilisi: the avenue, theatres, museums, and the evening view from above.
 - ![1](/chips/map-chip-1.png?v=chips-2) Freedom Square is a convenient starting point if you are staying in Sololaki or the lower part of Mtatsminda.
 - ![2](/chips/map-chip-2.png?v=chips-2) Rustaveli Avenue is the main urban axis with theatres, museums, bookshops, and broad pavements. Here Tbilisi feels less like an old quarter and more like a capital.
 - ![3](/chips/map-chip-3.png?v=chips-2) The Opera House is worth seeing at least from the outside: it is striking, slightly East-European in mood, and fits naturally into a Rustaveli walk.
-- The National Gallery or the Simon Janashia Museum of Georgia is a good option for the hot part of the day: there is no need to do a full museum marathon, one shorter visit is enough.
-- If you choose just one museum that gives the clearest first impression of Georgia, the Museum of Georgia makes the most sense. It is at `3 Shota Rustaveli Ave`, near the start of Rustaveli and Freedom Square. Inside you can see archaeology from the Stone Age and ancient Colchis, gold jewelry and hoards, coins, medieval objects, ethnography, material from the Soviet period, and temporary exhibitions. It is not just “beautiful objects,” but a fast cross-section of the country from antiquity to modern times.
+- The National Gallery or the Museum of Georgia works well in the hotter part of the day: there is no need to do the “full museum program,” one shorter visit is enough.
 - ![4](/chips/map-chip-4.png?v=chips-2) The Mtatsminda funicular is its own little city adventure. It carries you up the mountain to the park, viewpoints, and rides. Price guide: about `$3-$3.70` one way, plus about `$0.74` for the card.
 - ![5](/chips/map-chip-5.png?v=chips-2) Children may enjoy Mtatsminda Park at the top, where the outing can honestly end with rides rather than one more adult “let’s admire a facade.”
-- It is better to go up closer to evening: the light is softer, the city is prettier, and the heat stops draining all your energy.
-- Food: `Pasanauri` for khinkali and khachapuri or `Shemomechama` if you want a simple place with Georgian food.
-- More: [Cableways: Tbilisi and Batumi](item:note.transport.cableways).
+- It is better to go up closer to evening, when the light is softer and the heat easier.
+- Food: `Pasanauri` for khinkali and khachapuri or `Shemomechama`, if you want straightforward Georgian food.
 - Map point: [Simon Janashia Museum of Georgia](https://www.google.com/maps/search/Simon+Janashia+Museum+of+Georgia+3+Shota+Rustaveli+Ave+Tbilisi)
 - Day area map: [Rustaveli, the Opera House, and the Mtatsminda funicular](https://www.google.com/maps/search/Rustaveli+Avenue+Tbilisi+Opera+Mtatsminda+Funicular)
 
@@ -99,15 +94,14 @@ Date: 2026-08-08
 
 ![Day map: Mtskheta and Jvari](/maps/2026-08-08-mtskheta-jvari.png?v=maptiler-5)
 
-- The point of the day is to leave Tbilisi for a short while and see a place where Georgian history feels very concentrated, but without a long road day.
+- The point of the day is to leave Tbilisi briefly and see a place where Georgian history feels especially concentrated, but without a long road day.
 - ![1](/chips/map-chip-1.png?v=chips-2) Tbilisi is the start of a short outing: the road to Mtskheta should not turn into a big car day.
 - ![2](/chips/map-chip-2.png?v=chips-2) Mtskheta is the ancient capital of Georgia, a small town at the meeting point of two rivers. It works well because it does not demand a lot of excursion patience: the center is compact, the cathedral is right there, and the streets are calm.
 - ![3](/chips/map-chip-3.png?v=chips-2) Svetitskhoveli is the great cathedral in the center of Mtskheta and one of the country’s key spiritual places. Even without going deeply into religious history, the scale and calm are impressive.
 - ![4](/chips/map-chip-4.png?v=chips-2) Jvari is the monastery on the hill above Mtskheta. The main thing here is the view over the confluence of the Kura and Aragvi; it is one of those places where the landscape explains more than any lecture.
-- Logic of the day: Mtskheta and Svetitskhoveli in the morning, then a short ride to Jvari, then lunch back in Mtskheta after the view.
-- There is no obvious “wow-park” for children here, so it is better to keep the day short: the view from Jvari, ice cream or lemonade in the center of Mtskheta, and no third monastery added by force.
-- Lunch is better after Jvari, so that nobody returns to Tbilisi hungry and tired.
-- More: [Mtskheta and Jvari](item:activity.mtskheta.daytrip).
+- A Russian literary note belongs here too: the view of Jvari above the rivers entered the shared cultural memory through Lermontov and `Mtsyri`, so the place unexpectedly feels connected not only to Georgian history, but to familiar literature as well.
+- Day logic: Mtskheta and Svetitskhoveli in the morning, a short drive to Jvari, and lunch back in Mtskheta after the viewpoint.
+- Lunch is better after Jvari, so nobody returns to Tbilisi hungry and tired.
 - Day area map: [Mtskheta, Svetitskhoveli, and Jvari](https://www.google.com/maps/search/Mtskheta+Svetitskhoveli+Jvari+Monastery)
 
 ## [day.tbilisi.2026-08-09] August 9 — markets, Sololaki, and city details
@@ -116,15 +110,14 @@ Date: 2026-08-09
 
 ![Day map: markets and Sololaki](/maps/2026-08-09-tbilisi-markets-sololaki.png?v=maptiler-9)
 
-- The point of the day is to leave one day without a long outing so that the city does not become only a list of major sights. It works well for meeting relatives, walking, buying small things, and simply looking at houses.
+- The point of the day is to keep one day without a long outing so that the city does not become only a list of “major sights.” This is where everyday Tbilisi shows itself best.
 - ![1](/chips/map-chip-1.png?v=chips-2) Dezerter Bazaar deserves a separate morning stop for fruit, spices, cheese, and sweets. The name is not decorative: in the early 20th century deserters sold uniforms, equipment, and army goods here near the station, and the name stayed.
 - ![2](/chips/map-chip-2.png?v=chips-2) Dry Bridge is the flea market and a walk through an older city mood: books, dishes, badges, paintings, strange finds, and the feeling that every object has a story.
 - ![3](/chips/map-chip-3.png?v=chips-2) 9 April Park is a convenient green pause between Dry Bridge and the center. Children may enjoy it simply because it replaces the market with trees, benches, and space to move.
 - ![4](/chips/map-chip-4.png?v=chips-2) Freedom Square is the clear transition point toward Sololaki and an easy place to agree on a meeting point with relatives.
 - ![5](/chips/map-chip-5.png?v=chips-2) Sololaki is the district of old houses, entrance halls, balconies, and quiet rising streets. It is better to walk here without a rigid checklist: doors, courtyards, staircases, and coffee pauses are the point.
-- If you want the market, it is better to make it a separate morning ride by taxi, bus, or metro with a short transfer, rather than part of a long central walking loop.
-- Main walking route for the day: Dry Bridge → 9 April Park → Freedom Square → lower Sololaki → a coffee stop on Lado Asatiani Street or nearby.
-- Food: simple places with khinkali, lobio, and khachapuri near the center; it is better not to choose a place where a big group may wait an hour for a table.
+- The walking logic stays honest and without pointless jumps: Dezerter Bazaar → Dry Bridge → 9 April Park → Freedom Square → Sololaki.
+- Food: simple cafes near the center with khinkali, lobio, and khachapuri; it is better not to choose a place where a large group may wait an hour for a table.
 - Day area map: [Dry Bridge, Sololaki, and Freedom Square](https://www.google.com/maps/search/Dry+Bridge+Market+Sololaki+Freedom+Square+Tbilisi)
 
 ## [day.tbilisi.2026-08-10] August 10 — Kakheti, Sighnaghi, and views over the Alazani Valley
@@ -133,16 +126,13 @@ Date: 2026-08-10
 
 ![Day map: Kakheti and Sighnaghi](/maps/2026-08-10-kakheti-sighnaghi.png?v=maptiler-5)
 
-- The point of the day is to swap the city for bright hills, vineyards, and a small town with big views. This is not a day about “major ancient monuments,” but about space, air, and the mood of Kakheti.
+- The point of the day is to swap the city for pale hills, vineyards, and a small town with views. This is not a “big antiquities” day, but a day of space, air, and Kakhetian mood.
 - ![1](/chips/map-chip-1.png?v=chips-2) Tbilisi is the start of the longer outing, so it is better to leave in the morning and not add a city program before the road.
 - ![2](/chips/map-chip-2.png?v=chips-2) Bodbe is the monastery near Sighnaghi. It adds a quiet green part to the day and balances the town walk beautifully.
 - ![3](/chips/map-chip-3.png?v=chips-2) Sighnaghi is the small hill town known for its fortress walls and views over the Alazani Valley. It is best explored on foot: walk the streets, go out to the walls, and stop at the panoramic points.
 - ![4](/chips/map-chip-4.png?v=chips-2) The Alazani Valley is the main visual hero of the day: a wide view over the plain, vineyards, and distant mountains. This is exactly why Kakheti feels so different from Tbilisi.
-- Timing: Tbilisi → Sighnaghi usually takes about `1.5-2.5 hours` one way, and about the same back. With Bodbe, a walk in Sighnaghi, lunch, and a short tasting, this becomes a day of roughly `7-9 hours` door to door.
-- If you want a tasting, keep it short: with children and a large family, the day should rest on walking, views, and a proper meal, not only on wine.
-- Children may enjoy the fortress walls and the viewpoints more than a long adult tasting.
-- Lunch: simple Kakhetian food, bread, cheese, salads, grilled meat, or home-style dishes in a family restaurant along the route.
-- More: [Kakheti, Sighnaghi, and Bodbe](item:activity.kakheti.sighnaghi).
+- If you want a short tasting, it is better to place it near lunch and not turn it into a wine marathon.
+- Lunch: simple Kakhetian food, bread, cheese, salads, grilled meat, or homestyle dishes somewhere along the route.
 - Day area map: [Sighnaghi, Bodbe, and the Alazani Valley](https://www.google.com/maps/search/Sighnaghi+Bodbe+Monastery+Alazani+Valley)
 
 ## [day.tbilisi.2026-08-11] August 11 — the left bank, Aghmashenebeli, and calmer urban Tbilisi
@@ -151,13 +141,13 @@ Date: 2026-08-11
 
 ![Day map: Tbilisi left bank](/maps/2026-08-11-tbilisi-left-bank.png?v=maptiler-5)
 
-- The point of the day is to see the left bank of the Kura and give a child a real non-excursion part of the city rather than just “one more beautiful street.”
+- The point of the day is to see Tbilisi not only from the Old Town side. The left bank of the Kura feels softer, more residential in places, and less postcard-like, which makes it livelier.
 - ![1](/chips/map-chip-1.png?v=chips-2) Mushtaidi Garden is the most useful child-friendly anchor of the day: greenery, a walk, and rides without leaving the city.
 - ![2](/chips/map-chip-2.png?v=chips-2) Chugureti is the district on the left bank with more everyday city life, cafes, smaller streets, and a calmer rhythm.
 - ![3](/chips/map-chip-3.png?v=chips-2) Aghmashenebeli Avenue is a restored walking street with handsome facades, cafes, and an evening mood. It is not ancient Tbilisi, but a more European urban stage.
 - ![4](/chips/map-chip-4.png?v=chips-2) Dry Bridge works as a final stop if you want to end the day by the market, Dedaena Park, or the river.
-- Concrete route: Mushtaidi Garden → Chugureti → Aghmashenebeli Avenue → Dry Bridge or the embankment.
-- Food: `Mapshalia` for a simple budget-friendly taste of western Georgia, or the same reliable khinkali if the children want familiar food again.
+- This is a good day for photos, smaller purchases, and a pause between longer outings.
+- Food: `Mapshalia` as a simple budget choice with a Megrelian mood, or the familiar khinkali places if the children want something easy.
 - Day area map: [Chugureti, Aghmashenebeli, and the left bank of the Kura](https://www.google.com/maps/search/Chugureti+Agmashenebeli+Avenue+Tbilisi)
 
 ## [day.tbilisi.2026-08-12] August 12 — Kazbegi and the Georgian Military Road, if you are ready for a full mountain day
@@ -166,18 +156,14 @@ Date: 2026-08-12
 
 ![Day map: the road to Kazbegi](/maps/2026-08-12-kazbegi-road.png?v=maptiler-5)
 
-- The point of the day is scale. This is the biggest outing from the Tbilisi half of the trip, where the experience comes not only from the final destination but from the road itself through gorges, reservoir views, and mountain passes.
+- The point of the day is scale: this is the biggest outing from the Tbilisi side, where the impression comes not only from the final destination, but from the road itself through gorges, the reservoir, and high passes.
 - ![1](/chips/map-chip-1.png?v=chips-2) Tbilisi is the start of the longest outing from the city part of the trip. It is important to leave early and not place a mandatory evening plan afterward.
 - ![2](/chips/map-chip-2.png?v=chips-2) Zhinvali Reservoir is a beautiful water stop along the road and a good short pause to break up the journey.
 - ![3](/chips/map-chip-3.png?v=chips-2) Ananuri is the fortress by the water, one of the most photogenic stops on the route. It gives you an easy-to-read story, towers, walls, and a strong view over the reservoir.
 - ![4](/chips/map-chip-4.png?v=chips-2) Gudauri is the marker of the high-mountain stretch of the road: after it, the landscape already feels fully Caucasian.
 - ![5](/chips/map-chip-5.png?v=chips-2) Stepantsminda is the settlement at the foot of Kazbek. It is small in itself, but the feeling of the Greater Caucasus is already there.
 - ![6](/chips/map-chip-6.png?v=chips-2) The view of Kazbek and the Gergeti area is the main final image of the day: mountain, valley, and church high above. The climb to Gergeti often needs a local car or clear transport planning.
-- Timing: Tbilisi → Stepantsminda usually takes about `2.5-3.5 hours` one way. The plain road time there and back is about `5.5-7 hours`. Add Zhinvali, Ananuri, Gudauri, the drive up to Gergeti, lunch, and pauses, and it becomes a `10-12 hour` day, so it really should be treated as a big outing.
-- For children, the most memorable parts are usually not the museum-like side of the route but the shifts in scale: water at Zhinvali, the towers of Ananuri, the serpentine road, and the final mountain view. Water, snacks, and the right to skip one extra stop matter.
-- What can be shortened: skip a separate long stop in Gudauri, avoid collecting every viewpoint, and if the weather is bad or the group is tired, keep the final stop to a view of Kazbek from Stepantsminda without going up to Gergeti.
-- If the group is not ready for such a long day, it is better to replace this route with a museum, the Mtatsminda funicular, sulfur baths for the adults, and a slow dinner in the center. Funicular price guide: about `$3-$3.70` one way plus about `$0.74` for the card.
-- More: [Kazbegi and the Georgian Military Road](item:activity.kazbegi.daytrip).
+- If the group is not ready for such a long day, it is better to replace it with a museum, the funicular, sulfur baths for the adults, and an unhurried dinner in the center.
 - Day area map: [Zhinvali, Ananuri, Stepantsminda, and Kazbek](https://www.google.com/maps/search/Zhinvali+Ananuri+Stepantsminda+Kazbek)
 
 ## [day.transfer.2026-08-13] August 13 — train to the sea and the first evening in Batumi
@@ -186,20 +172,16 @@ Date: 2026-08-13
 
 ![Day map: first evening in Batumi](/maps/2026-08-13-batumi-first-evening.png?v=maptiler-5)
 
-- The point of the day is not to squeeze more out of Tbilisi in the morning, but to switch parts of the trip calmly. The transfer itself will take energy.
-- It is better to leave the morning for breakfast, packing, and getting to the station: family travel, luggage, and August heat do not love dense plans.
-- Based on the usual pattern on the Tbilisi → Batumi line as of April 2, 2026, it is practical to think in terms of two daytime trains: around `08:00` and around `17:10`. Travel time is about `5 hours 12 minutes`, and the train usually makes three intermediate stops: Kutaisi Airport, Ureki, and Kobuleti.
+- The point of the day is not to squeeze more out of Tbilisi in the morning, but to change chapters calmly. The transfer itself will take energy.
+- It is better to keep the morning to breakfast, packing, and the ride to the station.
+- There is a separate card with the train details: [read more about the Tbilisi - Batumi train transfer](item:transport.train.tbilisi-batumi).
+- In Tbilisi, the station is at `Tbilisi Central / Station Square`, with `Station Square` metro nearby; in Batumi, the train arrives at `Batumi-Central`, from where a taxi is usually the easiest way to the old center.
 - ![1](/chips/map-chip-1.png?v=chips-2) Old Batumi Boulevard is the first walk by the sea: wide promenade, air after the train, and the plain feeling that the second part of the journey has begun.
 - ![2](/chips/map-chip-2.png?v=chips-2) The Ali and Nino sculpture is the moving seafront sculpture and one of Batumi’s signature images. It is especially good in the evening when the lights come on.
 - ![3](/chips/map-chip-3.png?v=chips-2) Batumi Sea Port adds a working, non-resort note to the route and reads well next to the sea.
 - ![4](/chips/map-chip-4.png?v=chips-2) Europe Square is the extra city turn if there is still strength left after the boulevard.
 - ![5](/chips/map-chip-5.png?v=chips-2) `Laguna` is a clear first stop for Adjarian khachapuri if you want to begin the sea part with food and not a hard decision.
-- In Tbilisi, the train usually leaves from `Tbilisi Central`, the big station hub by `Station Square / Sadguris Moedani`, with metro, buses, and taxis nearby.
-- In Batumi, the train arrives at `Batumi-Central`, north of the old center, so getting to your accommodation is usually easiest by taxi or public transport along Tamar Mepe Avenue.
-- Children may enjoy the Ferris wheel and Miracle Park near Ali and Nino; if there is energy for only one little treat after the train, that is usually better than a longer city circuit.
-- For the sea leg, it is worth choosing the beach logic in advance: central Batumi is easiest for logistics, the New Boulevard is roomier, the northern suburbs are quieter and greener, while sandy Ureki is already a separate outing.
-- More: [Tbilisi to Batumi by train](item:transport.train.tbilisi-batumi).
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
+- Dinner: `Laguna` or `Retro`, if you want to open the sea part with Adjarian khachapuri.
 - Day area map: [Batumi Boulevard, Ali and Nino, and Europe Square](https://www.google.com/maps/search/Batumi+Boulevard+Ali+and+Nino+Europe+Square)
 
 ## [day.batumi.2026-08-14] August 14 — sea in the morning and Old Batumi in the evening
@@ -208,15 +190,14 @@ Date: 2026-08-14
 
 ![Day map: Old Batumi](/maps/2026-08-14-batumi-old-town.png?v=maptiler-5)
 
-- The point of the day is to give the sea its first proper morning and then do one concrete compact evening loop through the old center.
-- Morning by the sea is better without heroics: Batumi’s beach is pebbly, so water shoes genuinely improve life.
+- The point of the day is to give the sea its first proper morning and leave the city for the evening, when the heat is softer and the older streets feel better.
+- The morning sea is best done without heroics: Batumi’s beach is pebbly, so water shoes make life much better.
 - ![1](/chips/map-chip-1.png?v=chips-2) Batumi Piazza is a good entry point into the old center: compact, legible, and easy to use as a meeting place.
 - ![2](/chips/map-chip-2.png?v=chips-2) Europe Square is the central urban stage of Old Batumi, from which it is easy to head toward the clock and the older streets.
 - ![3](/chips/map-chip-3.png?v=chips-2) Batumi Astronomical Clock is a pleasing city detail on the facade rather than a major standalone sight.
 - ![4](/chips/map-chip-4.png?v=chips-2) Memed Abashidze Street and the neighboring old streets are the right place for a short walk without the feeling of “closing a list.”
 - ![5](/chips/map-chip-5.png?v=chips-2) Old Batumi Boulevard is the final stretch by the sea, where it is easier to give a child movement, ice cream, and open space after the old center.
-- Food: a simple cafe in the old town is often better than the first seafront line: less of a “view surcharge” and calmer with children.
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
+- Food: a simple cafe in the old town often works better than the first line by the sea: less “view surcharge” and calmer with children.
 - Day area map: [Old Batumi, Europe Square, and the Astronomical Clock](https://www.google.com/maps/search/Old+Batumi+Europe+Square+Astronomical+Clock)
 
 ## [day.batumi.2026-08-15] August 15 — the port, Argo cable car, and evening by the water
@@ -225,15 +206,13 @@ Date: 2026-08-15
 
 ![Day map: Argo, the port, and Miracle Park](/maps/2026-08-15-batumi-argo-port.png?v=maptiler-5)
 
-- The point of the day is to see Batumi from above and understand how the city sits between the sea, the port, and the hills.
+- The point of the day is to see Batumi from above and understand how the city sits between sea, port, and hills.
 - ![1](/chips/map-chip-1.png?v=chips-2) The lower station of the `Argo` cable car is the start of the lift from the port district. Price guide: about `$12.17` for an adult return ticket and about `$2.59` for a child aged 5-11.
 - ![2](/chips/map-chip-2.png?v=chips-2) The upper `Argo` station is the viewpoint from which the sea, the port, the towers, and the green hills start to make sense as one picture.
 - ![3](/chips/map-chip-3.png?v=chips-2) Batumi Sea Port is best looked at either from above or from the promenade: it gives the city a working, not only resort-like, character.
 - ![4](/chips/map-chip-4.png?v=chips-2) Miracle Park is the seafront zone by Ali and Nino, the Alphabet Tower, and the Ferris wheel. It works very well for an evening walk without a rigid plan.
 - ![5](/chips/map-chip-5.png?v=chips-2) The Ferris wheel is a clear child-friendly finish after the cable car and the seaside walk.
-- A boat ride is only worth taking if the weather is calm and before dinner; if the sea is rough, it is better to leave the day to the Ferris wheel and the promenade.
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
-- More: [Cableways: Tbilisi and Batumi](item:note.transport.cableways).
+- A boat trip is worth taking only if the weather is good and the mood right: on this day it is a pleasant extra, not an essential part.
 - Day area map: [Argo cable car, the port, and Miracle Park](https://www.google.com/maps/search/Argo+Cable+Car+Batumi+Port+Miracle+Park)
 
 ## [day.batumi.2026-08-16] August 16 — Batumi Botanical Garden and Green Cape
@@ -242,15 +221,13 @@ Date: 2026-08-16
 
 ![Day map: Batumi Botanical Garden](/maps/2026-08-16-batumi-botanical-garden.png?v=maptiler-5)
 
-- The point of the day is to make this the greenest day of the sea leg. This is not an ordinary park, but a large walk on slopes above the sea.
+- The point of the day is to make the greenest day of the sea part. This is not a regular park, but a long walk across slopes above the sea.
 - ![1](/chips/map-chip-1.png?v=chips-2) Central Batumi is the starting point from which it makes sense to go to the garden early, before the heat becomes the main event of the day.
 - ![2](/chips/map-chip-2.png?v=chips-2) Batumi Botanical Garden lies north of the center by Green Cape. It is strong not because of rare plant names, but because of shade, slopes, long paths, and sea views.
 - ![3](/chips/map-chip-3.png?v=chips-2) Green Cape is the natural point next to the garden where the sea and greenery feel calmer than in the center of Batumi.
-- It is best to go in the morning: there are many paths in the garden, and even in the shade August heat will still drain energy.
-- Children may enjoy the paths, the viewpoints, and the sea appearing between the trees; if electric carts are running inside the garden, they work well as part of the route rather than as a “weakness.”
-- For a large group, it is useful to agree on a meeting point inside the garden in advance, because walking at one shared speed is rarely realistic.
-- Evening plan: a short dinner near where you are staying, without a second full outing.
-- More: [Batumi Botanical Garden](item:activity.batumi.botanical-garden).
+- It is better to go in the morning: the garden has many paths, and even in shade the August heat takes energy quickly.
+- For a large group, it helps to agree on a meeting point inside in advance: it is almost impossible to walk all of it at one shared pace, and that is normal.
+- The evening is better kept for a lighter dinner without another full program.
 - Day area map: [Batumi Botanical Garden and Green Cape](https://www.google.com/maps/search/Batumi+Botanical+Garden+Green+Cape)
 
 ## [day.batumi.2026-08-17] August 17 — May 6 Park, the center, and a shared evening
@@ -259,13 +236,13 @@ Date: 2026-08-17
 
 ![Day map: May 6 Park and central Batumi](/maps/2026-08-17-batumi-family-day.png?v=maptiler-5)
 
-- The point of the day is to make a shared day with relatives concrete without turning it into an excursion: a park for children, a clear center for adults, and an evening by the sea for everyone.
+- The point of the day is to make it a shared city day rather than a “ten-person excursion,” with something comfortable for both children and adults.
 - ![1](/chips/map-chip-1.png?v=chips-2) May 6 Park and Lake Nurigeli are the morning anchor of the day: shade, a walk, children’s activities, and an easy meeting point.
 - ![2](/chips/map-chip-2.png?v=chips-2) Europe Square is a convenient central point for a shared lunch or a short walk after the park.
 - ![3](/chips/map-chip-3.png?v=chips-2) Batumi Piazza is a compact stop in the old center that does not stretch into an endless route.
 - ![4](/chips/map-chip-4.png?v=chips-2) Miracle Park is the seafront zone for those who still have energy in the evening.
 - ![5](/chips/map-chip-5.png?v=chips-2) The Ferris wheel is the clearest child-friendly finish so that adult meetings do not turn into waiting at a table for the child.
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
+- The shared lunch is best planned in a straightforward place with simple Georgian food: khinkali, khachapuri, salads, lemonade.
 - Day area map: [Batumi Boulevard and Europe Square](https://www.google.com/maps/search/Batumi+Boulevard+Europe+Square)
 
 ## [day.batumi.2026-08-18] August 18 — mountainous Adjara, Makhuntseti, and the green road inland
@@ -274,16 +251,13 @@ Date: 2026-08-18
 
 ![Day map: Makhuntseti and mountainous Adjara](/maps/2026-08-18-adjara-makhuntseti.png?v=maptiler-5)
 
-- The point of the day is to see Adjara as more than sea and Batumi. Outside the city, the picture shifts quickly into wet greenery, mountain roads, river views, a waterfall, and a stone bridge.
+- The point of the day is to see Adjara not only as sea. Very quickly outside the city, you get a different picture: wet greenery, a mountain road, a river, a waterfall, and a stone bridge.
 - ![1](/chips/map-chip-1.png?v=chips-2) Batumi is the start of the outing into mountainous Adjara; it is better to agree with the driver right away on rhythm and stops.
 - ![2](/chips/map-chip-2.png?v=chips-2) Makhuntseti is the marker of the settlement and the green road inland.
 - ![3](/chips/map-chip-3.png?v=chips-2) Makhuntseti Waterfall is a simple, clear natural stop: beautiful, not too difficult, and good for a family format.
 - ![4](/chips/map-chip-4.png?v=chips-2) Queen Tamar’s arched bridge is the old stone bridge across the river, a small historical anchor of the route. Its value is not scale but the feeling of an older mountain road.
-- Timing: Batumi → Makhuntseti usually takes about `45-60 minutes` one way, and about the same back. If the day stays focused on the waterfall, the bridge, short stops, and lunch, the outing is roughly `4-6 hours`.
-- Children may enjoy the waterfall, the river, and the bridge. Shoes that can handle wet stone and earth are important.
-- It is better to go with a driver or organized transport: public transport makes a day like this too choppy.
-- Dinner after returning is better near your accommodation, without another cross-city ride.
-- More: [Mountain Adjara and Makhuntseti](item:activity.adjara.makhuntseti).
+- The road itself is part of the impression: Adjara becomes greener, wetter, and more rural than Batumi.
+- It is better to go with a driver or organized transport: public transport makes a day like this too fragmented.
 - Day area map: [Makhuntseti, the waterfall, and the arched bridge](https://www.google.com/maps/search/Makhuntseti+Waterfall+Queen+Tamar+Bridge)
 
 ## [day.batumi.2026-08-19] August 19 — the market, Piazza, Europe Square, and the boulevard
@@ -292,15 +266,14 @@ Date: 2026-08-19
 
 ![Day map: the market and central Batumi](/maps/2026-08-19-batumi-market-old-town.png?v=maptiler-5)
 
-- The point of the day is not to go far after mountainous Adjara, but also not to leave the day empty. This is a concrete city loop with the market, the old center, and the sea.
+- The point of the day is to return to a calmer seaside rhythm after mountainous Adjara, but not let it dissolve into “we can just go somewhere.”
 - ![1](/chips/map-chip-1.png?v=chips-2) Batumi Market is the morning stop for fruit, spices, churchkhela, and edible souvenirs. It is best in the morning, while the market is still lively.
 - ![2](/chips/map-chip-2.png?v=chips-2) Batumi Piazza is the transition from the market into the old center and an easy point for coffee or lemonade.
 - ![3](/chips/map-chip-3.png?v=chips-2) Europe Square is the central stop in the old town.
 - ![4](/chips/map-chip-4.png?v=chips-2) Batumi Astronomical Clock is a small urban detail on the way, without turning the day into an excursion marathon.
 - ![5](/chips/map-chip-5.png?v=chips-2) Old Batumi Boulevard is the seaside finish; children may enjoy reaching it after the market and old town as an honest reward for adult shopping.
-- In the evening, it is better to choose one concrete stretch of the boulevard from Ali and Nino toward the colonnades rather than trying to “walk all of Batumi.”
-- Food: `Retro`, `Laguna`, or a simple place with Adjarian food.
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
+- The route gives a clear rhythm: market → Piazza → Europe Square → the clock → the old boulevard.
+- Food: `Retro`, `Laguna`, or a simple cafe with Adjarian cuisine.
 - Day area map: [Batumi, the market, old streets, and the boulevard](https://www.google.com/maps/search/Batumi+Market+Old+Batumi+Boulevard)
 
 ## [day.batumi.2026-08-20] August 20 — the final sea day without extra risk
@@ -309,135 +282,166 @@ Date: 2026-08-20
 
 ![Day map: final day in Batumi](/maps/2026-08-20-batumi-final-day.png?v=maptiler-5)
 
-- The point of the day is for the final day to stay simple in logistics but still feel full in content.
+- The point of the day is not to place anything that could break packing and the early flight. The last day should stay beautiful, but simple.
 - ![1](/chips/map-chip-1.png?v=chips-2) The beach by Batumi Boulevard is the nearest sea in the morning, with no need to relocate to another settlement.
 - ![2](/chips/map-chip-2.png?v=chips-2) Europe Square is a convenient point for the final city loop and for souvenirs in the old center.
 - ![3](/chips/map-chip-3.png?v=chips-2) Batumi Piazza is another compact stop for sweets, coffee, or a short walk before a pause back at the accommodation.
 - ![4](/chips/map-chip-4.png?v=chips-2) Lake Ardagani and the dancing fountains are an evening accent if you are staying closer to the New Boulevard. Children may enjoy it, but it is better to choose just one evening finish so as not to complicate packing.
-- It is better not to go far out of town: any long road on the eve of an early flight adds unnecessary risk.
-- More: [Sea days and Batumi without rushing](item:activity.batumi.sea-days).
+- In the daytime you can buy souvenirs, sweets, spices, or simply return to what you liked most.
+- In the evening: a calm dinner, a final seafront walk, and packing.
 - Day area map: [central Batumi, the boulevard, and the old town](https://www.google.com/maps/search/Batumi+Boulevard+Old+Batumi)
 
 ## [note.food.cuisine] Food: what to eat first in Georgia and Adjara
 Type: note
 
-Georgia is delicious not because of one “khachapuri box to tick,” but because the food is generous, warm, and very alive: plenty of dough, cheese, herbs, walnuts, beans, meat, and dishes that suddenly turn out to be genuinely outstanding in the right place. In Tbilisi it makes sense to taste the classic city-Georgian table, while in Batumi and Adjara the stars are cheese, butter, western Georgian richness, and that easy seaside rhythm.
+Georgia is one of those countries where food does not work as “a service for hunger,” but as an important part of the trip itself. It is very easy to start by discussing routes and logistics, and then realize that the real program of the day sometimes looks more like this: a good khachapuri, cold lemonade, shade, bread, cheese, grilled meat, and one more dish because “we should try this too.”
 
-The Georgian side:
-- `Khinkali` are not “small dumplings,” but broth, pepper, meat, and dough that should hold its shape without turning heavy.
-Image:
+Where to begin in Tbilisi and in Georgia more broadly:
+
+Khinkali
 ![Khinkali](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1e/1e31f9be8b1d1318b747a6fa69f66948a0e4da796cbc608fad5d5331472bf3a8.webp)
-- `Mtsvadi` is Georgian grilled meat, where the flavor stands on meat, fire, and salt rather than on a complicated marinade.
-Image:
+- the big and very Georgian genre: juicy dumplings with meat, broth, pepper, and dough;
+- they work best in straightforward places where locals actually eat them, not only tourists;
+- children usually like the format itself, as long as it is not too spicy.
+
+Mtsvadi
 ![Mtsvadi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/19/19040162746a3d97d953bfaaf47802c66b7dda87715b957c67c02bb58350eeea.webp)
-- `Pkhali` are cold vegetable spreads with a walnut base. Through them you feel Georgia’s love for herbs, garlic, coriander, and nuts very clearly.
-Image:
+- Georgian grilled meat, but not “just barbecue,” rather an important part of the table;
+- it is especially strong in Kakheti and on out-of-town outings, where meat, lavash, tomatoes, and wine lock into an ideal combination.
+
+Chkmeruli
+![Chkmeruli](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/68/680e6ba4f6b3a506ff66630a0cd55b61865b82fbe15c3beb76bf04a6b11763b9.jpg)
+- chicken in a garlic cream or milk-garlic sauce, very homestyle and easy to understand;
+- good for sharing at the table: the sauce asks for bread, and the flavor is vivid without usually being extremely spicy.
+
+Chikhirtma
+![Chikhirtma](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/ce/ce294ff3ce11081bc6018cf1e6e1c8d74ac4e6ae98b56a87282b70eaa39cd62e.jpg)
+- a thick chicken soup with egg, herbs, and a light sour note;
+- a good lunch choice in Tbilisi when you want something warm, soft, and Georgian rather than a heavy meat dish.
+
+Pkhali
 ![Pkhali](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/bd/bd8cd7a2f221513a06bc4ed00d6504f42530f5c87a9d98860287fe328133a482.webp)
-- `Lobio` is beans in a clay pot, often simple in appearance but deep in flavor. It is especially good with mchadi, cheese, and pickles.
-Image:
+- cold vegetable starters with walnuts: spinach, beetroot, beans;
+- a very good way to open a table, especially if you do not want to begin with too much meat.
+
+Lobio
 ![Lobio](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/40/40bb7fc5cc616aa5c2cbc563794a6a5356d2f7e7b11cf1b178f5a3792164a86e.webp)
+- thick beans in a clay pot, one of the simplest and strongest Georgian flavors;
+- especially good with mchadi, bread, and pickles.
 
-The Adjarian side:
-- `Adjarian khachapuri` is the boat-shaped bread with cheese, butter, and egg. It has to be eaten right away, while it is hot and alive.
-Image:
+What you should definitely eat in Adjara:
+
+Adjarian khachapuri
 ![Adjarian khachapuri](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5c/5c15891c07fe1a4c5c1a1fc7839ebf8a22a2d53b23c7b189ad525a384d585c3c.webp)
-- `Borano` is the Adjarian dish of melted cheese and butter. It is rich, deeply satisfying, and works best as one bright dish for the table rather than a routine everyday order.
-Image:
+- the best-known Adjarian symbol on a plate: a “boat” with cheese, egg, and butter;
+- in Batumi, it is worth eating it at least several times, because even after one good first experience the next thought is usually “let’s compare another one.”
+
+Borano
 ![Borano](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/cd/cd906d59edbaf296def24fafb03ac0d67e16838f63068493fe173bda0cf1650f.webp)
-- `Achma` or `sinori` is the soft, layered, buttery side of western Georgian cuisine, where cheese, butter, and home-style generosity matter.
-Image:
+- melted Adjarian cheese in butter;
+- very delicious, very rich, not an everyday dish, but absolutely worth trying once.
+
+Achma
 ![Achma](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/db/db2b2420626c3c3baa73f18e184af903b1e75e4d300c24b0eff9e416dcae6fc1.webp)
-- `Churchkhela` is not a full meal, but one of the best sweet road snacks and the easiest edible souvenir.
-Image:
+- a layered cheese pie;
+- good as an alternative to khachapuri if you want to stay in the cheese zone but change the genre.
+
+Sweet finish and “what to take with you”:
+
+Churchkhela
 ![Churchkhela](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4b/4b83acac915edb1cbd2fd260a2051c69a70c9af8fd3c660dddb2a103ebce2c68.webp)
+- nuts in thickened grape juice;
+- good both as a road sweet and as a souvenir.
 
-Where to eat without fuss in Tbilisi:
-- `Racha` is old city-school Tbilisi for those who want khinkali, lobio, and very Tbilisi food without gloss.
-- `Pasanauri` is an easy and reliable first stop for khinkali and khachapuri, especially in the first days of the trip.
-- `Mapshalia` is a good move toward western Georgian food when you want more than centralized “tourist classics.”
-- `Samikitno / Machakhela` is the practical family option when speed, clarity, and good food matter more than fashion.
+Where to eat very well without fuss:
 
-Where to eat without fuss in Batumi:
-- `Laguna` is one of the best-known Batumi addresses for Adjarian khachapuri.
-- `Retro` is another strong place if you want to compare styles of Adjarian khachapuri in one city.
-- `Shemoikhede Genatsvale` is a good move for a broad Georgian table without the feeling that you sat down inside a festive set.
+Tbilisi:
+- `Pasanauri`, a clear and very reliable choice for khinkali and basic Georgian classics;
+- `Racha`, an old Tbilisi format with homestyle food;
+- `Mapshalia`, a simple and well-loved option for Megrelian food;
+- `Shemomechama`, solid city Georgian food without the mood of a dressed-up dinner.
 
-Useful logic:
-- in Tbilisi, focus on khinkali, lobio, pkhali, grilled meat, and classic city-Georgian dishes;
-- in Batumi and Adjara, look for Adjarian khachapuri, borano, western Georgian cheeses, and dishes that feel right by the sea;
-- for a big family, it is often better to order a shared table rather than “one plate per person”: pkhali, salads, cheese, khachapuri, meat, beans, and lemonade.
+Batumi:
+- `Laguna`, one of the best-known and most reliable addresses for Adjarian khachapuri;
+- `Retro`, another Batumi favorite for khachapuri;
+- simple cafes in the old town often give a more honest experience than the restaurants on the first line by the sea.
 
-Links:
-- [Georgian cuisine](https://ru.wikipedia.org/wiki/Грузинская_кухня)
-- [Khinkali](https://ru.wikipedia.org/wiki/Хинкали)
-- [Khachapuri](https://ru.wikipedia.org/wiki/Хачапури)
+Food logic for the trip:
+- in Tbilisi, it makes sense to lean into khinkali, lobio, pkhali, chikhirtma, chkmeruli, grilled meat, and broader Georgian classics;
+- in Batumi, the emphasis should shift to the Adjarian part: khachapuri, achma, borano;
+- in Kakheti, the main thing is not a single “restaurant achievement,” but the combination of bread, meat, cheese, vegetables, and wine.
 
 ## [note.wine.guide] Wine: the easiest and most rewarding things to try on this trip
 Type: note
 
-Georgian wine is pleasant because you do not need to be a collector to enjoy it. Even in an easy restaurant or during a short tasting, it is possible to drink a genuinely good glass and quickly understand why local grapes matter so much here. It is better not to try everything at once, but to choose a few clear styles and compare them.
+Georgia is one of those countries where wine can take you very deep very quickly, but for this trip it is better to focus not on the encyclopedia, but on the most understandable, accessible, and delicious options that you are actually likely to meet in Tbilisi, Kakheti, and Batumi. The good news is that Georgian wine does not require complicated preparation: it already has plenty of character at the first sip.
 
-What to try first:
-- `Saperavi` is the great Georgian red: dark, juicy, with cherry, plum, spice, and real character.
-- `Mukuzani` is a more structured and noble red made from Saperavi, especially good with meat and a longer dinner.
-- `Kindzmarauli` is the softer, friendlier red for anyone who does not want to begin with too much austere dryness.
-- `Rkatsiteli` is one of the easiest white grapes to approach: freshness, fruit, sometimes an herbal note, and a very comfortable starting point for Georgian whites.
-- `Tsinandali` is a white that works especially well with cheese, pkhali, salads, and a lighter lunch.
-- `Qvevri wines` are wines aged in clay vessels. The whites here can be amber, slightly tannic, and nothing like an ordinary “just white wine.”
+The easiest starting points:
 
-Image:
+Saperavi
 ![Saperavi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/9f/9f2cfd0938a10c697fe0669800c1d54d1eed476485244e6bf4418c66d9452a36.webp)
+- the most recognizable Georgian red grape;
+- dense, dark, and characterful, but when chosen well it does not feel bluntly heavy, it feels alive;
+- best with meat, mtsvadi, khinkali, or a Kakhetian lunch.
 
-Image:
+Rkatsiteli
+- an easy white starting point for anyone who does not want to begin with dense amber wines;
+- fresher, calmer, and easier with lunch and heat.
+
+Tsinandali
+- a good and accessible white option with a more “European” feel;
+- easy to order in city restaurants when you want something clear and not too experimental.
+
+Qvevri wines
 ![Qvevri](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/19/1952a2811c7cb3a59124d5fc0aa4d580a89df0c9afd5d300ca2dec46a6262007.jpg)
+- one of the great Georgian wine symbols: wine made in large clay vessels called qvevri;
+- often this is no longer “just white or red,” but something deeper, more earthy, and more textural;
+- best not as the very first glass of your life, but once you already have the basic feel of Georgian wine.
 
-How to try wine without overload:
-- in Tbilisi, it is easy to order one glass of `Saperavi` and one of `Rkatsiteli` just to feel the difference between the basic red and white styles;
-- in Kakheti, a short tasting of 3-4 wines is better than a marathon through ten labels;
-- if someone does not enjoy very dry wines, `Kindzmarauli` is often the most welcoming entry point;
-- if you want the most Georgian experience, try at least one amber white from qvevri.
+How to taste it best on this trip:
+- in Tbilisi, it is better to order one or two glasses in good but simple restaurants than try to turn every evening walk into a formal tasting;
+- in Kakheti, you get the most beautiful wine episode of the whole journey: lunch, the valley, vineyards, and one good glass of Saperavi or Rkatsiteli sound especially right there;
+- in Batumi, it is better to drink by mood and with food, not as a separate “wine program.”
 
-What works best with food:
-- `Saperavi` and `Mukuzani` suit mtsvadi, grilled meat, khinkali, and fuller meat dishes;
-- `Rkatsiteli` and `Tsinandali` work better with cheese, pkhali, salads, and lighter lunches;
-- `Kindzmarauli` suits the longer family dinner where the wine should be soft and not argue with everything on the table.
+What pairs especially well:
+- `Saperavi` with mtsvadi, khinkali, meat, and stronger cheeses;
+- `Rkatsiteli` with salads, cheese, khachapuri, and a lighter lunch;
+- `Tsinandali` with fish, chicken, vegetables, and a calmer dinner;
+- `qvevri` with something more expressive in flavor: cheeses, meat, a long lunch, a Kakhetian table.
 
-Links:
-- [Saperavi](https://ru.wikipedia.org/wiki/Саперави)
-- [Rkatsiteli](https://ru.wikipedia.org/wiki/Ркацители)
-- [Kindzmarauli](https://ru.wikipedia.org/wiki/Киндзмараули)
-- [Mukuzani](https://ru.wikipedia.org/wiki/Мукузани)
-- [Tsinandali](https://ru.wikipedia.org/wiki/Цинандали)
+What not to overcomplicate:
+- there is no need to “understand all Georgian winemaking” in one trip;
+- for a family format, one good wine day in Kakheti is much better than constant tastings between children’s plans and city walks;
+- if you like a particular wine, it is more useful simply to remember the producer and order it again than to keep switching endlessly between everything at once.
 
 ## [note.transport.cableways] Cableways: Tbilisi and Batumi
 Type: note
 
-The cableways in this trip work well not as “one more transport mode,” but as the fastest way to see the city properly. In Tbilisi they help you read the relief and gather the old city into one picture, while in Batumi they give you that moment when the sea, the port, and the green hills suddenly become one landscape.
+In this trip, cableways are not decorative extras. They are one of the nicest ways to get the “big picture” of a city quickly. They work especially well with a child: less effort on the climb, more of a view, and the feeling that this is not just transport, but a small adventure.
 
-Tbilisi: the Rike to Narikala cable car
-- This is the shortest and highest-yield lift in Tbilisi: in just a few minutes you are above the Kura, the old quarters, the baths, and the fortress.
-- It works best on the old city day, when you want the view without climbing in the heat.
-- Price guide: about `$0.93` one way per person.
-- Nice detail: the line opened in 2012 and almost immediately became one of the clearest first-visit rituals in Tbilisi.
-- From the top station, it is easy to continue toward Narikala, Mother of Georgia, or the Botanical Garden.
+Tbilisi: the cable car from Rike to Narikala
+- this is the shortest and the most instantly postcard-like cableway of the trip;
+- price guide: about `$0.93` one way per person;
+- its main strength is that in just a few minutes you are above the river, the old city, the baths, and the roofs, which means you get that layered Tbilisi frame from above right away;
+- it fits best into the Old Town, Abanotubani, and Metekhi day.
 Image:
 ![Cable car to Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/04/04ab2c7bda1fcb99de939fbafe1b6b9448f7b3a487a00e533e37681130dd6ee9.webp)
 
 Tbilisi: the Mtatsminda funicular
-- This is less of a “short city trick” and more of a full Tbilisi story: a historic climb up the mountain with a view, a park, and the feel of old capital-city leisure.
-- Price guide: about `$3-$3.70` one way plus about `$0.74` for the card.
-- It is best late in the day: cooler below, and the city begins to glow beautifully above.
-- Interesting detail: the Tbilisi funicular has been running since 1905, so it is not just an attraction but part of the city’s memory.
-- At the top it works especially well with children because you can combine the viewpoint with the park and rides rather than ending with only a viewing platform.
+- this is already not just a lift “to a viewpoint,” but a city ritual in its own right;
+- price guide: about `$3-$3.70` one way, plus about `$0.74` for the card;
+- at the top you do not get only a view, but also a park, rides, cafes, and a lighter family format than “we went up, looked, and came down”;
+- interesting detail: the funicular has been running since 1905, so it is not just an attraction but part of the city’s memory;
+- at the top it works especially well with children because you can combine the viewpoint with the park and rides rather than ending with only a viewing platform.
 Image:
 ![Mtatsminda Funicular](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d8/d82298610a5f4d07732bc83b4e3b29dcc51646f494d608da2275b1d4936fd840.webp)
 
 Batumi: the `Argo` cable car
 - `Argo` is good because it shows Batumi not as a line of beaches, but as a city between sea, port, and hills.
-- Price guide: about `$12.17` for an adult return ticket and about `$2.59` for a child aged 5-11.
-- This is the longest and most panoramic lift in the trip: about 2.6 km and roughly 15 minutes one way.
-- Interesting detail: the upper station stands on Anuria Mountain at roughly 256 m above sea level, and the top is not only a viewpoint but a whole leisure complex with terraces, cafes, and evening programming.
-- It works best in the second half of the day, when you can combine the lift with the port, Miracle Park, and sunset light over the sea.
+- price guide: about `$12.17` for an adult return ticket and about `$2.59` for a child aged 5-11;
+- this is the longest and most panoramic lift in the trip: about 2.6 km and roughly 15 minutes one way;
+- interesting detail: the upper station stands on Anuria Mountain at roughly 256 m above sea level, and the top is not only a viewpoint but a whole leisure complex with terraces, cafes, and evening programming;
+- it works best in the second half of the day, when you can combine the lift with the port, Miracle Park, and sunset light over the sea.
 Image:
 ![Argo cable car](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d0/d0c128728b8fab7e5baf276d0fd9804adbb29c1ec5dba33d180650482af881c3.webp)
 

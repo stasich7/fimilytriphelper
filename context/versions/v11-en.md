@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Georgia Trip, August 2026
-version_id: v12-en
+version_id: v11-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -309,16 +309,6 @@ Mtsvadi
 - Georgian grilled meat, but not “just barbecue,” rather an important part of the table;
 - it is especially strong in Kakheti and on out-of-town outings, where meat, lavash, tomatoes, and wine lock into an ideal combination.
 
-Chkmeruli
-![Chkmeruli](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/68/680e6ba4f6b3a506ff66630a0cd55b61865b82fbe15c3beb76bf04a6b11763b9.jpg)
-- chicken in a garlic cream or milk-garlic sauce, very homestyle and easy to understand;
-- good for sharing at the table: the sauce asks for bread, and the flavor is vivid without usually being extremely spicy.
-
-Chikhirtma
-![Chikhirtma](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/ce/ce294ff3ce11081bc6018cf1e6e1c8d74ac4e6ae98b56a87282b70eaa39cd62e.jpg)
-- a thick chicken soup with egg, herbs, and a light sour note;
-- a good lunch choice in Tbilisi when you want something warm, soft, and Georgian rather than a heavy meat dish.
-
 Pkhali
 ![Pkhali](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/bd/bd8cd7a2f221513a06bc4ed00d6504f42530f5c87a9d98860287fe328133a482.webp)
 - cold vegetable starters with walnuts: spinach, beetroot, beans;
@@ -367,7 +357,7 @@ Batumi:
 - simple cafes in the old town often give a more honest experience than the restaurants on the first line by the sea.
 
 Food logic for the trip:
-- in Tbilisi, it makes sense to lean into khinkali, lobio, pkhali, chikhirtma, chkmeruli, grilled meat, and broader Georgian classics;
+- in Tbilisi, it makes sense to lean into khinkali, lobio, pkhali, grilled meat, and broader Georgian classics;
 - in Batumi, the emphasis should shift to the Adjarian part: khachapuri, achma, borano;
 - in Kakheti, the main thing is not a single “restaurant achievement,” but the combination of bread, meat, cheese, vegetables, and wine.
 

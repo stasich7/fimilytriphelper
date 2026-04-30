@@ -63,6 +63,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Exit with an error if markdown image URLs point to localhost or loopback hosts.",
     )
+    parser.add_argument(
+        "--forbid-local-content-image-urls",
+        action="store_true",
+        help="Exit with an error if markdown still contains local content image URLs such as /images/trip/...",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument(
         "--write-output-on-dry-run",
@@ -131,6 +136,19 @@ def find_localhost_image_urls(markdown: str) -> list[str]:
         parsed = urlparse(url)
         hostname = parsed.hostname or ""
         if hostname in LOCALHOST_HOSTS and url not in seen:
+            seen.add(url)
+            urls.append(url)
+
+    return urls
+
+
+def find_local_content_image_urls(markdown: str) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+
+    for match in IMAGE_PATTERN.finditer(markdown):
+        url = match.group(2)
+        if is_publishable_local_image_url(url) and url not in seen:
             seen.add(url)
             urls.append(url)
 
@@ -283,6 +301,7 @@ def main() -> int:
     rewritten = rewrite_markdown(markdown, published)
     unpublished_urls = find_unpublished_image_urls(rewritten, args.public_base_url)
     localhost_urls = find_localhost_image_urls(rewritten)
+    local_content_image_urls = find_local_content_image_urls(rewritten)
     if not args.dry_run or args.write_output_on_dry_run:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(rewritten, encoding="utf-8")
@@ -304,6 +323,12 @@ def main() -> int:
         for url in localhost_urls:
             print(f"- {url}", file=sys.stderr)
         return 3
+
+    if args.forbid_local_content_image_urls and local_content_image_urls:
+        print("error: local content image URLs are not allowed in published markdown:", file=sys.stderr)
+        for url in local_content_image_urls:
+            print(f"- {url}", file=sys.stderr)
+        return 4
 
     return 0
 
