@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Поездка в Грузию | Trip to Georgia, 2026
-version_id: v19-en
+version_id: v17-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -532,15 +532,14 @@ Area: Old Tbilisi / Puri Square
 
 Old Town is the most convenient area for the first Tbilisi days if the accommodation is near Puri Square. From here, the city’s main layers meet on foot: Freedom Square, Kote Abkhazi Street, Meidan, Abanotubani, Metekhi, Rike, the cable car to Narikala, and the quiet streets of Sololaki. This is not a “single sight” area, but a dense walking fabric: balconies, courtyards, churches, old staircases, and the smell of bread, sulfur, and grilled meat.
 
-![Old Tbilisi: balconies, streets, and rooftops](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/01/0169004c300a8313163ef5b7aed37fc31f64817003f569b883e57aa3240cf067.jpg)
+Image:
+![Old Tbilisi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/a2/a261cf8f5cb54039c375228aeb59b4bba06cc649e898bfee8aecf4026dcc109b.jpg)
 
 How to walk from Puri Square:
 - start from [Puri Square](https://www.google.com/maps/search/?api=1&query=Puri%20Square%20Tbilisi) and head toward Freedom Square: this is the clear orientation point, with the metro, exchange booths, and the easiest entry into the old part of the city;
 - walk along [Kote Abkhazi Street](https://www.google.com/maps/search/?api=1&query=Kote%20Abkhazi%20Street%20Tbilisi) toward Meidan: it is touristy, but useful, with cafes, shops, ice cream, and short side lanes;
 - from [Meidan / Gorgasali Square](https://www.google.com/maps/search/?api=1&query=Meidan%20Gorgasali%20Square%20Tbilisi), turn toward the sulfur baths, then look up to Narikala and Metekhi;
 - cross toward [Rike Park](https://www.google.com/maps/search/?api=1&query=Rike%20Park%20Tbilisi) via the Bridge of Peace or Metekhi Bridge and decide whether to go up by cable car.
-
-![Old Tbilisi lanes near the main walking route](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/3d/3dcc6dc386d7c5d4490d02969bee12ee1db5905b9079773530ddb5f298fdb10d.jpg)
 
 Main places:
 - [Abanotubani](https://www.google.com/maps/search/?api=1&query=Abanotubani%20Tbilisi) — the sulfur bath quarter at the foot of Narikala. It is worth coming even without taking a bath: the brick domes, Chreli Abano’s mosaic facade, the narrow passage to Leghvtakhevi Waterfall, and the fortress view give the exact Old Tbilisi feeling.
@@ -552,7 +551,8 @@ Main places:
 - [Bridge of Peace](https://www.google.com/maps/search/?api=1&query=Bridge%20of%20Peace%20Tbilisi) — the modern bridge between Old Town and Rike. Best in the evening or around sunset, but it should not be the whole day’s anchor.
 - [Leghvtakhevi Waterfall](https://www.google.com/maps/search/?api=1&query=Leghvtakhevi%20Waterfall%20Tbilisi) — a short walk from the baths into the gorge. A good small pause with a child: no museum, no queue, just water, shade, and stone walls.
 
-![Abanotubani: sulfur bath domes and old houses below Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1a/1a5f78f3bb0aa77fe63f3d3089b863dfb25a10a9962986d2b7c40baabd2cb285.jpg)
+Image:
+![Cable car to Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/04/04ab2c7bda1fcb99de939fbafe1b6b9448f7b3a487a00e533e37681130dd6ee9.webp)
 
 What the sulfur baths are like inside:
 - you usually choose a private room for 1 hour: inside there is a changing area, a hot sulfur pool or tub, a shower, a stone surface for `kisi`, and sometimes a cold plunge, sauna, or rest area;
@@ -561,22 +561,16 @@ What the sulfur baths are like inside:
 - ask about towels, slippers, and the scrub mitt when booking: some places include them, some sell them separately;
 - for a calm family visit: book a private room in advance, arrive 10-15 minutes early, bring water, and do not eat heavily right before the bath.
 
-![Cable car from Rike to Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5e/5e61345dfe6b8ac9b267e19ea3360f9dc564977073a176e23c8c9a7c02ea80e4.jpg)
-
 Practical family route:
 - in the morning or closer to evening, walk Puri Square → Kote Abkhazi → Meidan → Abanotubani → Leghvtakhevi;
 - if there is enough energy, take the cable car from Rike to Narikala and walk down toward the baths or back toward Sololaki;
 - if it is hot, use the short version: Puri Square → Meidan → baths from the outside → waterfall → cafe;
 - keep the bath as a separate evening slot rather than mixing it with a long museum-and-market day.
 
-![Old Town works best as short walking loops](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/be/be3ad63003a3c296e726c22b0ac5f6a3b7773dbca026552500911acee05b8af3.jpg)
-
 Bakeries and quick food:
 - [Puri Guliani](https://www.google.com/maps/search/?api=1&query=Puri%20Guliani%20Saarbrucken%20Square%20Tbilisi) — a convenient bakery-restaurant at Saarbrucken Square, close to Puri Square. Good for breakfast, bread, khachapuri, and clear family food.
 - [Old Town tone bakeries](https://www.google.com/maps/search/?api=1&query=tone%20bakery%20Old%20Tbilisi) — the best cheap snack without overthinking: fresh shoti, cheese, lemonade, or fruit nearby.
 - [Carrefour / Spar near Liberty Square](https://www.google.com/maps/search/?api=1&query=supermarket%20Liberty%20Square%20Tbilisi) — not gastronomic romance, but useful for water, fruit, yogurt, and child basics before a walk.
-
-![Traditional bakery in Tbilisi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/da/da11e764377d7a1a5c96de0dcbffe90b235932eff8337529bbca53d661f2056b.jpg)
 
 Budget cafes and restaurants nearby:
 - [Shemoikhede Genatsvale, Freedom Square](https://www.google.com/maps/search/?api=1&query=Shemoikhede%20Genatsvale%20Freedom%20Square%20Tbilisi) — a simple Georgian option near Freedom Square: khinkali, khachapuri, soups, and meat. Good when you do not want to hunt for the “perfect” restaurant.
@@ -584,10 +578,6 @@ Budget cafes and restaurants nearby:
 - [Racha Dukhan](https://www.google.com/maps/search/?api=1&query=Racha%20Dukhan%20Tbilisi) — a very simple format for lobio, khinkali, and home-style Georgian food; no fancy interior, but honest and budget-friendly.
 - [Mapshalia](https://www.google.com/maps/search/?api=1&query=Mapshalia%20Tbilisi) — not directly in Old Town, but a good budget backup on the left bank if you want simple Megrelian food without a tourist markup.
 - [Samikitno / Machakhela at Meidan](https://www.google.com/maps/search/?api=1&query=Samikitno%20Machakhela%20Meidan%20Tbilisi) — not the most subtle place, but convenient by location and easy by menu; useful as a backup when the child is tired and you need to sit down now.
-
-![Khachapuri for a quick family lunch](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/3b/3b0c256a642f208bacf42b3c21bfec8f79a41b3228539ad5856730078189feec.jpg)
-
-![Khinkali for a simple Old Town dinner](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/30/3085ec6e34559e60bd39519f1e6297c73f7c0a556f41ce2d666681289a481d7b.jpg)
 
 Where to be careful:
 - on the most scenic terraces near Meidan and the baths, check the menu and reviews first: the place may be selling the view more than the food;

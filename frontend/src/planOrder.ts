@@ -10,6 +10,7 @@ export interface ReadingSection {
 
 const planStableKeys = ["note.plan.update-scope", "route.option.a"];
 const stayStableKeys = [
+  "stay.tbilisi.area.old-town",
   "stay.tbilisi.area.sololaki",
   "stay.tbilisi.area.mtatsminda",
   "stay.batumi.area.old-batumi",

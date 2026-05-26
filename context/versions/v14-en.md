@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Поездка в Грузию | Trip to Georgia, 2026
-version_id: v19-en
+version_id: v14-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -419,24 +419,6 @@ How to taste it best on this trip:
 - in Kakheti, you get the most beautiful wine episode of the whole journey: lunch, the valley, vineyards, and one good glass of Saperavi or Rkatsiteli sound especially right there;
 - in Batumi, it is better to drink by mood and with food, not as a separate “wine program.”
 
-Where to buy good red wine for `$10-$15` per bottle:
-- [Dadi Wine Bar and Shop](https://www.google.com/maps/search/?api=1&query=Dadi%20Wine%20Bar%20and%20Shop%204%20Shalva%20Dadiani%20Street%20Tbilisi) — the most convenient option near Freedom Square and Puri Square: you can have a glass, ask for a red `Saperavi` or `Mukuzani` in a clear budget, and take a bottle home. Good when you want advice from a real person, not a “souvenir” bottle.
-- [Vino Underground](https://www.google.com/maps/search/?api=1&query=Vino%20Underground%2015%20Galaktion%20Tabidze%20Street%20Tbilisi) — close to Sololaki and Liberty Square, a strong address for natural wines and small wineries. Go here if you want something more alive than mass-market Saperavi; name the `$10-$15` budget right away, because some bottles are much more expensive.
-- [Wine Gallery](https://www.google.com/maps/search/?api=1&query=Wine%20Gallery%2039%20Mikheil%20Tsinamdzghvrishvili%20Street%20Tbilisi) — a large shop on the left bank, convenient after the Dry Bridge or a Chugureti walk. Good for buying several bottles: compare Saperavi, Mukuzani, Akhasheni, and ask for normal everyday wines rather than the tourist shelf.
-- [8000 Vintages](https://www.google.com/maps/search/?api=1&query=8000%20Vintages%20Tbilisi) — not the closest place to Puri Square, but one of the most reliable formats if you want a large Georgian bottle selection and sommelier help. Practical scenario: take a taxi, buy 2-3 checked bottles, and do not spend the evening on random shops.
-- [Telavi Wine Cellar / Marani](https://www.google.com/maps/search/?api=1&query=Telavi%20Wine%20Cellar%20Marani%20Telavi%20Georgia) — a Kakhetian stop near Telavi if the day route goes that way. It makes sense to buy after tasting: take a dry Saperavi, Mukuzani, or another Kakhetian red that you actually liked at the table.
-
-Where it is better not to buy:
-- the first random souvenir shop near Meidan, the baths, or Narikala, if bottles stand in the sun by the window and the seller cannot explain the grape, year, and producer;
-- the airport, if the goal is a good everyday red for `$10-$15`: it is convenient for a last-minute gift, but often worse value;
-- street sellers of “homemade wine” without a clear origin, especially if the wine is in plastic and you cannot taste it properly;
-- mini-markets on tourist streets if the choice looks like a shelf of similar sweet `Kindzmarauli` and `Alazani Valley`: fine for a souvenir, worse for actually understanding wine.
-
-Simple request to the seller:
-- “I need a dry red `Saperavi` or `Mukuzani` up to `$10-$15`, not too sweet and not too heavy, for meat and khinkali.”
-- If you want something softer, ask for `semi-dry Saperavi`, but do not automatically drift into sweet wines.
-- If you are taking one bottle for an evening at home, choose a dry Saperavi; if two, add Mukuzani or another Kakhetian red after the seller’s recommendation.
-
 What pairs especially well:
 - `Saperavi` with mtsvadi, khinkali, meat, and stronger cheeses;
 - `Rkatsiteli` with salads, cheese, khachapuri, and a lighter lunch;
@@ -525,82 +507,6 @@ Links:
 - [Official airport rail page, Georgian version](https://www.tbilisiairport.com/ka-GE/passenger-guide-ge/to-from-the-airport-ge/page/train-ge)
 - [Airport press release about the Airport station and the night train](https://www.tbilisiairport.com/en-EN/press-releases/page/railway-station-airport-will-serve-the-passengers-arriving-in-tbilisi-with-the-night-train-press)
 - [Kiwitaxi for Tbilisi Airport](https://kiwitaxi.com/en/georgia/tbilisi-airport)
-
-## [stay.tbilisi.area.old-town] Tbilisi: Old Town
-Type: stay
-Area: Old Tbilisi / Puri Square
-
-Old Town is the most convenient area for the first Tbilisi days if the accommodation is near Puri Square. From here, the city’s main layers meet on foot: Freedom Square, Kote Abkhazi Street, Meidan, Abanotubani, Metekhi, Rike, the cable car to Narikala, and the quiet streets of Sololaki. This is not a “single sight” area, but a dense walking fabric: balconies, courtyards, churches, old staircases, and the smell of bread, sulfur, and grilled meat.
-
-![Old Tbilisi: balconies, streets, and rooftops](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/01/0169004c300a8313163ef5b7aed37fc31f64817003f569b883e57aa3240cf067.jpg)
-
-How to walk from Puri Square:
-- start from [Puri Square](https://www.google.com/maps/search/?api=1&query=Puri%20Square%20Tbilisi) and head toward Freedom Square: this is the clear orientation point, with the metro, exchange booths, and the easiest entry into the old part of the city;
-- walk along [Kote Abkhazi Street](https://www.google.com/maps/search/?api=1&query=Kote%20Abkhazi%20Street%20Tbilisi) toward Meidan: it is touristy, but useful, with cafes, shops, ice cream, and short side lanes;
-- from [Meidan / Gorgasali Square](https://www.google.com/maps/search/?api=1&query=Meidan%20Gorgasali%20Square%20Tbilisi), turn toward the sulfur baths, then look up to Narikala and Metekhi;
-- cross toward [Rike Park](https://www.google.com/maps/search/?api=1&query=Rike%20Park%20Tbilisi) via the Bridge of Peace or Metekhi Bridge and decide whether to go up by cable car.
-
-![Old Tbilisi lanes near the main walking route](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/3d/3dcc6dc386d7c5d4490d02969bee12ee1db5905b9079773530ddb5f298fdb10d.jpg)
-
-Main places:
-- [Abanotubani](https://www.google.com/maps/search/?api=1&query=Abanotubani%20Tbilisi) — the sulfur bath quarter at the foot of Narikala. It is worth coming even without taking a bath: the brick domes, Chreli Abano’s mosaic facade, the narrow passage to Leghvtakhevi Waterfall, and the fortress view give the exact Old Tbilisi feeling.
-- [Chreli Abano / Orbeliani Baths](https://www.google.com/maps/search/?api=1&query=Chreli%20Abano%20Tbilisi) — the most photogenic and straightforward option for a first sulfur bath visit. This is not a cheap city shower, but a tourist-friendly format with booking, private rooms, and a `kisi` service.
-- [Bathhouse No. 5](https://www.google.com/maps/search/?api=1&query=Bathhouse%20No%205%20Abanotubani%20Tbilisi) — a simpler and more traditional reference point in the same district. Consider it if you want less polish and a calmer price, but check the exact room and time before visiting.
-- [Narikala Fortress](https://www.google.com/maps/search/?api=1&query=Narikala%20Fortress%20Tbilisi) — the main upper point of the Old Town. From above, it is easy to see how the river, baths, Metekhi, Sololaki, and new bridges sit side by side while still looking like different eras.
-- [Rike-Narikala Cable Car](https://www.google.com/maps/search/?api=1&query=Rike%20Narikala%20Cable%20Car%20Tbilisi) — the easiest way to reach Narikala without a heavy climb. Price guide: `2.5 GEL`, about `$0.93` one way per person.
-- [Metekhi Church](https://www.google.com/maps/search/?api=1&query=Metekhi%20Church%20Tbilisi) — a good view across the river toward the old city and baths. It is easy to add before or after Rike.
-- [Bridge of Peace](https://www.google.com/maps/search/?api=1&query=Bridge%20of%20Peace%20Tbilisi) — the modern bridge between Old Town and Rike. Best in the evening or around sunset, but it should not be the whole day’s anchor.
-- [Leghvtakhevi Waterfall](https://www.google.com/maps/search/?api=1&query=Leghvtakhevi%20Waterfall%20Tbilisi) — a short walk from the baths into the gorge. A good small pause with a child: no museum, no queue, just water, shade, and stone walls.
-
-![Abanotubani: sulfur bath domes and old houses below Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1a/1a5f78f3bb0aa77fe63f3d3089b863dfb25a10a9962986d2b7c40baabd2cb285.jpg)
-
-What the sulfur baths are like inside:
-- you usually choose a private room for 1 hour: inside there is a changing area, a hot sulfur pool or tub, a shower, a stone surface for `kisi`, and sometimes a cold plunge, sauna, or rest area;
-- `kisi` is the traditional firm exfoliating scrub with a mitt, usually 10-15 minutes. After a walking day it feels very Georgian, but it may be too intense for a child;
-- the sulfur smell is noticeable and the water is hot, so it is better not to schedule the bath at the most exhausted point of the day;
-- ask about towels, slippers, and the scrub mitt when booking: some places include them, some sell them separately;
-- for a calm family visit: book a private room in advance, arrive 10-15 minutes early, bring water, and do not eat heavily right before the bath.
-
-![Cable car from Rike to Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5e/5e61345dfe6b8ac9b267e19ea3360f9dc564977073a176e23c8c9a7c02ea80e4.jpg)
-
-Practical family route:
-- in the morning or closer to evening, walk Puri Square → Kote Abkhazi → Meidan → Abanotubani → Leghvtakhevi;
-- if there is enough energy, take the cable car from Rike to Narikala and walk down toward the baths or back toward Sololaki;
-- if it is hot, use the short version: Puri Square → Meidan → baths from the outside → waterfall → cafe;
-- keep the bath as a separate evening slot rather than mixing it with a long museum-and-market day.
-
-![Old Town works best as short walking loops](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/be/be3ad63003a3c296e726c22b0ac5f6a3b7773dbca026552500911acee05b8af3.jpg)
-
-Bakeries and quick food:
-- [Puri Guliani](https://www.google.com/maps/search/?api=1&query=Puri%20Guliani%20Saarbrucken%20Square%20Tbilisi) — a convenient bakery-restaurant at Saarbrucken Square, close to Puri Square. Good for breakfast, bread, khachapuri, and clear family food.
-- [Old Town tone bakeries](https://www.google.com/maps/search/?api=1&query=tone%20bakery%20Old%20Tbilisi) — the best cheap snack without overthinking: fresh shoti, cheese, lemonade, or fruit nearby.
-- [Carrefour / Spar near Liberty Square](https://www.google.com/maps/search/?api=1&query=supermarket%20Liberty%20Square%20Tbilisi) — not gastronomic romance, but useful for water, fruit, yogurt, and child basics before a walk.
-
-![Traditional bakery in Tbilisi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/da/da11e764377d7a1a5c96de0dcbffe90b235932eff8337529bbca53d661f2056b.jpg)
-
-Budget cafes and restaurants nearby:
-- [Shemoikhede Genatsvale, Freedom Square](https://www.google.com/maps/search/?api=1&query=Shemoikhede%20Genatsvale%20Freedom%20Square%20Tbilisi) — a simple Georgian option near Freedom Square: khinkali, khachapuri, soups, and meat. Good when you do not want to hunt for the “perfect” restaurant.
-- [Cafe Daphna](https://www.google.com/maps/search/?api=1&query=Cafe%20Daphna%20Tbilisi) — a clear choice for khinkali and an informal dinner, especially if the route shifts toward Chugureti or the Dry Bridge.
-- [Racha Dukhan](https://www.google.com/maps/search/?api=1&query=Racha%20Dukhan%20Tbilisi) — a very simple format for lobio, khinkali, and home-style Georgian food; no fancy interior, but honest and budget-friendly.
-- [Mapshalia](https://www.google.com/maps/search/?api=1&query=Mapshalia%20Tbilisi) — not directly in Old Town, but a good budget backup on the left bank if you want simple Megrelian food without a tourist markup.
-- [Samikitno / Machakhela at Meidan](https://www.google.com/maps/search/?api=1&query=Samikitno%20Machakhela%20Meidan%20Tbilisi) — not the most subtle place, but convenient by location and easy by menu; useful as a backup when the child is tired and you need to sit down now.
-
-![Khachapuri for a quick family lunch](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/3b/3b0c256a642f208bacf42b3c21bfec8f79a41b3228539ad5856730078189feec.jpg)
-
-![Khinkali for a simple Old Town dinner](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/30/3085ec6e34559e60bd39519f1e6297c73f7c0a556f41ce2d666681289a481d7b.jpg)
-
-Where to be careful:
-- on the most scenic terraces near Meidan and the baths, check the menu and reviews first: the place may be selling the view more than the food;
-- do not accept “the best homemade wine” from touts without a menu and a price;
-- on the climb toward Narikala, do not pay for photos with birds or animals unless you actively wanted that;
-- in hot weather, do not try to do the baths, Narikala, Rike, Metekhi, and Sololaki in one push. Old Town works better in short loops.
-
-Links:
-- [Abanotubani on the map](https://www.google.com/maps/search/?api=1&query=Abanotubani%20Tbilisi)
-- [Chreli Abano booking](https://booking.chreli-abano.ge/)
-- [TTC fare for the Rike-Narikala ropeway](https://ttc.com.ge/ka/tariff/10)
-- [Georgia Travel: Bridge of Peace](https://georgia.travel/tbilisi-peace-bridge)
-- [Georgia Travel: Metekhi Bridge and Narikala views](https://georgia.travel/metekhi-bridge)
 
 ## [stay.tbilisi.area.sololaki] Tbilisi: Sololaki and Freedom Square
 Type: stay
@@ -1075,40 +981,6 @@ Links:
 - [Yacht trips in Batumi](https://www.sputnik8.com/ru/batumi/category/na-yahte)
 - [Private yacht trip, from $140.46 for up to 5 people](https://www.sputnik8.com/ru/batumi/category/na-yahte)
 - [Sea photo trip on a double-deck yacht, $195 for up to 12 people](https://www.sputnik8.com/ru/batumi/activities/63184-morskaya-fotoprogulka-na-dvuhpalubnoy-yahte-v-batumi)
-
-## [activity.batumi.plane-spotting] Planes by Batumi Airport
-Type: activity
-
-Plane spotting by Batumi Airport is a short free activity at the edge of the New Boulevard: aircraft approach from the sea and fly low over the beach before touching down on the runway. It is not a must-do excursion, but it is a good sunset or pre-sunset episode if you want unusual photos and a little adrenaline without leaving the city.
-
-Where to look:
-- map point: `Plane spotting site` / `Площадка для споттинга`;
-- coordinates: `41.618433, 41.586777`;
-- on-site landmark: the far western end of the New Boulevard, between the sea and the airport.
-
-When to go:
-- arrivals are the interesting part: in the airport schedule, look for `Arrival`, because the plane comes in from the sea;
-- check the Batumi Airport schedule and Flightradar24 in advance;
-- it is better to choose a time when at least two flights are expected close together, because the actual flyover gives you only about 20-30 seconds;
-- weekdays are usually calmer, while Friday and Saturday can bring more cars, wedding groups, and spectators.
-
-How to get there:
-- on foot, walk to the end of the New Boulevard; from New Batumi it is usually 30-60 minutes, from the center noticeably longer;
-- by bicycle or scooter, the seafront route is convenient;
-- by taxi from the center, about 15 minutes; price guide: about `$1.85-$3.70` per car at 5-10 GEL.
-
-Things to keep in mind:
-- it is better to stand on the stones closer to the sea, but wear proper shoes;
-- there is little shade, so bring water;
-- there is a beach access nearby, so the wait can be combined with a short pause by the sea.
-
-Links:
-- [BPTrip: where and when to take photos with planes in Batumi](https://bptrip.ru/posts/gde-i-kogda-fotkatsya-s-samoletami-v-batumi/)
-- [Batumi Airport: flight schedule](https://www.batumiairport.com/)
-- [Flightradar24: Batumi Airport](https://www.flightradar24.com/data/airports/bus)
-
-Image:
-![Planes by Batumi Airport](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/07/078334ec1dbcaf157f4118eddf716e54ea5a9ba1a80d7b7715f7743b1da63fce.jpg)
 
 ## [activity.batumi.botanical-garden] Batumi Botanical Garden
 Type: activity

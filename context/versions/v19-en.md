@@ -561,22 +561,16 @@ What the sulfur baths are like inside:
 - ask about towels, slippers, and the scrub mitt when booking: some places include them, some sell them separately;
 - for a calm family visit: book a private room in advance, arrive 10-15 minutes early, bring water, and do not eat heavily right before the bath.
 
-![Cable car from Rike to Narikala](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5e/5e61345dfe6b8ac9b267e19ea3360f9dc564977073a176e23c8c9a7c02ea80e4.jpg)
-
 Practical family route:
 - in the morning or closer to evening, walk Puri Square → Kote Abkhazi → Meidan → Abanotubani → Leghvtakhevi;
 - if there is enough energy, take the cable car from Rike to Narikala and walk down toward the baths or back toward Sololaki;
 - if it is hot, use the short version: Puri Square → Meidan → baths from the outside → waterfall → cafe;
 - keep the bath as a separate evening slot rather than mixing it with a long museum-and-market day.
 
-![Old Town works best as short walking loops](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/be/be3ad63003a3c296e726c22b0ac5f6a3b7773dbca026552500911acee05b8af3.jpg)
-
 Bakeries and quick food:
 - [Puri Guliani](https://www.google.com/maps/search/?api=1&query=Puri%20Guliani%20Saarbrucken%20Square%20Tbilisi) — a convenient bakery-restaurant at Saarbrucken Square, close to Puri Square. Good for breakfast, bread, khachapuri, and clear family food.
 - [Old Town tone bakeries](https://www.google.com/maps/search/?api=1&query=tone%20bakery%20Old%20Tbilisi) — the best cheap snack without overthinking: fresh shoti, cheese, lemonade, or fruit nearby.
 - [Carrefour / Spar near Liberty Square](https://www.google.com/maps/search/?api=1&query=supermarket%20Liberty%20Square%20Tbilisi) — not gastronomic romance, but useful for water, fruit, yogurt, and child basics before a walk.
-
-![Traditional bakery in Tbilisi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/da/da11e764377d7a1a5c96de0dcbffe90b235932eff8337529bbca53d661f2056b.jpg)
 
 Budget cafes and restaurants nearby:
 - [Shemoikhede Genatsvale, Freedom Square](https://www.google.com/maps/search/?api=1&query=Shemoikhede%20Genatsvale%20Freedom%20Square%20Tbilisi) — a simple Georgian option near Freedom Square: khinkali, khachapuri, soups, and meat. Good when you do not want to hunt for the “perfect” restaurant.
