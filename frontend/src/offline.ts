@@ -3,6 +3,7 @@ import { normalizeLang, type AppLang } from "./lang";
 import type { PlanItem } from "./types/api";
 
 const OFFLINE_STATUS_KEY = "family-trip-helper:offline-guide-status";
+const OFFLINE_STATUS_PREFIX = `${OFFLINE_STATUS_KEY}:`;
 const MEDIA_CACHE_NAME = "family-trip-helper-media-v1";
 const APP_CACHE_NAME = "family-trip-helper-app-v1";
 
@@ -25,7 +26,6 @@ export interface OfflineGuideProgress {
 }
 
 export interface CacheGuideInput {
-  versionId?: string | number;
   guestToken?: string;
   lang?: AppLang;
   onProgress?: (progress: OfflineGuideProgress) => void;
@@ -103,14 +103,20 @@ async function cacheMedia(urls: string[], onProgress?: (done: number, total: num
   return cachedCount;
 }
 
-export function getOfflineGuideStatus(): OfflineGuideStatus | null {
-  const rawValue = localStorage.getItem(OFFLINE_STATUS_KEY);
+function getOfflineStatusKey(lang: AppLang): string {
+  return `${OFFLINE_STATUS_PREFIX}${lang}`;
+}
+
+export function getOfflineGuideStatus(lang?: AppLang): OfflineGuideStatus | null {
+  const normalizedLang = normalizeLang(lang);
+  const rawValue = localStorage.getItem(getOfflineStatusKey(normalizedLang)) ?? localStorage.getItem(OFFLINE_STATUS_KEY);
   if (!rawValue) {
     return null;
   }
 
   try {
-    return JSON.parse(rawValue) as OfflineGuideStatus;
+    const status = JSON.parse(rawValue) as OfflineGuideStatus;
+    return status.lang === normalizedLang ? status : null;
   } catch {
     return null;
   }
@@ -129,7 +135,7 @@ export async function cacheGuide(input: CacheGuideInput = {}): Promise<OfflineGu
   progress(lang === "ru" ? "Загружаем поездку" : "Loading trip", 4);
 
   const overview = await getOverview(lang);
-  const versionId = input.versionId ?? overview.currentVersion?.id;
+  const versionId = overview.currentVersion?.id;
   if (!versionId) {
     throw new Error(lang === "ru" ? "Нет текущей версии для офлайн-загрузки" : "No current version to cache offline");
   }
@@ -163,7 +169,7 @@ export async function cacheGuide(input: CacheGuideInput = {}): Promise<OfflineGu
     failedMediaCount: Math.max(mediaURLs.length - mediaCount, 0),
   };
 
-  localStorage.setItem(OFFLINE_STATUS_KEY, JSON.stringify(status));
+  localStorage.setItem(getOfflineStatusKey(lang), JSON.stringify(status));
   progress(lang === "ru" ? "Готово" : "Ready", 4);
   return status;
 }

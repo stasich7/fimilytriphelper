@@ -31,11 +31,6 @@ const guestToken = computed(() => {
   return token || undefined;
 });
 
-const routeVersionId = computed(() => {
-  const value = String(route.params.versionId || "");
-  return value || undefined;
-});
-
 const icon = computed(() => {
   if (saving.value) {
     return "…";
@@ -91,7 +86,6 @@ async function saveOfflineGuide(): Promise<void> {
 
   try {
     status.value = await cacheGuide({
-      versionId: routeVersionId.value,
       guestToken: guestToken.value,
       lang: lang.value,
       onProgress: (nextProgress) => {
@@ -106,11 +100,11 @@ async function saveOfflineGuide(): Promise<void> {
 }
 
 onMounted(() => {
-  status.value = getOfflineGuideStatus();
+  status.value = getOfflineGuideStatus(lang.value);
 });
 
 watch(lang, () => {
-  status.value = getOfflineGuideStatus();
+  status.value = getOfflineGuideStatus(lang.value);
   lastError.value = "";
 });
 </script>
