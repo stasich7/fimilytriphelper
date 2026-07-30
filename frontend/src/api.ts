@@ -16,6 +16,7 @@ import type {
 import { normalizeLang, type AppLang } from "./lang";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || "/api/v1").replace(/\/$/, "");
+const API_CACHE_NAME = "family-trip-helper-api-v1";
 
 function appendLangParam(path: string, lang?: AppLang): string {
   const normalizedLang = normalizeLang(lang);
@@ -27,9 +28,66 @@ function appendLangParam(path: string, lang?: AppLang): string {
   return `${path}${separator}lang=${normalizedLang}`;
 }
 
+function canUseCache(init?: RequestInit): boolean {
+  return !init || !init.method || init.method.toUpperCase() === "GET";
+}
+
+async function readCachedJSON<T>(url: string): Promise<T | null> {
+  if (!("caches" in window)) {
+    return null;
+  }
+
+  try {
+    const cachedResponse = await caches.match(url);
+    if (!cachedResponse) {
+      return null;
+    }
+
+    return (await cachedResponse.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+async function writeCachedJSON(url: string, response: Response): Promise<void> {
+  if (!("caches" in window)) {
+    return;
+  }
+
+  try {
+    const cache = await caches.open(API_CACHE_NAME);
+    await cache.put(url, response.clone());
+  } catch {
+    // API cache is a convenience layer; online reads must still succeed if storage is unavailable.
+  }
+}
+
 async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, init);
+  const url = `${API_BASE}${path}`;
+  const shouldCache = canUseCache(init);
+  let response: Response;
+
+  try {
+    response = await fetch(url, init);
+  } catch (err) {
+    if (shouldCache) {
+      const cachedPayload = await readCachedJSON<T>(url);
+      if (cachedPayload) {
+        return cachedPayload;
+      }
+    }
+
+    throw err;
+  }
+
   if (!response.ok) {
+    if (shouldCache) {
+      const cachedPayload = await readCachedJSON<T>(url);
+      if (cachedPayload) {
+        return cachedPayload;
+      }
+    }
+
     let message = `Request failed with status ${response.status}`;
     try {
       const payload = (await response.json()) as { message?: string };
@@ -41,6 +99,10 @@ async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
     }
 
     throw new Error(message);
+  }
+
+  if (shouldCache) {
+    await writeCachedJSON(url, response);
   }
 
   return (await response.json()) as T;

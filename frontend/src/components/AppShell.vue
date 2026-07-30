@@ -15,6 +15,7 @@
           <span aria-hidden="true" class="shell__lang-label">Рус/Eng</span>
           <span aria-hidden="true" class="shell__lang-icon">🌐</span>
         </button>
+        <OfflineGuideButton />
         <button v-if="showBack" type="button" class="shell__nav-button shell__back-button" :aria-label="text.back" :title="text.back" @click="goBack">
           <span aria-hidden="true" class="shell__back-label">{{ text.back }}</span>
           <span aria-hidden="true" class="shell__back-icon">←</span>
@@ -36,6 +37,7 @@ import { useRoute, useRouter } from "vue-router";
 import { getOverview } from "../api";
 import { buildLangQuery, getNextLang, getRouteLang, getUIText } from "../lang";
 import { buildOverviewPath, buildToolsPath, buildVersionPath } from "../paths";
+import OfflineGuideButton from "./OfflineGuideButton.vue";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
 
