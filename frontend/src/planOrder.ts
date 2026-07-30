@@ -14,6 +14,7 @@ const stayStableKeys = [
   "stay.tbilisi.area.sololaki",
   "stay.tbilisi.area.mtatsminda",
   "stay.batumi.area.old-batumi",
+  "stay.ureki.week-by-sea",
   "stay.batumi.area.chakvi",
 ];
 const arrivalStableKeys = ["transport.arrival.tbilisi-airport"];

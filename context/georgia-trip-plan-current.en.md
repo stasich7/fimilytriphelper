@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Поездка в Грузию | Trip to Georgia, 2026
-version_id: v19-en
+version_id: v20-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -106,7 +106,8 @@ Date: 2026-08-08
 - Day logic: Mtskheta and Svetitskhoveli in the morning, a short drive to Jvari, and lunch back in Mtskheta after the viewpoint.
 - Lunch is better after Jvari, so nobody returns to Tbilisi hungry and tired.
 - More: [Mtskheta and Jvari](item:activity.mtskheta.daytrip).
-- Day area map: [Mtskheta, Svetitskhoveli, and Jvari](https://www.google.com/maps/search/Mtskheta+Svetitskhoveli+Jvari+Monastery)
+- Day area map: [Mtskheta and Svetitskhoveli](https://www.google.com/maps/search/Mtskheta+Svetitskhoveli+Cathedral)
+- Separate map: [Jvari](https://www.google.com/maps/search/Jvari+Monastery+Mtskheta)
 
 ## [day.tbilisi.2026-08-09] August 9 — markets, Sololaki, and city details
 Type: day_plan
@@ -138,7 +139,8 @@ Date: 2026-08-10
 - If you want a short tasting, it is better to place it near lunch and not turn it into a wine marathon.
 - Lunch: simple Kakhetian food, bread, cheese, salads, grilled meat, or homestyle dishes somewhere along the route.
 - More: [Kakheti, Sighnaghi, and Bodbe](item:activity.kakheti.sighnaghi).
-- Day area map: [Sighnaghi, Bodbe, and the Alazani Valley](https://www.google.com/maps/search/Sighnaghi+Bodbe+Monastery+Alazani+Valley)
+- Day area map: [Bodbe and views over the Alazani Valley](https://www.google.com/maps/search/Bodbe+Monastery+Alazani+Valley)
+- Separate map: [Sighnaghi](https://www.google.com/maps/search/Sighnaghi+Georgia)
 
 ## [day.tbilisi.2026-08-11] August 11 — the left bank, Aghmashenebeli, and calmer urban Tbilisi
 Type: day_plan
@@ -170,7 +172,9 @@ Date: 2026-08-12
 - ![6](/chips/map-chip-6.png?v=chips-2) The view of Kazbek and the Gergeti area is the main final image of the day: mountain, valley, and church high above. The climb to Gergeti often needs a local car or clear transport planning.
 - If the group is not ready for such a long day, it is better to replace it with a museum, the funicular, sulfur baths for the adults, and an unhurried dinner in the center.
 - More: [Kazbegi and the Georgian Military Road](item:activity.kazbegi.daytrip).
-- Day area map: [Zhinvali, Ananuri, Stepantsminda, and Kazbek](https://www.google.com/maps/search/Zhinvali+Ananuri+Stepantsminda+Kazbek)
+- Day area map: [Zhinvali and Ananuri](https://www.google.com/maps/search/Zhinvali+Reservoir+Ananuri+Fortress)
+- Separate map: [Gudauri](https://www.google.com/maps/search/Gudauri+Georgia)
+- Separate map: [Stepantsminda, Kazbek, and the Gergeti area](https://www.google.com/maps/search/Stepantsminda+Kazbek+Gergeti+Trinity+Church)
 
 ## [day.transfer.2026-08-13] August 13 — train to the sea and the first evening in Batumi
 Type: day_plan
@@ -910,6 +914,14 @@ Price guide:
 - about `$6.50` for a 6-year-old child, for 1 one-way ticket
 - for your family of 2 adults + 1 teenager age 15 + 1 child age 6, the guide starts from `$45.50` one way for everyone
 
+Important:
+- because you chose accommodation near Ureki, you should travel from Tbilisi to `Ureki` station, not all the way to `Batumi-Central`;
+- this is one of the usual intermediate stops on Tbilisi → Batumi trains, so the logic stays the same: board the Batumi-bound train in Tbilisi, but get off earlier;
+- from `Ureki` station to the chosen accommodation at `41.97820999591867, 41.76465176995964`, plan a short local taxi ride or an arranged transfer, because walking from the station with luggage and a child is not convenient;
+- if you accidentally buy tickets to Batumi, you will overshoot the right area and then have to ride back toward Ureki for about an hour along the coast.
+- Map: [Ureki railway station](https://www.google.com/maps/search/Ureki+Railway+Station)
+- Accommodation map: [coordinates 41.97820999591867, 41.76465176995964](https://www.google.com/maps/search/?api=1&query=41.97820999591867,41.76465176995964)
+
 Links:
 - [Railway and tickets](https://www.tkt.ge/en/Railway)
 - [TRE.GE](https://tre.ge/en)
@@ -948,6 +960,53 @@ Links:
 
 Image:
 ![Batumi in the evening](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1c/1cc280f78364d41f6270e1a55d3f42076a6ac0656b5af494e63d3befd92d6cdd.jpg)
+
+## [stay.ureki.week-by-sea] A Week by the Sea: Ureki
+Type: stay
+Area: Ureki / Kaprovani
+
+You chose accommodation near Ureki, but there is one important nuance: the point is not in the very center of the village, but across the river, closer to the quieter side of the coast. That works well for a week by the sea: less of the dense resort-center feeling, an easier family rhythm, and no need to live every day in the noise of the promenade.
+
+- Accommodation map: [coordinates 41.97820999591867, 41.76465176995964](https://www.google.com/maps/search/?api=1&query=41.97820999591867,41.76465176995964)
+
+The beach closest to your accommodation feels calmer and more natural, but its beach infrastructure is less developed: fewer continuous rows of sunbeds, cafes, rentals, and resort bustle. It is more of a “walk out to the sea near home” format than a full beach day with services around you.
+
+Why Ureki is interesting:
+- it is one of Georgia's rare sandy seaside resorts: after the pebbly beaches of Batumi, Makhinjauri, Green Cape, and Chakvi, the black sand feels completely different;
+- the sand is dark because of minerals with magnetite, so it heats up quickly in the sun and can become very hot in the middle of the day;
+- the sea entry is usually gentler than on pebbly beaches, which makes the format better for a child and calmer swimming;
+- the healing qualities of the magnetic sands are often mentioned in tourism descriptions, but for this trip it is better to treat that as a pleasant feature of the place rather than a medical program.
+
+Image:
+![Ureki black sand at sunset](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4d/4d2b496426c7fcf325518c38d75a5d686512554e3b422117e7d7af86f90082a1.png)
+
+Image:
+![Beach near your accommodation](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d0/d0c641306aaefd4616e44d811be061b9b9fe27dfd2bca327f8f84f3475c17eaa.png)
+
+Image:
+![Seaside cafe near Ureki](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/2b/2b49bfbfca6870f08f92bcbf9575070681ee78cd7736090605faaea2a87317c8.png)
+
+Central Ureki beach is across the river and is more oriented toward a classic beach day: the resort infrastructure is more visible there, and it is easier to find sunbeds, umbrellas, cafes, drinks, and seasonal services. If you want a “proper resort beach” day, it makes more sense to go there rather than stay only on the stretch closest to the accommodation.
+
+Image:
+![Central Ureki beach from above](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c4/c463bce3114171950a59d430df247df63141684316b55cafd993a6b9cbc2da8e.webp)
+
+What is in the village:
+- central Ureki has the beach line, a small promenade, seasonal cafes, sunbed and umbrella rentals, simple shops, pharmacies, and fruit points;
+- food is mostly simple rather than fancy: family cafes, khachapuri, khinkali, grilled meat, fish, salads, pastries, ice cream, and beach drinks;
+- for groceries, use the small village shops and roadside points; for bigger shopping, it is better to stock up on the way or in Batumi;
+- in August, the village is lively and family-oriented, so for quiet it is better to stay closer to your accommodation than to the densest part of the central beach.
+
+How to get to central Batumi:
+- central Batumi is too far from Ureki for effortless daily evening walks: by road it is about an hour, sometimes more with traffic;
+- the calmest family option is a taxi or an arranged transfer directly from the accommodation to the exact point you need in Batumi;
+- minibuses and buses along the coast are the cheaper option, but with a child, beach things, and an evening return they are less predictable;
+- the train can work for specific transfers, but it does not replace an urban commuter service for every evening: check the timetable for the exact day.
+
+Links:
+- [Georgia Travel: Ureki](https://georgia.travel/villages/ureki)
+- [Georgia Travel: Georgian beaches and Guria's magnetic sands](https://georgia.travel/why-georgia-the-beaches)
+- [Practical Ureki guide](https://madloba.info/blog/georgian-cities/razvlecheniya-v-poselke-ureki-kafe-restorany-attraktsiony-plyazh-i-naberezhnaya-v-ureki/)
 
 ## [stay.batumi.area.chakvi] Batumi suburbs: Makhinjauri, Green Cape, and Chakvi
 Type: stay
@@ -1085,6 +1144,7 @@ Where to look:
 - map point: `Plane spotting site` / `Площадка для споттинга`;
 - coordinates: `41.618433, 41.586777`;
 - on-site landmark: the far western end of the New Boulevard, between the sea and the airport.
+- Map: [spotting point near Batumi Airport](https://www.google.com/maps/search/?api=1&query=41.618433,41.586777)
 
 When to go:
 - arrivals are the interesting part: in the airport schedule, look for `Arrival`, because the plane comes in from the sea;
