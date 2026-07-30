@@ -8,6 +8,10 @@
   font-weight: 400;
 }
 
+html {
+  touch-action: manipulation;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,6 +19,7 @@
 body {
   margin: 0;
   min-width: 320px;
+  touch-action: manipulation;
 }
 
 a {
@@ -28,6 +33,17 @@ textarea {
   font: inherit;
 }
 
+a,
+button,
+input,
+label,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
 #app {
   min-height: 100vh;
+  touch-action: manipulation;
 }
