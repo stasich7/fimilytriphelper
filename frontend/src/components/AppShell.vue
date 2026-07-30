@@ -34,9 +34,10 @@
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import { getOverview } from "../api";
-import { buildLangQuery, getNextLang, getRouteLang, getUIText } from "../lang";
-import { buildOverviewPath, buildToolsPath, buildVersionPath } from "../paths";
+import { getItem, getOverview, getVersion } from "../api";
+import { buildLangQuery, getNextLang, getRouteLang, getUIText, type AppLang } from "../lang";
+import { buildItemPath, buildOverviewPath, buildToolsPath, buildVersionItemAnchorPath, buildVersionPath } from "../paths";
+import type { PlanItem } from "../types/api";
 import OfflineGuideButton from "./OfflineGuideButton.vue";
 
 const RETURN_PATH_KEY = "family-trip-helper:return-path";
@@ -85,8 +86,106 @@ async function goHome(): Promise<void> {
   await router.push(overviewPath.value);
 }
 
+function appendFromQuery(path: string, fromItemId: number | string | null): string {
+  if (!fromItemId) {
+    return path;
+  }
+
+  const separator = path.includes("?") ? "&" : "?";
+  return `${path}${separator}from=${encodeURIComponent(String(fromItemId))}`;
+}
+
+function hashItemId(hash: string): number | null {
+  const match = hash.match(/^#item-(\d+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const itemId = Number(match[1]);
+  return Number.isFinite(itemId) && itemId > 0 ? itemId : null;
+}
+
+async function loadCurrentVersionItems(targetLang: AppLang): Promise<PlanItem[]> {
+  const overview = await getOverview(targetLang);
+  if (!overview.currentVersion) {
+    return [];
+  }
+
+  const version = await getVersion(overview.currentVersion.id, guestToken.value || undefined, targetLang);
+  return version.items ?? [];
+}
+
+async function findLocalizedItemID(sourceItemId: string | number, sourceLang: AppLang, targetLang: AppLang): Promise<number | null> {
+  const sourceItem = await getItem(String(sourceItemId), guestToken.value || undefined, sourceLang);
+  const targetItems = await loadCurrentVersionItems(targetLang);
+  const targetItem = targetItems.find((item) => item.stableKey === sourceItem.item.stableKey);
+  return targetItem?.id ?? null;
+}
+
+async function buildLocalizedItemLanguagePath(nextLang: AppLang): Promise<string | null> {
+  const itemId = String(route.params.itemId || "");
+  if (!itemId) {
+    return null;
+  }
+
+  const targetItemId = await findLocalizedItemID(itemId, lang.value, nextLang);
+  if (!targetItemId) {
+    return null;
+  }
+
+  let targetFromItemId: number | null = null;
+  const fromItemId = String(route.query.from || "");
+  if (fromItemId) {
+    targetFromItemId = await findLocalizedItemID(fromItemId, lang.value, nextLang);
+  }
+
+  return appendFromQuery(buildItemPath(targetItemId, guestToken.value || undefined, nextLang), targetFromItemId);
+}
+
+async function buildLocalizedVersionLanguagePath(nextLang: AppLang): Promise<string | null> {
+  const overview = await getOverview(nextLang);
+  if (!overview.currentVersion) {
+    return null;
+  }
+
+  const basePath = buildVersionPath(overview.currentVersion.id, guestToken.value || undefined, nextLang);
+  const sourceHashItemId = hashItemId(route.hash);
+  if (!sourceHashItemId) {
+    return basePath;
+  }
+
+  const targetItemId = await findLocalizedItemID(sourceHashItemId, lang.value, nextLang);
+  if (!targetItemId) {
+    return basePath;
+  }
+
+  return buildVersionItemAnchorPath(overview.currentVersion.id, targetItemId, guestToken.value || undefined, nextLang);
+}
+
 async function toggleLanguage(): Promise<void> {
   const nextLang = getNextLang(lang.value);
+  const routeName = String(route.name || "");
+
+  try {
+    if (routeName === "item" || routeName === "guest-item") {
+      const localizedPath = await buildLocalizedItemLanguagePath(nextLang);
+      if (localizedPath) {
+        await router.push(localizedPath);
+        return;
+      }
+    }
+
+    if (routeName === "version" || routeName === "guest-version") {
+      const localizedPath = await buildLocalizedVersionLanguagePath(nextLang);
+      if (localizedPath) {
+        await router.push(localizedPath);
+        return;
+      }
+    }
+  } catch {
+    // Fall back to a plain language query switch when localized cached data is unavailable.
+  }
+
   await router.push({
     name: route.name || undefined,
     params: route.params,
