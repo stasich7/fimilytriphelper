@@ -43,6 +43,15 @@ textarea,
   touch-action: manipulation;
 }
 
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
 #app {
   min-height: 100vh;
   touch-action: manipulation;

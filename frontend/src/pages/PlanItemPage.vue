@@ -394,6 +394,7 @@ watch(
   border-top: 1px solid rgba(39, 74, 103, 0.14);
   box-shadow: 0 -14px 30px rgba(31, 41, 55, 0.08);
   backdrop-filter: blur(10px);
+  touch-action: manipulation;
 }
 
 .floating-nav__inner {
@@ -402,6 +403,7 @@ watch(
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  touch-action: manipulation;
 }
 
 .floating-nav__button {
@@ -415,11 +417,15 @@ watch(
   cursor: pointer;
   font: inherit;
   font-weight: 800;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .floating-nav__button--disabled {
   opacity: 0.35;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 :deep(.markdown-body p) {
