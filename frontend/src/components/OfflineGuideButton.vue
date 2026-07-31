@@ -7,7 +7,8 @@
     :title="buttonTitle"
     @click="saveOfflineGuide"
   >
-    <span aria-hidden="true">{{ icon }}</span>
+    <span v-if="saving" aria-hidden="true" class="offline-button__spinner"></span>
+    <span v-else aria-hidden="true">{{ icon }}</span>
     <span class="offline-button__label">{{ label }}</span>
   </button>
 </template>
@@ -136,6 +137,21 @@ watch(lang, () => {
   opacity: 0.75;
 }
 
+.offline-button__spinner {
+  width: 1.05em;
+  height: 1.05em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: offline-spin 0.8s linear infinite;
+}
+
+@keyframes offline-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 430px) {
   .offline-button {
     width: 54px;
@@ -151,6 +167,11 @@ watch(lang, () => {
   .offline-button span:first-child {
     font-size: 26px;
     line-height: 1;
+  }
+
+  .offline-button__spinner {
+    width: 24px;
+    height: 24px;
   }
 }
 </style>
