@@ -1,5 +1,6 @@
 import { getGuest, getOverview, getVersion, getItem } from "./api";
 import { normalizeLang, type AppLang } from "./lang";
+import { buildItemPath, buildOverviewPath, buildVersionPath } from "./paths";
 import type { PlanItem } from "./types/api";
 
 const OFFLINE_STATUS_KEY = "family-trip-helper:offline-guide-status";
@@ -42,6 +43,12 @@ function toAbsoluteURL(url: string): string {
 function extractMediaURLs(items: PlanItem[]): string[] {
   const urls = new Set<string>([
     "/",
+    "/manifest.webmanifest",
+    "/favicon.svg",
+    "/favicon-32.png",
+    "/apple-touch-icon.png",
+    "/icon-192.png",
+    "/icon-512.png",
     "/family-trip-v4.png",
     "/family-trip-v5.png",
     "/chips/map-chip-1.png",
@@ -55,6 +62,28 @@ function extractMediaURLs(items: PlanItem[]): string[] {
   for (const item of items) {
     for (const match of item.bodyMarkdown.matchAll(markdownImagePattern)) {
       urls.add(match[1]);
+    }
+  }
+
+  return [...urls];
+}
+
+function buildOfflineRouteURLs(versionId: number | string, items: PlanItem[], guestToken: string | undefined, lang: AppLang): string[] {
+  const urls = new Set<string>([
+    buildOverviewPath(undefined, lang),
+    buildVersionPath(versionId, undefined, lang),
+  ]);
+
+  for (const item of items) {
+    urls.add(buildItemPath(item.id, undefined, lang));
+  }
+
+  if (guestToken) {
+    urls.add(buildOverviewPath(guestToken, lang));
+    urls.add(buildVersionPath(versionId, guestToken, lang));
+
+    for (const item of items) {
+      urls.add(buildItemPath(item.id, guestToken, lang));
     }
   }
 
@@ -77,6 +106,26 @@ async function cacheAppShell(): Promise<void> {
 
   const cache = await caches.open(APP_CACHE_NAME);
   await Promise.allSettled([...urls].map((url) => cache.add(toAbsoluteURL(url))));
+}
+
+async function cacheNavigationShell(urls: string[]): Promise<void> {
+  if (!canUseBrowserCaches()) {
+    return;
+  }
+
+  const cache = await caches.open(APP_CACHE_NAME);
+  let shellResponse = await cache.match(toAbsoluteURL("/"));
+
+  if (!shellResponse) {
+    try {
+      shellResponse = await fetch(toAbsoluteURL("/"));
+      await cache.put(toAbsoluteURL("/"), shellResponse.clone());
+    } catch {
+      return;
+    }
+  }
+
+  await Promise.allSettled(urls.map((url) => cache.put(toAbsoluteURL(url), shellResponse.clone())));
 }
 
 async function cacheMedia(urls: string[], onProgress?: (done: number, total: number) => void): Promise<number> {
@@ -122,6 +171,12 @@ export function getOfflineGuideStatus(lang?: AppLang): OfflineGuideStatus | null
   }
 }
 
+export function getOfflineGuideStatuses(): OfflineGuideStatus[] {
+  return (["ru", "en"] as AppLang[])
+    .map((currentLang) => getOfflineGuideStatus(currentLang))
+    .filter((status): status is OfflineGuideStatus => Boolean(status));
+}
+
 export async function cacheGuide(input: CacheGuideInput = {}): Promise<OfflineGuideStatus> {
   const lang = normalizeLang(input.lang);
   let done = 0;
@@ -148,6 +203,7 @@ export async function cacheGuide(input: CacheGuideInput = {}): Promise<OfflineGu
   if (input.guestToken) {
     await getGuest(input.guestToken);
   }
+  await cacheNavigationShell(buildOfflineRouteURLs(versionId, items, input.guestToken, lang));
 
   progress(lang === "ru" ? "Загружаем карточки" : "Loading cards", 4);
   const mediaURLs = extractMediaURLs(items);

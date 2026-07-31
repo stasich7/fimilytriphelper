@@ -6,8 +6,24 @@
         <h2>{{ text.loadingTrip }}</h2>
       </template>
       <template v-else-if="error">
-        <h2>{{ text.tripLoadError }}</h2>
-        <p>{{ error }}</p>
+        <template v-if="offlineStatuses.length > 0">
+          <h2>{{ offlineTitle }}</h2>
+          <p>{{ offlineHint }}</p>
+          <div class="offline-links">
+            <RouterLink
+              v-for="status in offlineStatuses"
+              :key="status.lang"
+              class="start-link"
+              :to="offlineVersionPath(status)"
+            >
+              {{ offlineLinkLabel(status) }}
+            </RouterLink>
+          </div>
+        </template>
+        <template v-else>
+          <h2>{{ text.tripLoadError }}</h2>
+          <p>{{ error }}</p>
+        </template>
       </template>
       <template v-else-if="overview?.trip">
         <h2>{{ overview.trip.title }}</h2>
@@ -32,6 +48,7 @@ import { useRoute } from "vue-router";
 
 import { getGuest, getOverview } from "../api";
 import { getRouteLang, getUIText } from "../lang";
+import { getOfflineGuideStatuses, type OfflineGuideStatus } from "../offline";
 import { buildVersionPath } from "../paths";
 import type { OverviewResponse } from "../types/api";
 
@@ -39,6 +56,7 @@ const route = useRoute();
 const loading = ref(true);
 const error = ref("");
 const overview = ref<OverviewResponse | null>(null);
+const offlineStatuses = ref<OfflineGuideStatus[]>([]);
 const guestName = ref("");
 const lang = computed(() => getRouteLang(route));
 const text = computed(() => getUIText(lang.value));
@@ -56,9 +74,24 @@ const currentVersionPath = computed(() => {
   return buildVersionPath(overview.value.currentVersion.id, guestToken.value, lang.value);
 });
 
+const offlineTitle = computed(() => (lang.value === "ru" ? "Офлайн-путеводитель" : "Offline guide"));
+const offlineHint = computed(() =>
+  lang.value === "ru" ? "Интернет недоступен. Можно открыть сохраненную версию." : "No connection. Saved versions are available.",
+);
+
+function offlineVersionPath(status: OfflineGuideStatus): string {
+  return buildVersionPath(status.versionId || "", guestToken.value, status.lang);
+}
+
+function offlineLinkLabel(status: OfflineGuideStatus): string {
+  const languageLabel = status.lang === "ru" ? "Русская" : "English";
+  return `${languageLabel}: ${status.itemCount}`;
+}
+
 async function loadPage(): Promise<void> {
   loading.value = true;
   error.value = "";
+  offlineStatuses.value = getOfflineGuideStatuses();
 
   try {
     const overviewResponse = await getOverview(lang.value);
@@ -72,6 +105,7 @@ async function loadPage(): Promise<void> {
     }
   } catch (err) {
     error.value = err instanceof Error ? err.message : "Неизвестная ошибка";
+    offlineStatuses.value = getOfflineGuideStatuses();
   } finally {
     loading.value = false;
   }
@@ -138,6 +172,12 @@ h2 {
 .start-link:hover,
 .start-link:focus-visible {
   background: #0f3d5f;
+}
+
+.offline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .hero-image-link {

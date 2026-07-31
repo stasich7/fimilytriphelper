@@ -4,6 +4,12 @@ const MEDIA_CACHE = "family-trip-helper-media-v1";
 
 const APP_SHELL = [
   "/",
+  "/manifest.webmanifest",
+  "/favicon.svg",
+  "/favicon-32.png",
+  "/apple-touch-icon.png",
+  "/icon-192.png",
+  "/icon-512.png",
   "/family-trip-v4.png",
   "/family-trip-v5.png",
   "/chips/map-chip-1.png",
@@ -57,6 +63,22 @@ async function networkFirst(request, cacheName) {
   }
 }
 
+async function navigationFallback(request) {
+  try {
+    const response = await fetch(request);
+    const cache = await caches.open(APP_CACHE);
+    await cache.put(request, response.clone());
+    return response;
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    return caches.match("/");
+  }
+}
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -66,7 +88,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (request.mode === "navigate") {
-    event.respondWith(networkFirst(request, APP_CACHE).catch(() => caches.match("/")));
+    event.respondWith(navigationFallback(request));
     return;
   }
 
