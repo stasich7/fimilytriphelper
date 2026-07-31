@@ -17,6 +17,7 @@ import { normalizeLang, type AppLang } from "./lang";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || "/api/v1").replace(/\/$/, "");
 const API_CACHE_NAME = "family-trip-helper-api-v1";
+const API_TIMEOUT_MS = 3000;
 
 function appendLangParam(path: string, lang?: AppLang): string {
   const normalizedLang = normalizeLang(lang);
@@ -62,13 +63,34 @@ async function writeCachedJSON(url: string, response: Response): Promise<void> {
   }
 }
 
+async function fetchWithTimeout(url: string, init: RequestInit | undefined, timeoutMs: number): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutID = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: init?.signal ?? controller.signal,
+    });
+  } finally {
+    window.clearTimeout(timeoutID);
+  }
+}
+
 async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
   const url = `${API_BASE}${path}`;
   const shouldCache = canUseCache(init);
   let response: Response;
 
+  if (shouldCache && navigator.onLine === false) {
+    const cachedPayload = await readCachedJSON<T>(url);
+    if (cachedPayload) {
+      return cachedPayload;
+    }
+  }
+
   try {
-    response = await fetch(url, init);
+    response = await fetchWithTimeout(url, init, shouldCache ? API_TIMEOUT_MS : 10000);
   } catch (err) {
     if (shouldCache) {
       const cachedPayload = await readCachedJSON<T>(url);

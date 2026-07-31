@@ -2,8 +2,22 @@
   <section class="grid">
     <article class="card card--hero">
       <p class="card__label">{{ text.trip }}</p>
-      <template v-if="loading">
+      <template v-if="loading && offlineStatuses.length === 0">
         <h2>{{ text.loadingTrip }}</h2>
+      </template>
+      <template v-else-if="loading && offlineStatuses.length > 0">
+        <h2>{{ offlineTitle }}</h2>
+        <p>{{ offlineHint }}</p>
+        <div class="offline-links">
+          <RouterLink
+            v-for="status in offlineStatuses"
+            :key="status.lang"
+            class="start-link"
+            :to="offlineVersionPath(status)"
+          >
+            {{ offlineLinkLabel(status) }}
+          </RouterLink>
+        </div>
       </template>
       <template v-else-if="error">
         <template v-if="offlineStatuses.length > 0">

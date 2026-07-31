@@ -1,6 +1,7 @@
 const APP_CACHE = "family-trip-helper-app-v1";
 const API_CACHE = "family-trip-helper-api-v1";
 const MEDIA_CACHE = "family-trip-helper-media-v1";
+const NETWORK_TIMEOUT_MS = 3000;
 
 const APP_SHELL = [
   "/",
@@ -49,7 +50,7 @@ async function networkFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
 
   try {
-    const response = await fetch(request);
+    const response = await fetchWithTimeout(request, NETWORK_TIMEOUT_MS);
     if (response.ok || response.type === "opaque") {
       await cache.put(request, response.clone());
     }
@@ -63,9 +64,20 @@ async function networkFirst(request, cacheName) {
   }
 }
 
+async function fetchWithTimeout(request, timeoutMs) {
+  const controller = new AbortController();
+  const timeoutID = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(request, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeoutID);
+  }
+}
+
 async function navigationFallback(request) {
   try {
-    const response = await fetch(request);
+    const response = await fetchWithTimeout(request, NETWORK_TIMEOUT_MS);
     const cache = await caches.open(APP_CACHE);
     await cache.put(request, response.clone());
     return response;
@@ -93,6 +105,11 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (url.pathname.startsWith("/api/v1/")) {
+    if (self.navigator && self.navigator.onLine === false) {
+      event.respondWith(caches.match(request).then((response) => response || networkFirst(request, API_CACHE)));
+      return;
+    }
+
     event.respondWith(networkFirst(request, API_CACHE));
     return;
   }
