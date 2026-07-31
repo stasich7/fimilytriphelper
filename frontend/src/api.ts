@@ -63,6 +63,17 @@ async function writeCachedJSON(url: string, response: Response): Promise<void> {
   }
 }
 
+async function refreshCachedJSON(url: string, init?: RequestInit): Promise<void> {
+  try {
+    const response = await fetchWithTimeout(url, init, API_TIMEOUT_MS);
+    if (response.ok) {
+      await writeCachedJSON(url, response);
+    }
+  } catch {
+    // Background refresh is best-effort.
+  }
+}
+
 async function fetchWithTimeout(url: string, init: RequestInit | undefined, timeoutMs: number): Promise<Response> {
   const controller = new AbortController();
   const timeoutID = window.setTimeout(() => controller.abort(), timeoutMs);
@@ -82,9 +93,12 @@ async function requestJSON<T>(path: string, init?: RequestInit): Promise<T> {
   const shouldCache = canUseCache(init);
   let response: Response;
 
-  if (shouldCache && navigator.onLine === false) {
+  if (shouldCache) {
     const cachedPayload = await readCachedJSON<T>(url);
     if (cachedPayload) {
+      if (navigator.onLine !== false) {
+        void refreshCachedJSON(url, init);
+      }
       return cachedPayload;
     }
   }

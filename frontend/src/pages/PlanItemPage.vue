@@ -388,10 +388,11 @@ watch(
   z-index: 50;
   left: 0;
   right: 0;
-  bottom: 0;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  padding: 10px 12px;
   background: rgba(255, 255, 255, 0.92);
   border-top: 1px solid rgba(39, 74, 103, 0.14);
+  border-radius: 18px 18px 0 0;
   box-shadow: 0 -14px 30px rgba(31, 41, 55, 0.08);
   backdrop-filter: blur(10px);
   touch-action: manipulation;
