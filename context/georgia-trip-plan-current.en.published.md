@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Поездка в Грузию | Trip to Georgia, 2026
-version_id: v20-en
+version_id: v22-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -276,6 +276,7 @@ Date: 2026-08-18
 - The road itself is part of the impression: Adjara becomes greener, wetter, and more rural than Batumi.
 - It is better to go with a driver or organized transport: public transport makes a day like this too fragmented.
 - More: [Mountain Adjara and Makhuntseti](item:activity.adjara.makhuntseti).
+- A bigger nature-day alternative: [Martvili Canyon](item:activity.megrelia.martvili-canyon).
 - Day area map: [Makhuntseti, the waterfall, and the arched bridge](https://www.google.com/maps/search/Makhuntseti+Waterfall+Queen+Tamar+Bridge)
 
 ## [day.batumi.2026-08-19] August 19 — the market, Piazza, Europe Square, and the boulevard
@@ -632,7 +633,6 @@ Things to keep in mind:
 
 Links:
 - [Area guide](https://tbiligram.com/ru/district/sololaki)
-- [Reference page](https://ru.wikipedia.org/wiki/Сололаки)
 - [Area map](https://yandex.ru/maps/?text=Sololaki%20Tbilisi)
 
 Image:
@@ -664,7 +664,6 @@ Things to keep in mind:
 
 Links:
 - [Area guide](https://tbiligram.com/ru/district/mtacminda)
-- [Reference page](https://ru.wikipedia.org/wiki/Мтацминда_(район))
 - [Park and views of Mtatsminda](https://geomerid.com/ru/place/park-mtacminda-tbilisi/overview/)
 - [Area map](https://yandex.ru/maps/?text=Mtatsminda%20Tbilisi)
 
@@ -698,7 +697,6 @@ Price guide:
 Links:
 - [Walk through Old Tbilisi](https://www.sputnik8.com/ru/tbilisi/sights/stariy-gorod/info)
 - [Booking an Old Tbilisi walk, $70 per excursion](https://www.sputnik8.com/ru/tbilisi/activities/46816-ekskursiya-po-staromu-tbilisi)
-- [Reference page about Old Tbilisi](https://ru.wikipedia.org/wiki/Старый_Тбилиси)
 
 Image:
 ![Old Tbilisi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/a2/a261cf8f5cb54039c375228aeb59b4bba06cc649e898bfee8aecf4026dcc109b.jpg)
@@ -742,7 +740,6 @@ Price guide:
 - from `$30` per car, up to 4 passengers, for a private trip through GoTrip
 
 Links:
-- [Reference page about Mtskheta](https://ru.wikipedia.org/wiki/Мцхета)
 - [Svetitskhoveli](https://www.sputnik8.com/ru/tbilisi/sights/sobor-svetitskhoveli/info)
 - [Jvari](https://www.sputnik8.com/ru/tbilisi/sights/monastir-dzhvari/info)
 - [Sputnik8: Mtskheta — Jvari — Samtavro, $19.90 per person](https://www.sputnik8.com/ru/tbilisi/activities/34405-tayny-peschernogo-goroda-i-drevnyaya-stolitsa-mtsheta)
@@ -787,7 +784,6 @@ Price guide:
 - `$215` for an excursion, for a fuller private program
 
 Links:
-- [Sighnaghi](https://ru.wikipedia.org/wiki/Сигнахи)
 - [Bodbe](https://www.sputnik8.com/ru/tbilisi/sights/monastyr-bodbe/info)
 - [Sputnik8: Southern Kakheti, $120 per excursion](https://www.sputnik8.com/ru/tbilisi/activities/46809-kaheti-yuzhnyy-gorod-signahi-i-monastyr-bodbe)
 - [Sputnik8: Kakheti, Sighnaghi, Bodbe, $215 per excursion](https://www.sputnik8.com/ru/tbilisi/activities/68624-kaheti-signahi-bodbe-s-ziplanynom)
@@ -803,10 +799,41 @@ Type: activity
 
 Kazbegi is the biggest day in scale on the Tbilisi side of the trip: the road heads into the Caucasus, city streets give way to gorges, passes, and views that make you stop wanting to hurry. This is not a light walk, but a full day on the road, and at the same time it can easily become the main mountain chapter of the whole journey.
 
-What makes the route strong:
-- the Georgian Military Road is part of the experience in itself;
-- the Zhinvali Reservoir and Ananuri Fortress break the drive beautifully;
-- Stepantsminda and the view of Kazbek give you that proper Caucasus scale.
+The Georgian Military Road.
+
+The name sounds severe, but for this trip it is less about a modern military theme and more about the historical function of the route. The name refers to the road across the Caucasus range that the Russian Empire actively built and strengthened in the late eighteenth and early nineteenth centuries as a strategic route between the North Caucasus and Tiflis. The line of passage itself is much older: through the Dariali Gorge, the Jvari Pass, and the valleys of the Aragvi and Terek, merchants, envoys, pilgrims, armies, and mountain caravans had moved for centuries. That is why the road matters as more than asphalt from Tbilisi to Stepantsminda. It shows why the Caucasus was both a gate and a barrier: narrow gorges, fortresses by the water, high passes, and a sudden shift from soft hills to full mountain scale. For a family day, the road itself is part of the destination.
+
+![The Georgian Military Road in the Caucasus](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/12/12849e449915d81b3467b1e9ceeb112a9071a619112b4aa6b4cbc6bfaf795985.jpg)
+
+![A serpentine stretch of the Georgian Military Road](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/a8/a8ad83b6ed33456f64858c12902f0306f9cb9d3220f675848317740a5c0d11f6.jpg)
+
+Ananuri Fortress.
+
+Ananuri is the right first major stop because, after the urban part of Tbilisi, it immediately gives a clear historical image: stone walls, towers, a church, the water of the Zhinvali Reservoir, and the road passing nearby. The fortress stood on an important section of the Aragvi Gorge and was connected with the Aragvi rulers, who controlled local roads and approaches. Today the complex feels almost postcard-like, but originally it was not scenery. It was a defensive site with military, religious, and everyday functions. Inside, the main things to notice are the towers, walls, the seventeenth-century Assumption Church with carved stone decoration, and the view over the turquoise water. For a child, this is one of the easiest fortresses to understand: not vague ruins where “something used to be,” but a complete stone ensemble where walls, towers, and the high bank make sense at once. It breaks the long drive very well.
+
+![Ananuri and Zhinvali Reservoir](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/f9/f92ac80b34a146019498ce4d1c127aa4c72edb7f21610edf96c54b14f50bceec.webp)
+
+Gudauri.
+
+Gudauri marks the high-mountain part of the route. If Ananuri still belongs to a greener, more water-based landscape, the road near Gudauri already feels like the Greater Caucasus proper: open slopes, sharp changes in altitude, wind, broad valleys, and views that make it obvious you have climbed far above ordinary walking Georgia. Gudauri is best known as a ski resort: the lower part of the resort sits at around 2,000 meters, while the lifts rise much higher. But in summer and early autumn it is not an empty winter settlement. It works as a convenient place for panoramas, paragliding, and a pause before the final stretch toward the Jvari Pass, Kobi, and Stepantsminda. The most recognizable nearby stop is the Friendship Monument above the gorge. Its Soviet mosaic reads politically complicated today, but as a viewpoint it remains one of the strongest views on the road.
+
+![Paragliding above Gudauri](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/99/9902d5bb06a71f0a5650b02f7f6a0e1733590a491db71b00642ed3690db02ad9.webp)
+
+![Winter Gudauri](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/40/40f2a43a290725f892957cd3024527305af439896eedf2574896e36c927c7699.webp)
+
+Stepantsminda, Kazbek, and the Trinity Church in Gergeti.
+
+The names are easy to mix up, and that is completely normal. `Stepantsminda` is the official name of the settlement at the foot of Kazbek. `Kazbegi` is the old name of the settlement and also the familiar tourist name for the wider area; many people still say “we are going to Kazbegi” when they mean Stepantsminda, Kazbek, and the church above the village. `Kazbek` is the mountain, called `Mkinvartsveri` in Georgian, one of the best-known five-thousand-meter peaks in the Caucasus, about 5,054 m high. `Gergeti` is the area and former village near Stepantsminda. The church is usually called `Gergeti Trinity Church`, in Georgian `Tsminda Sameba`, and in Russian often “the Trinity Church in Gergeti” or “Gergeti Trinity Church.”
+
+This combination is what makes the end of the day so strong. First the road reaches Stepantsminda, a small settlement in the broad Terek valley. The settlement itself is not a polished resort. It is more like a mountain gathering point with guesthouses, cafes, shops, drivers, and views in every direction. But around it the real scale is already working: Caucasus walls, clouds, cool air, sudden changes of weather, and Kazbek, which may open completely or hide behind cloud for half a day.
+
+The Trinity Church stands above the settlement at roughly 2,170 m. It was built in the fourteenth century, and the site is chosen so powerfully that the church feels less like a separate building and more like part of the mountain silhouette. In good weather, Kazbek rises behind it, creating one of Georgia’s most recognizable images. You can walk up, but for a family day after a long drive it is often more sensible to use a local vehicle or check in advance whether your driver can go up to the church road. Inside, behave as in an active church: quietly, without loud conversations, and without turning services or praying people into a photo background.
+
+The main point here is not to chase a perfect postcard. Mountain weather changes quickly, Kazbek can disappear, and the church will still be a powerful place: stone, wind, the valley below, the road you climbed, and the feeling that the entire Georgian Military Road has been leading toward this frame. If the clouds cooperate, this may be the main visual moment of the Tbilisi part of the trip. If not, it is still a different kind of experience: seeing the Caucasus as alive, unpredictable, and very large.
+
+![Stepantsminda, Gergeti, and Kazbek](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1f/1fcef85bc1e07156b26073f270de00d9813049798ba2598dacc4d5943dc0c911.jpg)
+
+![Gergeti Trinity Church and Kazbek](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/22/22fd4f3d00a8aee03e806950992854e898c454a1bbe12a319c786cec601ee682.jpg)
 
 Things to keep in mind:
 - it is a long day, so it is better not to place it right after another long excursion;
@@ -825,11 +852,12 @@ Links:
 - [What to see in Kazbegi](https://www.sputnik8.com/ru/kazbegi/pages/kazbegi-chto-posmotret-i-chem-zanyatsya)
 - [Stepantsminda](https://www.sputnik8.com/ru/tbilisi/sights/stepancminda/info)
 - [The Georgian Military Road](https://www.sputnik8.com/ru/tbilisi/sights/voenno-gruzinskaya-doroga/info)
+- [Georgia Travel: Stepantsminda](https://georgia.travel/cities-towns/stepantsminda)
+- [Georgia Travel: Gergeti Trinity Church](https://georgia.travel/gergeti-trinity-church)
+- [Georgia Travel: Ananuri](https://georgia.travel/villages/ananuri)
+- [Georgia Travel: Gudauri](https://georgia.travel/resorts/gudauri)
 - [Sputnik8: excursion to Kazbegi, $160 per excursion](https://www.sputnik8.com/ru/tbilisi/activities/18960-ekskursiya-v-kazbegi)
 - [GoTrip: Tbilisi → Stepantsminda, from $65 per car](https://gotrip.ge/en/transfer/from-tbilisi-to-kazbegi-to-tbilisi/)
-
-Image:
-![Kazbegi and Stepantsminda](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/67/67e73d398dcb4f25eefe426a4343b847b61c1e978ffd2f0ae96d7f13f7f8c181.jpg)
 
 ## [activity.borjomi.daytrip] Borjomi: park, mineral water, and the gorge
 Type: activity
@@ -867,7 +895,6 @@ Price guide:
 - `$1.85` per person, for the sulfur pools at a 5 GEL ticket price
 
 Links:
-- [Borjomi: town description](https://ru.wikipedia.org/wiki/Боржоми)
 - [Borjomi Central Park: overview, walk, and prices](https://www.triplinkhub.com/en/georgia/borjomi/places/borjomi-central-park)
 - [Train 618: Tbilisi → Borjomi, timetable and fare](https://georailway.com/routes/618/)
 - [Train 617: Borjomi → Tbilisi, timetable and fare](https://georailway.com/routes/617/)
@@ -875,6 +902,106 @@ Links:
 
 Image:
 ![Borjomi, Central Park](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/ae/aec32a5b613086ce2982c1d8d6939d586fa47a342206d3af175ac487fdca8544.jpg)
+
+## [note.history.georgia] History of Georgia: a short layer before the trip
+Type: note
+
+It is better to read Georgian history not as a school table of kings and dates, but as an explanation for why such a small country carries so many strong symbols: its own alphabet, an ancient church, stone fortresses, wine vessels, polyphonic songs, and a habit of holding on to identity even while empires around it kept changing. Georgia sits at the crossroads of the Caucasus, the Black Sea, Western Asia, and Europe. Trade, armies, religions, and languages all passed through this crossing, so the country has rarely lived in isolation. Its history is a long, tense conversation with neighbors and larger powers.
+
+![Khertvisi Fortress and southern Georgia](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/65/656380d9c65eeb195886c0eb825d6588bf7d85f747480920a1b194025968b1e3.webp)
+
+The oldest layer is almost hard to believe. At Dmanisi, archaeologists found early human remains around 1.8 million years old. A family trip does not need to turn that into a museum lecture, but the scale matters: the story of this land begins far before our usual ideas of kingdoms and states. Later come Colchis and Iberia, ancient links with the Greek world, legends of gold, mountain roads, fortified settlements, and early forms of statehood. For this itinerary, that is useful context before Mtskheta, Jvari, and Svetitskhoveli: you are not only looking at beautiful churches, but at places where Georgia gathered its political and spiritual center.
+
+![UNESCO heritage sites in Georgia](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/90/9047e18d19126b855fac360d469c6f167821cd71510b9d60f91b19e048cd3007.webp)
+
+The fourth century is especially important: Christianity became the state religion of Kartli. For the trip, this explains why a Georgian church is often treated not only as architecture, but as memory of language, writing, and statehood. Mtskheta was the ancient capital, Jvari is tied to the image of Saint Nino and the cross above the city, and Svetitskhoveli remains one of the country’s main spiritual centers.
+
+![Uplistsikhe above the Mtkvari River](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/e5/e513bc1a41722869479a49a0b9cf65ee02a7d602ff0ae589335c24df675ecd34.webp)
+
+Medieval Georgia gives the strongest names: David the Builder, Queen Tamar, the Golden Age, monasteries, fortresses, manuscripts, and the poetry of Rustaveli. Then the harder line begins again: Mongol invasions, Persian and Ottoman pressure, fragmentation, and later the Russian Empire and the Soviet Union. But it would be wrong to reduce this to one sad story. Georgian history repeatedly makes the same movement: it is hit, it rebuilds, and it preserves language, church tradition, wine, song, family, and local pride.
+
+![Uplistsikhe cave town](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/29/2926740710beea68f714eb661dc54024e0930fe84360192e56776ff6b6f269c8.webp)
+
+For a family trip, this gives a simple key: almost every walk is not only about “seeing something pretty,” but about noticing how the country holds layers. In Tbilisi, a fortress, sulfur baths, European facades, Soviet traces, and new bridges stand close together. In Kakheti, ancient wine culture is not a museum topic, but a living practice. On the coast, Batumi shows another story: a port, trade, Ottoman heritage, modernization, and a resort-style twenty-first century. Georgia is interesting because it does not hide complexity. It turns complexity into character.
+
+![Jvari above Mtskheta](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/6e/6e1e41eff0f8d7d89f78110e37b43c1c4d7aa6a542d510fd83090669a15318bf.webp)
+
+Links:
+- [Georgia Travel: History of Georgia](https://georgia.travel/why-georgia-history)
+- [Georgia Travel: UNESCO Heritage in Georgia](https://georgia.travel/georgia-world-heritage)
+- [Georgia Travel: Uplistsikhe Cave Town](https://georgia.travel/uplistsikhe-cave-town)
+- [Georgia Travel: Jvari Monastery](https://georgia.travel/jvari-monastery)
+
+## [note.history.tbilisi-batumi] History of Tbilisi and Batumi: two different doors into the country
+Type: note
+
+Tbilisi and Batumi are useful as two different doors into Georgia. Tbilisi is the inland, river-based, hilly, political door: a capital, an old trading city, a place of power, culture, and everyday urban mixture. Batumi is the maritime, port-side, southern door: a Black Sea city of humid air, trade, borders, the boulevard, and resort energy. The train journey between them is not only a transfer, but a shift in historical rhythm.
+
+![Tbilisi, Narikala, and the old city](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4d/4d2f4abb22e86ef2ffc5f272efb65537bfa23ab168d361ff203dbb63344f4c28.webp)
+
+Tbilisi is connected with the legend of King Vakhtang Gorgasali and the hot springs. The Georgian word `tbili` is connected with warmth, and this legend explains the city well even without checking every detail: Tbilisi really did grow around water, a gorge, a river, and a passage between cliffs. The Abanotubani district, with its brick-domed sulfur baths, is not decorative scenery. It is a reminder of why this place became important. Above it stands Narikala; nearby are Metekhi, the Mtkvari River, Rike Park, and the newer bridges. Everything is close, so the city feels layered even within one walk.
+
+![Old Tbilisi and balconies](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/f3/f38d097ed673370ca603c37172f1067da8afeb8b0a5cfc40cb3f9774b36a7a7c.webp)
+
+One of Tbilisi’s strongest traits is coexistence. Georgians, Armenians, Persians, Ottomans, Russians, European travelers, merchants, and craftspeople met here for centuries. You see this not only in museums, but in the urban fabric: balconies, caravanserais, churches of different communities, a synagogue, a mosque, European facades in Sololaki, Soviet avenues, and modern architecture. That is why the old city is best seen slowly. The goal is not to “cover attractions,” but to notice how different eras stand shoulder to shoulder.
+
+![Abanotubani sulfur baths](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/5b/5bb6e21df6a9e0d69438dc2e328af2ce893a9bf4879f5d808cb9cf22408fe76d.webp)
+
+Batumi is built differently. Its name is often connected with the Greek `bathus`, meaning “deep,” which is a useful clue for a port city. Batumi long lived around the harbor and the Black Sea, and from the sixteenth century it entered the Ottoman sphere. In 1878, Batumi became part of the Russian Empire and received porto-franco status as a free port. The late nineteenth century accelerated its growth sharply: the Baku-Batumi railway and oil infrastructure turned the city into an international port, and with trade and money came an architectural mixture.
+
+![Old Batumi](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/2a/2a218b228f818c695ee799184b8462f6b82e97c134d630e92c3faf460466ecfb.webp)
+
+Old Batumi, therefore, is not “little Tbilisi by the sea.” It has more port space, southern facades, traces of the Ottoman period, European modern styles, hotels, consular buildings, the Orta Jame Mosque, churches, and old trading streets. In the twentieth century the city became the center of Adjara, and in the twenty-first century it gained strong tourist momentum: the boulevard, new towers, the cable car, the seafront, sculptures, hotels, and evening walking culture.
+
+![Modern Batumi by the sea](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/96/96abf044659f4ebc26173371fc684e1f9f9cc2195182b524ec1a72a4c21d1b2d.webp)
+
+The key for the trip is simple: Tbilisi better explains why Georgia feels so resilient and culturally dense, while Batumi shows how Georgia looks toward the sea, trade, and leisure. In one city you more often look upward at a fortress, balconies, and cliffs. In the other, you look along the horizon, the port, and the boulevard. Together, they give a strong contrast without making the itinerary feel like two unrelated countries.
+
+![Batumi Lighthouse](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/3f/3fe79746ac126f1b6143104802e84932329308e821e7f3e651e07b158fa4678a.webp)
+
+Links:
+- [Georgia Travel: Tbilisi](https://georgia.travel/cities-towns/tbilisi)
+- [Georgia Travel: Strolling Through the Old Tbilisi](https://georgia.travel/strolling-through-the-old-city-of-tbilisi)
+- [Georgia Travel: Tbilisi Sulfur Baths](https://georgia.travel/tbilisi-sulfur-baths)
+- [Georgia Travel: Old Batumi](https://georgia.travel/old-batumi)
+- [Georgia Travel: Batumi](https://georgia.travel/cities-towns/batumi)
+- [Georgia Travel: Batumi Lighthouse](https://georgia.travel/batumi-lighthouse)
+
+## [note.tourist.traditions-etiquette] Traditions and tourist etiquette
+Type: note
+
+Georgia is a very hospitable country, but that does not mean a tourist should behave like a spectator walking through a set. A lot here rests on respect: for the home, elders, food, a toast, a church, language, and personal dignity. The good news is that the rules are not complicated. If you are attentive, stay quiet where a place asks for quiet, and do not turn local traditions into an attraction, you will usually be met warmly.
+
+![Georgian supra feast](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/a3/a3f479732cbaec4997970913e57a2a683c10c7f2950c0d915a77f983fed8908c.webp)
+
+The best-known custom is the supra, the Georgian feast. It is not simply “a lot of food and wine,” but a social ritual. There is a tamada, toasts, pauses, gratitude to the hosts, and a shared thread of conversation. A tourist does not need to drink a lot. It is much more important to listen, raise a glass, thank the hosts, and not compete with the tamada for control of the table. If you do not want alcohol, you can sip lightly or honestly say that you are not drinking today. Pressuring others to drink is not needed either. Georgian culture values sincerity, but not rude performance.
+
+![Georgian culture and costumes](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c5/c5acd35c952a87d5148156301135ed77c893c59ee20e7b76fe8ddbc285caee93.webp)
+
+In churches, the rules are close to the Orthodox tradition: behave quietly, avoid very revealing clothes, do not photograph services or people closely without permission, and do not turn your back to the altar just for a dramatic shot. Women are often offered a scarf or wrap skirt at the entrance; men should avoid entering in shorts and a tank top. Even if you are not religious, a church is a living place for locals, not a museum pavilion.
+
+![Georgian national dance](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c0/c06db43e375bc06e0cc9c90837f1479ec9417c06d2d406586a4b37c7271c7ed6.webp)
+
+With people, simple politeness works best. A few Georgian words help a lot: `gamarjoba` means hello, and `madloba` means thank you. In tourist areas people often speak Russian or English, but it is better not to open with a demand to speak Russian. Ask calmly which language is convenient. Georgia has a complex modern history, so political topics, wars, and relations with Russia are not good casual table talk with people you barely know.
+
+![Vineyards and the wine tradition](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/fd/fdde0f4e6b3a2c1dc2976605c1a315d4dde4a20bc3d3f12d51cafdb4320c2324.webp)
+
+At markets and in small shops, gentle bargaining can be normal, but pressure and mockery are not. In restaurants, tips are often left if the service was good; before paying, check whether a service charge is included. For taxis, it is usually better to use an app or agree on the price in advance. On roads and crossings, be more attentive than in calm European cities: the driving style can feel sharper.
+
+![Georgian folklore](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/51/5147e3c6a32328481d1354879c9e997388282d250895381d4a9cd2e48cb9802e.webp)
+
+In nature, the rule is simple: do not leave trash, do not cross fences for a photo, do not swim where swimming is forbidden, and respect national park rules. In canyons, mountains, and near waterfalls, the terrain may look easy, but stones, bridges, and paths can be wet. For a family this matters especially: a beautiful photo is not worth the risk.
+
+![Qvevri and Georgian wine](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/19/1952a2811c7cb3a59124d5fc0aa4d580a89df0c9afd5d300ca2dec46a6262007.jpg)
+
+The main tourist tone in Georgia is warm curiosity without overfamiliarity. Taste the food, ask about wine, listen to toasts, watch dances, but do not turn people into props. Then the country opens not only as a set of views, but as a place where traditions still live in ordinary conversation, dinner, a church visit, and a family walk.
+
+Links:
+- [Georgia Travel: Georgian Supra](https://georgia.travel/georgian-traditions-and-rituals/georgian-supra)
+- [Georgia Travel: Georgian Unique Culture](https://georgia.travel/unique-georgian-culture)
+- [Georgia Travel: Georgian National Dance](https://georgia.travel/why-georgia-georgian-dance)
+- [Georgia Travel: Georgian Wine - 8000 Year Old Tradition](https://georgia.travel/georgia-the-cradle-of-wine)
+- [Georgia Travel: The Unique Georgian Folklore](https://georgia.travel/the-unique-georgian-folklore)
 
 ## [transport.train.tbilisi-batumi] Train transfer from Tbilisi to Batumi
 Type: transport
@@ -978,6 +1105,9 @@ Why Ureki is interesting:
 - the healing qualities of the magnetic sands are often mentioned in tourism descriptions, but for this trip it is better to treat that as a pleasant feature of the place rather than a medical program.
 
 Image:
+![Ureki black sand at sunset](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4d/4d2b496426c7fcf325518c38d75a5d686512554e3b422117e7d7af86f90082a1.png)
+
+Image:
 ![Beach near your accommodation](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/d0/d0c641306aaefd4616e44d811be061b9b9fe27dfd2bca327f8f84f3475c17eaa.png)
 
 Image:
@@ -987,9 +1117,6 @@ Central Ureki beach is across the river and is more oriented toward a classic be
 
 Image:
 ![Central Ureki beach from above](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c4/c463bce3114171950a59d430df247df63141684316b55cafd993a6b9cbc2da8e.webp)
-
-Image:
-![Ureki black sand at sunset](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/4d/4d2b496426c7fcf325518c38d75a5d686512554e3b422117e7d7af86f90082a1.png)
 
 What is in the village:
 - central Ureki has the beach line, a small promenade, seasonal cafes, sunbed and umbrella rentals, simple shops, pharmacies, and fruit points;
@@ -1195,7 +1322,6 @@ Links:
 - [Batumi Botanical Garden on Sputnik8](https://www.sputnik8.com/ru/batumi/sights/batumi-botanical-garden)
 - [Official Batumi Botanical Garden site](https://bbg.ge/en)
 - [Additional overview](https://www.advantour.com/rus/georgia/batumi/botanic-garden.htm)
-- [Reference page](https://ru.wikipedia.org/wiki/Батумский_ботанический_сад)
 
 Image:
 ![Batumi Botanical Garden](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c6/c6aaed1117f93c5f46da6e42fcdb3bd71dc4c5c6ae54903a80d3744ac454dc99.jpg)
@@ -1227,6 +1353,64 @@ Links:
 
 Image:
 ![Makhuntseti Waterfall](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/1a/1a18041059e225fbe1e1e8dafd26b88be3d8efd5be4bd247f6f4d13fb291ebc0.jpg)
+
+## [activity.megrelia.martvili-canyon] Martvili Canyon
+Type: activity
+
+Martvili Canyon is the “wait, is the water really that color?” part of western Georgia: the turquoise Abasha River, damp limestone walls, small waterfalls, bridges, and a short boat ride inside the gorge. This is Samegrelo rather than Adjara, so from the sea leg it is not a light post-breakfast outing, but a proper long nature day.
+
+![Martvili Canyon: water, cliffs, and greenery](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c2/c25c7637dd004d3c776161d71898d51a867f4a32609fb31abc4e084297a50368.webp)
+
+What to see:
+- the walking loop from the visitor center: about 700 m on a built stone trail, with bridges, viewing platforms, and the historic Dadiani path;
+- the boat ride on the Abasha River: a short canyon section at water level, where the place is strongest visually — the cliffs come close, the water is bright, and the greenery feels almost tropical;
+- waterfalls and limestone steps: this is not a difficult hike, but a compact natural scene where the main impression comes from the water color and the narrow gorge.
+
+![The boat section of Martvili Canyon](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/cd/cdecaa8b9ae8f5dc959e2a2a22294d6f05d8fc899a9acb432c90811045610a55.webp)
+
+How to get there:
+- from Kaprovani / Ureki: plan around 2-2.5 hours each way by car, which makes this the most sensible way to fit the canyon into the sea week;
+- from Batumi: roughly 2.5-3.5 hours each way, so in practice the day is long; leave early and avoid putting a required evening plan afterward;
+- from Kutaisi: about 1 hour by car, so Martvili works especially well from Kutaisi or as a stop between regions;
+- from Tbilisi: too far for a family day, roughly 4.5-5 hours each way; it is better not to use it that way for this itinerary.
+
+Transport:
+- the calmest family format is a car with driver for the day, because public transport adds transfers and drains energy;
+- GoTrip shows guide prices from `$60` per car from Ureki and from `$63` per car from Batumi to Martvili Canyon, but the exact price should be checked for the date and group size;
+- group tours from Batumi usually combine Martvili with Prometheus Cave, Okatse, or hot springs; this is scenic, but may be too long and packed for a family day;
+- if the canyon is the real goal, it is better not to overload the route with another major site: the road already takes a lot of time.
+
+Price guide:
+- `$14.80` for an adult foreign visitor entrance ticket, per person;
+- `$2.04` for a child ticket aged 6-18, per person;
+- free for children under 6;
+- `$7.40` for the boat ride, per person;
+- about `$22.20` for one adult with the boat ride, per person;
+- about `$53.84` for entrance plus boat ride for 2 adults and 1 child aged 6-18, without transport or food.
+
+Important details:
+- the boat may be cancelled because of rain, snow, or unsafe water conditions;
+- visitors must be taller than 1 m to take the boat;
+- boats take up to 6 people, visitors help with rowing, but the staff member keeps the main rhythm;
+- swimming, fishing, smoking, and getting out of the boat are not allowed: this is a protected natural area;
+- in summer, queues are possible, so it is better to go in the morning, on a weekday, and not build the whole day around “we will definitely board the boat immediately”;
+- wear sports shoes: the trail is built, but stone and bridges can be wet.
+
+![Martvili Canyon waterfalls](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/f9/f917b517c82e7ab469716aa3d62935560c81b575289d7a9d0c6e4fb0db086fe4.webp)
+
+Family takeaway:
+- if you want the juiciest natural photo from the sea leg, Martvili is visually stronger than Makhuntseti;
+- if you want a shorter and less tiring outing from Batumi, Makhuntseti is easier;
+- if you are staying in Ureki / Kaprovani, Martvili becomes much more logical than from central Batumi.
+
+Links:
+- [Official Martvili Canyon page on National Parks of Georgia](https://nationalparks.ge/en/site/martvilicanyon)
+- [Official Agency of Protected Areas page: Martvili Canyon](https://apa.gov.ge/en/eco-tourism/servisebi-da-tarifebi/martvilis-kanioni)
+- [Electronic ticket purchase rules via GURU.GE](https://apa.gov.ge/en/media/ticket-purchase-rule.page)
+- [Map: Martvili Canyon Visitor Centre](https://www.google.com/maps/search/?api=1&query=Martvili%20Canyon%20Visitor%20Centre%20Inchkhuri)
+- [GoTrip: routes to Martvili Canyon](https://gotrip.ge/en/transfer/from-martvili_canyon-to-gurjaani)
+- [GetYourGuide: Martvili Canyon day trips](https://www.getyourguide.com/martvili-canyon-l113142/day-trips-tc172/)
+- [Photo source: Georgia Travel](https://georgia.travel/visiting-martvili-canyon)
 
 ## [transport.departure.batumi-airport] Departure from Batumi
 Type: transport

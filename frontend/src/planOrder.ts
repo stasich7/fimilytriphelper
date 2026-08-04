@@ -20,6 +20,9 @@ const stayStableKeys = [
 const arrivalStableKeys = ["transport.arrival.tbilisi-airport"];
 const departureStableKeys = ["transport.departure.batumi-airport"];
 const detailStableKeys = [
+  "note.history.georgia",
+  "note.history.tbilisi-batumi",
+  "note.tourist.traditions-etiquette",
   "transport.train.tbilisi-batumi",
   "note.transport.cableways",
   "activity.tbilisi.old-town",
@@ -30,6 +33,7 @@ const detailStableKeys = [
   "activity.batumi.sea-days",
   "activity.batumi.botanical-garden",
   "activity.adjara.makhuntseti",
+  "activity.megrelia.martvili-canyon",
   "note.food.cuisine",
   "note.wine.guide",
 ];
