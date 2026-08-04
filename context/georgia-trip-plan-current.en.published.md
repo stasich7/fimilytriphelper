@@ -1,7 +1,7 @@
 ---
 trip_id: georgia-2026-08
 trip_title: Поездка в Грузию | Trip to Georgia, 2026
-version_id: v22-en
+version_id: v23-en
 title: Visual Trip Guide — Tbilisi and the Sea Leg
 ---
 
@@ -1002,6 +1002,58 @@ Links:
 - [Georgia Travel: Georgian National Dance](https://georgia.travel/why-georgia-georgian-dance)
 - [Georgia Travel: Georgian Wine - 8000 Year Old Tradition](https://georgia.travel/georgia-the-cradle-of-wine)
 - [Georgia Travel: The Unique Georgian Folklore](https://georgia.travel/the-unique-georgian-folklore)
+
+## [note.language.georgian] The Georgian Language
+Type: note
+
+Short history.
+
+Georgian, `kartuli ena`, belongs to the Kartvelian language family, alongside Mingrelian, Laz, and Svan. It is not Slavic, Turkic, or Indo-European, which is why it immediately sounds like its own world to many visitors. The Georgian literary tradition is very old: the earliest written monuments are usually dated to the fifth century. For this trip, the key point is simple: the language is not only a tool for communication, but also a part of national memory, much like churches, wine, and polyphonic singing.
+
+Script, alphabet, language structure, and pronunciation.
+
+![Georgian alphabet: letters, transliteration, and pronunciation hints](https://storage.familytrip.stasich7.ru/family-trip-assets/trips/georgia-2026-08/images/c0/c0ce6a36b1e877249fe86e9257316653197c72e2a4fd8dd8b7f49f28889d909a.png)
+
+The first impression of Georgian is often visual: the letters look like flowing signs, and it is difficult at first to guess where one sound ends and the next begins. That is normal. The modern everyday script is called `Mkhedruli`. This is what you will see on shop signs, road signs, menus, packages, receipts, and websites. Georgian writing culture is broader, though: UNESCO recognizes the living culture of three Georgian scripts, `Mrgvlovani`, `Nuskhuri`, and `Mkhedruli`. The first two are now mostly connected with church, historical, and artistic tradition, while `Mkhedruli` is the practical alphabet of modern life.
+
+The modern Georgian alphabet has 33 letters. It has no familiar split between uppercase and lowercase: a name, the start of a sentence, and an ordinary word all use the same letter forms. For someone used to Latin or Cyrillic scripts, this feels surprising at first, but it also makes reading more straightforward: you do not need to learn two shapes for every letter. Georgian is written from left to right, punctuation is mostly familiar to a European reader, and spelling is fairly transparent: usually one letter corresponds to one sound. That does not make the language easy, but it means that after you start recognizing letters, signs begin to break down into sounds more honestly than they seem to on day one.
+
+The main difficulty is not the alphabet, but the sound system. Georgian has many consonants, including pairs that can be hard for a Russian or English ear to distinguish. In tourist transliteration you may see sounds written as `k`, `p`, `t`, `ts`, and `ch`, alongside sharper ejective versions written as `k'`, `p'`, `t'`, `ts'`, and `ch'`. In practice, you do not need perfect phonetics. It is enough to know that Latin hints are rough, and real pronunciation is best learned by listening to locals, navigation audio, a waiter, or a driver.
+
+Another feature is that Georgian words can feel long and dense. The grammar packs a lot into the word itself: prefixes, suffixes, person markers, tense, and other signals. Georgian verbs are especially famous for this: one verb can contain more information than a short phrase in Russian or English. For a traveler this is not a problem, because polite basic words work on their own. But it explains why machine translation sometimes sounds odd, and why a simple sentence in Russian or English may turn into an unexpectedly compact Georgian form.
+
+Stress is usually not as forceful as in Russian. In ordinary speech it is often light, so it is better not to press heavily on one syllable. Georgian sounds more even, with clear consonants and open vowels. There are five basic vowels, `a`, `e`, `i`, `o`, and `u`, and they are usually read steadily. A good tourist strategy is therefore not to learn a lot, but to learn a little aloud. `Gamarjoba` and `madloba`, said calmly and with a smile, are usually more useful than a long sentence copied from a translator.
+
+For children, the alphabet can become a small road-game: find letters from the card on signs, notice repeated shapes, compare `თბილისი` with Tbilisi, and `ბათუმი` with Batumi. This quickly turns unfamiliar curves into the living code of the country. Even if nobody learns to read Georgian during the trip, the attempt itself makes the city feel closer: a sign stops being decorative pattern and becomes the actual language of the people around you.
+
+It is also worth remembering transliteration. On maps, tickets, and websites, the same Georgian place name may be rendered differently in Latin or Cyrillic letters. For example, `ც` is often written as `ts`, `ჭ` as `ch`, and `ყ` is almost impossible to represent honestly with one Russian or English letter. So do not be surprised if a driver, Google Maps, and a street sign look like three versions of the same word. The safest anchors are the Georgian spelling, coordinates, and the context of the place. For a traveler, this is less a problem than a small way to notice that the language follows its own rules.
+
+Minimal words.
+
+- გამარჯობა / gamarjoba — hello
+- მადლობა / madloba — thank you
+- კი / ki — yes
+- არა / ara — no
+- კარგი / kargi — good
+- ცუდი / tsudi — bad
+- ბოდიში / bodishi — sorry
+- ნახვამდის / nakhvamdis — goodbye
+- არაუშავს / araushavs — no problem
+- გთხოვთ / gtkhovt — please
+
+Interesting facts.
+
+- Batumi has an Alphabetic Tower, a tower decorated with the 33 letters of the Georgian alphabet as an architectural symbol of the language.
+- Georgian, Mingrelian, Laz, and Svan are related, but Georgian is not a form of Russian, Turkish, or Armenian.
+- The Georgian word `anbani`, meaning “alphabet,” comes from the first two letters, `an` and `ban`, much like “ABC.”
+- Georgian has no grammatical gender like Russian, so the third-person pronoun does not split into “he” and “she” in the same way.
+- Tourist names in Latin letters are often inconsistent: `Kazbegi`, `Stepantsminda`, `Tsminda Sameba`, `Gergeti`. That is normal; it is better to cross-check with the map and the Georgian sign.
+
+Links:
+- [UNESCO: Living culture of three writing systems of the Georgian alphabet](https://ich.unesco.org/en/RL/living-culture-of-three-writing-systems-of-the-georgian-alphabet-01205)
+- [Georgia Travel: Communication in Georgia](https://georgia.travel/coming-to-georgia/communication-in-georgia)
+- [Georgia Travel: Alphabetic Tower](https://georgia.travel/alphabetic-tower)
+- [Georgian alphabet reference](https://www.georgian-alphabet.com/en/alphabet.php)
 
 ## [transport.train.tbilisi-batumi] Train transfer from Tbilisi to Batumi
 Type: transport

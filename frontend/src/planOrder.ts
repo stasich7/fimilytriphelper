@@ -23,6 +23,7 @@ const detailStableKeys = [
   "note.history.georgia",
   "note.history.tbilisi-batumi",
   "note.tourist.traditions-etiquette",
+  "note.language.georgian",
   "transport.train.tbilisi-batumi",
   "note.transport.cableways",
   "activity.tbilisi.old-town",
